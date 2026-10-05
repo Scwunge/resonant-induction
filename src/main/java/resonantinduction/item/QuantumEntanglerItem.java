@@ -12,13 +12,12 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import resonantinduction.registry.RIRegistries;
-import resonantinduction.tesla.TeslaBlockEntity;
 
 import java.util.List;
 
 /**
- * Links two Tesla towers, even in different dimensions. Use on one tower to mark it, then on another to link both.
- * Sneak-use on a tower unlinks it; sneak-use in the air forgets the mark.
+ * Links two devices of the same kind: Tesla towers (even across dimensions) or Electromagnetic Levitators.
+ * Use on one to mark it, then on another to link both. Sneak-use on a device unlinks it; sneak-use in the air forgets the mark.
  */
 public class QuantumEntanglerItem extends Item {
     public QuantumEntanglerItem(Properties properties) {
@@ -28,7 +27,7 @@ public class QuantumEntanglerItem extends Item {
     @Override
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
-        if (!(level.getBlockEntity(context.getClickedPos()) instanceof TeslaBlockEntity coil)) {
+        if (!(level.getBlockEntity(context.getClickedPos()) instanceof Linkable clicked)) {
             return InteractionResult.PASS;
         }
         if (level.isClientSide) {
@@ -36,12 +35,12 @@ public class QuantumEntanglerItem extends Item {
         }
         Player player = context.getPlayer();
         ItemStack stack = context.getItemInHand();
-        TeslaBlockEntity tower = coil.primary();
-        GlobalPos here = GlobalPos.of(level.dimension(), tower.getBlockPos());
+        Linkable device = clicked.linkOwner();
+        GlobalPos here = device.linkKey();
         GlobalPos marked = stack.get(RIRegistries.LINK_TARGET.get());
 
         if (player != null && player.isSecondaryUseActive()) {
-            tower.unlink();
+            device.unlink();
             stack.remove(RIRegistries.LINK_TARGET.get());
             message(player, Component.translatable("message.resonantinduction.entangler.unlinked"));
         } else if (marked == null || marked.equals(here)) {
@@ -49,7 +48,7 @@ public class QuantumEntanglerItem extends Item {
             message(player, Component.translatable("message.resonantinduction.entangler.marked", here.pos().getX(), here.pos().getY(), here.pos().getZ()));
         } else {
             stack.remove(RIRegistries.LINK_TARGET.get());
-            if (tower.linkTo(marked)) {
+            if (device.linkTo(marked)) {
                 message(player, Component.translatable("message.resonantinduction.entangler.linked",
                         marked.pos().getX(), marked.pos().getY(), marked.pos().getZ(), marked.dimension().location().toString()));
             } else {

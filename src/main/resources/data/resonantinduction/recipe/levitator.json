@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    " G ",
+    "SDS",
+    "SWS"
+  ],
+  "key": {
+    "G": {
+      "tag": "c:glass_blocks"
+    },
+    "S": {
+      "tag": "c:ingots/iron"
+    },
+    "D": {
+      "tag": "c:gems/diamond"
+    },
+    "W": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:levitator",
+    "count": 2
+  }
+}

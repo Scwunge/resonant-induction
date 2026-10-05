@@ -13,11 +13,17 @@
   "message.resonantinduction.tesla.linked_to": "linked to [%s, %s, %s] in %s",
   "message.resonantinduction.entangler.marked": "Marked Tesla tower at [%s, %s, %s]. Use on another tower to link.",
   "message.resonantinduction.entangler.linked": "Linked with the tower at [%s, %s, %s] in %s",
-  "message.resonantinduction.entangler.failed": "Could not link: the marked tower is gone or cross-dimension links are off",
+  "message.resonantinduction.entangler.failed": "Could not link: the marked device is gone, of another kind, or out of reach",
   "message.resonantinduction.entangler.unlinked": "Tower unlinked",
   "message.resonantinduction.entangler.cleared": "Mark cleared",
   "tooltip.resonantinduction.entangler.marked": "Marked: [%s, %s, %s] in %s",
-  "tooltip.resonantinduction.entangler.empty": "Use on a Tesla tower to mark it, then on another to link them",
+  "tooltip.resonantinduction.entangler.empty": "Use on a Tesla tower or levitator to mark it, then on another to link them",
   "jei.resonantinduction.tesla": "Stack Tesla Coils into a tower; each coil above the first adds 4 blocks of range (up to 50). Power the bottom coil from any side but the top: the tower beams energy to other towers of two or more coils within range, which push it into machines next to their bottom coil. Dye a tower to give it a frequency; light blue (the default) talks to every colour. Empty hand: toggle receiving. Redstone dust: toggle zapping mobs in the arcs. A redstone signal stops a tower sending. Sneak-use with an empty hand shows the tower's status.",
-  "jei.resonantinduction.quantum_entangler": "Use on one Tesla tower, then another, to link them: linked towers send only to each other, even across dimensions (the far end's chunk must be loaded). Sneak-use a tower to unlink it."
+  "jei.resonantinduction.quantum_entangler": "Use on one Tesla tower, then another, to link them: linked towers send only to each other, even across dimensions (the far end's chunk must be loaded). Also links a pushing and a pulling Electromagnetic Levitator. Sneak-use a device to unlink it.",
+  "block.resonantinduction.levitator": "Electromagnetic Levitator",
+  "message.resonantinduction.levitator.pull": "Levitator: pulling items into the inventory",
+  "message.resonantinduction.levitator.push": "Levitator: pushing items out along the beam",
+  "message.resonantinduction.levitator.status": "%s, %s",
+  "message.resonantinduction.levitator.linked_to": "linked to [%s, %s, %s]",
+  "jei.resonantinduction.levitator": "Place on the side of an inventory. In pull mode (default) it puts items that reach it into the inventory. Sneak-use with an empty hand to switch to push mode: it takes items out one at a time and carries them along its beam to a levitator facing it, up to 40 blocks away. Link a pushing and a pulling levitator with a Quantum Entangler to carry items around corners (up to 200 blocks). Dye changes the beam colour; a redstone signal turns it off."
 }

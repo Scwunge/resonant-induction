@@ -15,6 +15,13 @@ public final class RIConfig {
     public static final ModConfigSpec.BooleanValue TESLA_ATTACK_PLAYERS;
     public static final ModConfigSpec.BooleanValue TESLA_SOUNDS;
 
+    public static final ModConfigSpec.IntValue LEVITATOR_REACH;
+    public static final ModConfigSpec.IntValue LEVITATOR_PUSH_DELAY;
+    public static final ModConfigSpec.IntValue LEVITATOR_ITEMS_PER_PUSH;
+    public static final ModConfigSpec.DoubleValue LEVITATOR_MAX_SPEED;
+    public static final ModConfigSpec.DoubleValue LEVITATOR_ACCELERATION;
+    public static final ModConfigSpec.IntValue LEVITATOR_MAX_PATH;
+
     static {
         ModConfigSpec.Builder b = new ModConfigSpec.Builder();
         b.push("tesla");
@@ -34,6 +41,21 @@ public final class RIConfig {
                 .define("attackPlayers", true);
         TESLA_SOUNDS = b.comment("Play the electric shock sound on zaps.")
                 .define("sounds", true);
+        b.pop();
+
+        b.push("levitator");
+        LEVITATOR_REACH = b.comment("How far a levitator's beam reaches to find a levitator facing it. Original: 40.")
+                .defineInRange("reach", 40, 1, 128);
+        LEVITATOR_PUSH_DELAY = b.comment("Ticks between items taken out of the inventory in push mode. Original: 5.")
+                .defineInRange("pushDelay", 5, 1, 200);
+        LEVITATOR_ITEMS_PER_PUSH = b.comment("Items taken out per push.")
+                .defineInRange("itemsPerPush", 1, 1, 64);
+        LEVITATOR_MAX_SPEED = b.comment("Top speed of items in a beam, blocks per tick. Original: 0.2.")
+                .defineInRange("maxSpeed", 0.2, 0.01, 2.0);
+        LEVITATOR_ACCELERATION = b.comment("Acceleration of items in a beam, blocks per tick per tick. Original: 0.02.")
+                .defineInRange("acceleration", 0.02, 0.001, 1.0);
+        LEVITATOR_MAX_PATH = b.comment("Longest distance between two linked levitators. Original: 200.")
+                .defineInRange("maxPathDistance", 200, 2, 1024);
         b.pop();
         SPEC = b.build();
     }

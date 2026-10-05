@@ -32,7 +32,8 @@ it, it uses copper ingots, a redstone block and iron ingots. JEI shows a descrip
 - **1.21.1 port:** Scwunge.
 
 ## Licence
-MIT, see [LICENSE](LICENSE) and [PERMISSION.md](PERMISSION.md).
+MIT, see [LICENSE](LICENSE). Ported with the permission of Calclavia, whose original source is also released under MIT.
+Resonant Induction is free and will stay free.
 
 ## Building
 Java 21. `./gradlew build` produces `build/libs/ResonantInduction-1.21.1-<version>.jar`. `./gradlew runGameTestServer`

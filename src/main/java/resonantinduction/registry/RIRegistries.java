@@ -24,6 +24,8 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import resonantinduction.ResonantInduction;
 import resonantinduction.item.QuantumEntanglerItem;
+import resonantinduction.levitator.LevitatorBlock;
+import resonantinduction.levitator.LevitatorBlockEntity;
 import resonantinduction.tesla.TeslaBlock;
 import resonantinduction.tesla.TeslaBlockEntity;
 
@@ -45,7 +47,13 @@ public final class RIRegistries {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TeslaBlockEntity>> TESLA_BE = BLOCK_ENTITIES.register("tesla",
             () -> BlockEntityType.Builder.of(TeslaBlockEntity::new, TESLA.get()).build(null));
 
-    /** The Tesla tower a Quantum Entangler has marked, waiting to be linked with a second one. */
+    public static final DeferredBlock<LevitatorBlock> LEVITATOR = BLOCKS.registerBlock("levitator", LevitatorBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(2f, 6f).sound(SoundType.METAL).noOcclusion());
+    public static final DeferredItem<BlockItem> LEVITATOR_ITEM = ITEMS.registerSimpleBlockItem(LEVITATOR);
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<LevitatorBlockEntity>> LEVITATOR_BE = BLOCK_ENTITIES.register("levitator",
+            () -> BlockEntityType.Builder.of(LevitatorBlockEntity::new, LEVITATOR.get()).build(null));
+
+    /** The device a Quantum Entangler has marked, waiting to be linked with a second one. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<GlobalPos>> LINK_TARGET = COMPONENTS.registerComponentType("link_target",
             b -> b.persistent(GlobalPos.CODEC).networkSynchronized(GlobalPos.STREAM_CODEC));
 

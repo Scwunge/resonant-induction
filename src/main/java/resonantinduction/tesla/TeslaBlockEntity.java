@@ -23,6 +23,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.Nullable;
 import resonantinduction.RIConfig;
+import resonantinduction.item.Linkable;
 import resonantinduction.network.RINetwork;
 import resonantinduction.registry.RIRegistries;
 
@@ -44,7 +45,7 @@ import java.util.Set;
  * toggles receiving, redstone dust toggles hurting mobs, a redstone signal on the primary coil stops it sending, and a
  * Quantum Entangler links two towers so they send only to each other, across dimensions.
  */
-public class TeslaBlockEntity extends BlockEntity {
+public class TeslaBlockEntity extends BlockEntity implements Linkable {
     public static final DyeColor DEFAULT_COLOR = DyeColor.LIGHT_BLUE;
 
     private int charge;
@@ -364,7 +365,13 @@ public class TeslaBlockEntity extends BlockEntity {
         return level.getBlockEntity(pos.pos()) instanceof TeslaBlockEntity be ? be.primary() : null;
     }
 
+    @Override
+    public Linkable linkOwner() {
+        return primary();
+    }
+
     /** Links this tower and the one at {@code target} both ways, unlinking any previous partners. */
+    @Override
     public boolean linkTo(GlobalPos target) {
         if (!(level instanceof ServerLevel server)) {
             return false;
@@ -382,6 +389,7 @@ public class TeslaBlockEntity extends BlockEntity {
         return true;
     }
 
+    @Override
     public void unlink() {
         if (link != null && level instanceof ServerLevel server) {
             TeslaBlockEntity other = resolve(server, link, true);
