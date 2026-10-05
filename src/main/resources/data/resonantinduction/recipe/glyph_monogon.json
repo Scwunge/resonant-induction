@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "TCT",
+    "LBL",
+    " CT"
+  ],
+  "key": {
+    "B": {
+      "tag": "c:storage_blocks/diamond"
+    },
+    "L": {
+      "item": "resonantinduction:levitator"
+    },
+    "C": {
+      "tag": "c:storage_blocks/redstone"
+    },
+    "T": {
+      "item": "resonantinduction:tesla"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:glyph_monogon",
+    "count": 1
+  }
+}

@@ -25,5 +25,17 @@
   "message.resonantinduction.levitator.push": "Levitator: pushing items out along the beam",
   "message.resonantinduction.levitator.status": "%s, %s",
   "message.resonantinduction.levitator.linked_to": "linked to [%s, %s, %s]",
-  "jei.resonantinduction.levitator": "Place on the side of an inventory. In pull mode (default) it puts items that reach it into the inventory. Sneak-use with an empty hand to switch to push mode: it takes items out one at a time and carries them along its beam to a levitator facing it, up to 40 blocks away. Link a pushing and a pulling levitator with a Quantum Entangler to carry items around corners (up to 200 blocks). Dye changes the beam colour; a redstone signal turns it off."
+  "jei.resonantinduction.levitator": "Place on the side of an inventory. In pull mode (default) it puts items that reach it into the inventory. Sneak-use with an empty hand to switch to push mode: it takes items out one at a time and carries them along its beam to a levitator facing it, up to 40 blocks away. Link a pushing and a pulling levitator with a Quantum Entangler to carry items around corners (up to 200 blocks). Dye changes the beam colour; a redstone signal turns it off.",
+  "block.resonantinduction.quantum_gate": "Quantum Gate",
+  "item.resonantinduction.glyph_nought": "Nought Glyph",
+  "item.resonantinduction.glyph_monogon": "Monogon Glyph",
+  "item.resonantinduction.glyph_digon": "Digon Glyph",
+  "item.resonantinduction.glyph_trigon": "Trigon Glyph",
+  "tooltip.resonantinduction.glyph": "Fill all eight corners of a block with glyphs to make a Quantum Gate",
+  "message.resonantinduction.quantum_gate.frequency": "Quantum Gate frequency: %s",
+  "message.resonantinduction.quantum_gate.incomplete": "Incomplete Quantum Gate: %s of 8 glyphs",
+  "jei.resonantinduction.glyph_nought": "Each glyph fills one corner of a block; fill all eight corners to make a Quantum Gate. The order of the glyphs sets its frequency. Gates on the same frequency, in any dimension, teleport mobs and items that land on them to another gate on that frequency. Players go by sneaking on a gate or sneak-using it with an empty hand. They also share one item slot and a one-bucket fluid tank that hoppers and pipes can use from every side.",
+  "jei.resonantinduction.glyph_monogon": "Each glyph fills one corner of a block; fill all eight corners to make a Quantum Gate. The order of the glyphs sets its frequency. Gates on the same frequency, in any dimension, teleport mobs and items that land on them to another gate on that frequency. Players go by sneaking on a gate or sneak-using it with an empty hand. They also share one item slot and a one-bucket fluid tank that hoppers and pipes can use from every side.",
+  "jei.resonantinduction.glyph_digon": "Each glyph fills one corner of a block; fill all eight corners to make a Quantum Gate. The order of the glyphs sets its frequency. Gates on the same frequency, in any dimension, teleport mobs and items that land on them to another gate on that frequency. Players go by sneaking on a gate or sneak-using it with an empty hand. They also share one item slot and a one-bucket fluid tank that hoppers and pipes can use from every side.",
+  "jei.resonantinduction.glyph_trigon": "Each glyph fills one corner of a block; fill all eight corners to make a Quantum Gate. The order of the glyphs sets its frequency. Gates on the same frequency, in any dimension, teleport mobs and items that land on them to another gate on that frequency. Players go by sneaking on a gate or sneak-using it with an empty hand. They also share one item slot and a one-bucket fluid tank that hoppers and pipes can use from every side."
 }
