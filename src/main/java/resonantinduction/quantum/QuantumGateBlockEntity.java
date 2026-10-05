@@ -158,6 +158,10 @@ public class QuantumGateBlockEntity extends BlockEntity {
     // ---- ticking and teleporting ----
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, QuantumGateBlockEntity be) {
+        // Glyphs can arrive after onLoad (commands, structures), so keep the registry in step.
+        if (be.registeredFrequency != be.frequency()) {
+            be.updateRegistration();
+        }
         if (++be.ticks % 10 != 0 || be.frequency() == -1) {
             return;
         }
