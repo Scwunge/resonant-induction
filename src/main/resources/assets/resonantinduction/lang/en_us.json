@@ -1,0 +1,23 @@
+{
+  "itemGroup.resonantinduction": "Resonant Induction",
+  "block.resonantinduction.tesla": "Tesla Coil",
+  "item.resonantinduction.quantum_entangler": "Quantum Entangler",
+  "subtitles.resonantinduction.electricshock": "Electricity crackles",
+  "death.attack.resonantinduction.electrocution": "%1$s was electrocuted",
+  "death.attack.resonantinduction.electrocution.player": "%1$s was electrocuted while fighting %2$s",
+  "message.resonantinduction.tesla.mode": "Tesla receive mode is now %s",
+  "message.resonantinduction.tesla.toggle_attack": "Toggled entity attack to: %s",
+  "message.resonantinduction.tesla.color": "Tesla frequency set to %s",
+  "message.resonantinduction.tesla.status": "Tesla tower: height %s, range %s, charge %s, received %s (of %s each), colour %s, receive %s, attack %s, %s",
+  "message.resonantinduction.tesla.unlinked": "not linked",
+  "message.resonantinduction.tesla.linked_to": "linked to [%s, %s, %s] in %s",
+  "message.resonantinduction.entangler.marked": "Marked Tesla tower at [%s, %s, %s]. Use on another tower to link.",
+  "message.resonantinduction.entangler.linked": "Linked with the tower at [%s, %s, %s] in %s",
+  "message.resonantinduction.entangler.failed": "Could not link: the marked tower is gone or cross-dimension links are off",
+  "message.resonantinduction.entangler.unlinked": "Tower unlinked",
+  "message.resonantinduction.entangler.cleared": "Mark cleared",
+  "tooltip.resonantinduction.entangler.marked": "Marked: [%s, %s, %s] in %s",
+  "tooltip.resonantinduction.entangler.empty": "Use on a Tesla tower to mark it, then on another to link them",
+  "jei.resonantinduction.tesla": "Stack Tesla Coils into a tower; each coil above the first adds 4 blocks of range (up to 50). Power the bottom coil from any side but the top: the tower beams energy to other towers of two or more coils within range, which push it into machines next to their bottom coil. Dye a tower to give it a frequency; light blue (the default) talks to every colour. Empty hand: toggle receiving. Redstone dust: toggle zapping mobs in the arcs. A redstone signal stops a tower sending. Sneak-use with an empty hand shows the tower's status.",
+  "jei.resonantinduction.quantum_entangler": "Use on one Tesla tower, then another, to link them: linked towers send only to each other, even across dimensions (the far end's chunk must be loaded). Sneak-use a tower to unlink it."
+}

@@ -1,0 +1,36 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "electrodynamics"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "WEW",
+    " C ",
+    "DID"
+  ],
+  "key": {
+    "W": {
+      "item": "electrodynamics:wirecopper"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "C": {
+      "item": "electrodynamics:battery"
+    },
+    "D": {
+      "tag": "c:gems/diamond"
+    },
+    "I": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:tesla",
+    "count": 1
+  }
+}

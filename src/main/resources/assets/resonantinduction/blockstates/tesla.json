@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "part=bottom": {
+      "model": "resonantinduction:block/tesla_bottom"
+    },
+    "part=middle": {
+      "model": "resonantinduction:block/tesla_middle"
+    },
+    "part=top": {
+      "model": "resonantinduction:block/tesla_top"
+    }
+  }
+}

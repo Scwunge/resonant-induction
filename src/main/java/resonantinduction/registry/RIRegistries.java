@@ -1,0 +1,78 @@
+package resonantinduction.registry;
+
+import net.minecraft.core.GlobalPos;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import resonantinduction.ResonantInduction;
+import resonantinduction.item.QuantumEntanglerItem;
+import resonantinduction.tesla.TeslaBlock;
+import resonantinduction.tesla.TeslaBlockEntity;
+
+public final class RIRegistries {
+    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(ResonantInduction.MODID);
+    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ResonantInduction.MODID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, ResonantInduction.MODID);
+    public static final DeferredRegister.DataComponents COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, ResonantInduction.MODID);
+    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, ResonantInduction.MODID);
+    public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ResonantInduction.MODID);
+
+    public static final ResourceKey<DamageType> ELECTROCUTION = ResourceKey.create(Registries.DAMAGE_TYPE, ResonantInduction.id("electrocution"));
+
+    public static final DeferredBlock<TeslaBlock> TESLA = BLOCKS.registerBlock("tesla", TeslaBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.5f, 6f).sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops().noOcclusion());
+    public static final DeferredItem<BlockItem> TESLA_ITEM = ITEMS.registerSimpleBlockItem(TESLA);
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TeslaBlockEntity>> TESLA_BE = BLOCK_ENTITIES.register("tesla",
+            () -> BlockEntityType.Builder.of(TeslaBlockEntity::new, TESLA.get()).build(null));
+
+    /** The Tesla tower a Quantum Entangler has marked, waiting to be linked with a second one. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<GlobalPos>> LINK_TARGET = COMPONENTS.registerComponentType("link_target",
+            b -> b.persistent(GlobalPos.CODEC).networkSynchronized(GlobalPos.STREAM_CODEC));
+
+    public static final DeferredItem<QuantumEntanglerItem> QUANTUM_ENTANGLER = ITEMS.registerItem("quantum_entangler", QuantumEntanglerItem::new,
+            new Item.Properties().stacksTo(1));
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ELECTRIC_SHOCK = SOUNDS.register("electricshock",
+            () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("electricshock")));
+
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB = TABS.register("main", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup.resonantinduction"))
+            .icon(() -> new ItemStack(TESLA_ITEM.get()))
+            .displayItems((params, out) -> ITEMS.getEntries().forEach(e -> out.accept(e.get())))
+            .build());
+
+    private RIRegistries() {}
+
+    public static void register(IEventBus modBus) {
+        BLOCKS.register(modBus);
+        ITEMS.register(modBus);
+        BLOCK_ENTITIES.register(modBus);
+        COMPONENTS.register(modBus);
+        SOUNDS.register(modBus);
+        TABS.register(modBus);
+    }
+
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, TESLA_BE.get(), TeslaBlockEntity::getEnergyCapability);
+    }
+}

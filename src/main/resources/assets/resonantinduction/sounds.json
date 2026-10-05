@@ -1,0 +1,14 @@
+{
+  "electricshock": {
+    "subtitle": "subtitles.resonantinduction.electricshock",
+    "sounds": [
+      "resonantinduction:electricshock1",
+      "resonantinduction:electricshock2",
+      "resonantinduction:electricshock3",
+      "resonantinduction:electricshock4",
+      "resonantinduction:electricshock5",
+      "resonantinduction:electricshock6",
+      "resonantinduction:electricshock7"
+    ]
+  }
+}

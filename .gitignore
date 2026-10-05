@@ -1,0 +1,23 @@
+# build
+.gradle/
+build/
+out/
+runs/
+run/
+*.log
+src/generated/resources/.cache/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+bin/
+
+# Private: upstream checkouts/decompiles and working notes
+reference/
+PLAN.md
+HANDOFF*.md
+NOTES*.md
