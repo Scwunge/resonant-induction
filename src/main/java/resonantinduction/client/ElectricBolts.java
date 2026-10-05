@@ -102,9 +102,11 @@ public final class ElectricBolts {
                     Vec3 mid = a.add(c).scale(0.5).add(perpendicular(c.subtract(a), random).scale((random.nextDouble() - 0.5) * 2 * o));
                     next.add(a);
                     next.add(mid);
-                    if (depth < 2 && pass < 3 && random.nextFloat() < 0.25f) {
+                    // Forks: short side branches (a fraction of the bolt) heading roughly the same way, fainter each level.
+                    if (depth < 2 && pass >= 1 && pass < 4 && random.nextFloat() < 0.3f) {
                         Vec3 dir = c.subtract(a);
-                        Vec3 forkEnd = mid.add(dir.scale(1.5 + random.nextDouble()).add(perpendicular(dir, random).scale(dir.length())));
+                        double forkLength = Math.min(length * 0.25, dir.length() * (0.6 + random.nextDouble() * 0.6));
+                        Vec3 forkEnd = mid.add(dir.normalize().add(perpendicular(dir, random).scale(0.7)).normalize().scale(forkLength));
                         build(mid, forkEnd, o * 0.5, alpha * 0.5f, depth + 1, random);
                     }
                 }

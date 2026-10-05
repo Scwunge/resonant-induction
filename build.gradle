@@ -42,6 +42,10 @@ neoForge {
             client()
             gameDirectory = file('runs/client')
             programArguments.addAll('--width', '854', '--height', '480')
+            // -PquickPlay=<world> joins a singleplayer world straight away (used for in-game tests)
+            if (findProperty('quickPlay')) {
+                programArguments.addAll('--quickPlaySingleplayer', (String) findProperty('quickPlay'))
+            }
         }
         server {
             server()
@@ -105,6 +109,7 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
+def licenseName = "LICENSE_${mod_id}"
 jar {
-    from('LICENSE') { rename { "LICENSE_${mod_id}" } }
+    from('LICENSE') { rename { licenseName } }
 }
