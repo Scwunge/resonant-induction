@@ -38,6 +38,7 @@ import resonantinduction.mechanical.process.MixerBlockEntity;
 import resonantinduction.archaic.CastingMoldBlock;
 import resonantinduction.atomic.fusion.ElectromagnetBlock;
 import resonantinduction.atomic.fusion.PlasmaBlock;
+import resonantinduction.schematic.CreativeBuilderBlock;
 import resonantinduction.atomic.fusion.PlasmaHeaterBlock;
 import resonantinduction.atomic.fusion.PlasmaHeaterBlockEntity;
 import resonantinduction.atomic.particle.AcceleratorBlock;
@@ -739,6 +740,14 @@ public final class RIRegistries {
         ITEMS.registerSimpleBlockItem(ACCELERATOR);
         ITEMS.registerSimpleBlockItem(FULMINATION);
         ITEMS.registerSimpleBlockItem(QUANTUM_ASSEMBLER);
+    }
+
+    // ---- schematics ----
+    public static final DeferredBlock<CreativeBuilderBlock> CREATIVE_BUILDER = BLOCKS.registerBlock("creative_builder", CreativeBuilderBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_MAGENTA).strength(-1f, 3600000f).sound(SoundType.METAL).noLootTable());
+
+    static {
+        ITEMS.registerSimpleBlockItem(CREATIVE_BUILDER);
     }
 
     public static final DeferredItem<HandCrankItem> HAND_CRANK = ITEMS.registerItem("hand_crank", HandCrankItem::new, new Item.Properties().stacksTo(1));

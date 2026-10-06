@@ -402,5 +402,17 @@
   "block.resonantinduction.plasma_heater": "Plasma Heater",
   "tooltip.resonantinduction.energy_short": "Energy: %s",
   "tooltip.resonantinduction.fluid_short": "%s: %s mB",
-  "jei.resonantinduction.plasma_heater": "Heats deuterium and tritium into plasma for fusion power, using a great deal of energy. Fill it with cells, buckets or pipes; the plasma must be pumped out into a reactor cell, which lets it out into a chamber walled with electromagnets."
+  "jei.resonantinduction.plasma_heater": "Heats deuterium and tritium into plasma for fusion power, using a great deal of energy. Fill it with cells, buckets or pipes; the plasma must be pumped out into a reactor cell, which lets it out into a chamber walled with electromagnets.",
+  "block.resonantinduction.creative_builder": "Creative Builder",
+  "message.resonantinduction.creative_builder.creative_only": "Only usable in creative mode",
+  "gui.resonantinduction.creative_builder.build": "Build",
+  "gui.resonantinduction.creative_builder.size": "Size: %s",
+  "gui.resonantinduction.creative_builder.none": "No schematics",
+  "schematic.resonantinduction.accelerator": "Particle Accelerator",
+  "schematic.resonantinduction.breeding_reactor": "Breeding Reactor",
+  "schematic.resonantinduction.fission_reactor": "Fission Reactor",
+  "schematic.resonantinduction.fusion_reactor": "Fusion Reactor",
+  "schematic.resonantinduction.wind_turbine": "Wind Turbine",
+  "schematic.resonantinduction.water_turbine": "Water Turbine",
+  "jei.resonantinduction.creative_builder": "Creative mode only. Use it to put down a ready-made structure round it: a particle accelerator, fission, breeding or fusion reactor, or a wind or water turbine disc (turned the way you face), at the size you choose."
 }

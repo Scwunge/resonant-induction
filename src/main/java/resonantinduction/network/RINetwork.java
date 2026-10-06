@@ -24,6 +24,8 @@ public final class RINetwork {
                 (payload, context) -> context.enqueueWork(() -> ClientPayloads.zap(payload)));
         event.registrar("1").playToServer(MultimeterSettingsPayload.TYPE, MultimeterSettingsPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> MultimeterSettingsPayload.handle(payload, context)));
+        event.registrar("1").playToServer(BuildSchematicPayload.TYPE, BuildSchematicPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> BuildSchematicPayload.handle(payload, context)));
     }
 
     public static void sendZap(ServerLevel level, Vec3 from, Vec3 to, DyeColor color) {
