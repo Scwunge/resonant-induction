@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "resonantinduction:block/atomic/centrifuge"
+    },
+    "facing=east": {
+      "model": "resonantinduction:block/atomic/centrifuge",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "resonantinduction:block/atomic/centrifuge",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "resonantinduction:block/atomic/centrifuge",
+      "y": 270
+    }
+  }
+}

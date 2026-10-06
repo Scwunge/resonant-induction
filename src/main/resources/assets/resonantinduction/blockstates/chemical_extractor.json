@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "resonantinduction:block/atomic/chemical_extractor"
+    },
+    "facing=east": {
+      "model": "resonantinduction:block/atomic/chemical_extractor",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "resonantinduction:block/atomic/chemical_extractor",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "resonantinduction:block/atomic/chemical_extractor",
+      "y": 270
+    }
+  }
+}

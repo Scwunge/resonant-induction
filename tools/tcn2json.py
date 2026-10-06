@@ -38,8 +38,9 @@ def convert(tcn_path, texture, out_path, only=None):
         x0, y0, z0 = ox, oy, oz
         x1, y1, z1 = ox + w, oy + h, oz + d
         # Bake Y rotations of +-90/180 by swapping axes about the rotation point.
-        q = int(round(ry / 90.0)) % 4
-        for _ in range(q):  # -90 deg steps in Techne == +90 about y in our frame; direction only affects symmetric shapes
+        # A Techne y rotation of +90 turns the box a quarter the other way in our (x-flipped) frame.
+        q = int(round(-ry / 90.0)) % 4
+        for _ in range(q):
             x0, z0, x1, z1 = -z1, x0, -z0, x1
         # ModelBase -> block space (pixels): x' = 8 - x, y' = 24 - y, z' = 8 + z
         fx = sorted([8 - (px + x0), 8 - (px + x1)])

@@ -1,0 +1,215 @@
+{
+ "textures": {
+  "tex": "resonantinduction:block/model/chemical_extractor",
+  "particle": "resonantinduction:block/model/chemical_extractor"
+ },
+ "elements": [
+  {
+   "name": "MAIN CHAMBER-ROTATES",
+   "from": [
+    3.0,
+    5.0,
+    1.0
+   ],
+   "to": [
+    7.0,
+    9.0,
+    15.0
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      0.0,
+      5.375,
+      1.75,
+      5.875
+     ],
+     "texture": "#tex"
+    },
+    "west": {
+     "uv": [
+      2.25,
+      5.375,
+      4.0,
+      5.875
+     ],
+     "texture": "#tex"
+    },
+    "up": {
+     "uv": [
+      2.25,
+      3.625,
+      1.75,
+      5.375
+     ],
+     "texture": "#tex"
+    },
+    "down": {
+     "uv": [
+      2.75,
+      3.625,
+      2.25,
+      5.375
+     ],
+     "texture": "#tex"
+    },
+    "north": {
+     "uv": [
+      2.25,
+      5.375,
+      1.75,
+      5.875
+     ],
+     "texture": "#tex"
+    },
+    "south": {
+     "uv": [
+      4.5,
+      5.375,
+      4.0,
+      5.875
+     ],
+     "texture": "#tex"
+    }
+   }
+  },
+  {
+   "name": "MAGNET 1-ROTATES",
+   "from": [
+    2.0,
+    4.0,
+    9.0
+   ],
+   "to": [
+    8.0,
+    10.0,
+    13.0
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      3.125,
+      2.875,
+      3.625,
+      3.625
+     ],
+     "texture": "#tex"
+    },
+    "west": {
+     "uv": [
+      4.375,
+      2.875,
+      4.875,
+      3.625
+     ],
+     "texture": "#tex"
+    },
+    "up": {
+     "uv": [
+      4.375,
+      2.375,
+      3.625,
+      2.875
+     ],
+     "texture": "#tex"
+    },
+    "down": {
+     "uv": [
+      5.125,
+      2.375,
+      4.375,
+      2.875
+     ],
+     "texture": "#tex"
+    },
+    "north": {
+     "uv": [
+      4.375,
+      2.875,
+      3.625,
+      3.625
+     ],
+     "texture": "#tex"
+    },
+    "south": {
+     "uv": [
+      5.625,
+      2.875,
+      4.875,
+      3.625
+     ],
+     "texture": "#tex"
+    }
+   }
+  },
+  {
+   "name": "MAGNET 2-ROTATES",
+   "from": [
+    2.0,
+    4.0,
+    3.0
+   ],
+   "to": [
+    8.0,
+    10.0,
+    7.0
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      3.125,
+      2.875,
+      3.625,
+      3.625
+     ],
+     "texture": "#tex"
+    },
+    "west": {
+     "uv": [
+      4.375,
+      2.875,
+      4.875,
+      3.625
+     ],
+     "texture": "#tex"
+    },
+    "up": {
+     "uv": [
+      4.375,
+      2.375,
+      3.625,
+      2.875
+     ],
+     "texture": "#tex"
+    },
+    "down": {
+     "uv": [
+      5.125,
+      2.375,
+      4.375,
+      2.875
+     ],
+     "texture": "#tex"
+    },
+    "north": {
+     "uv": [
+      4.375,
+      2.875,
+      3.625,
+      3.625
+     ],
+     "texture": "#tex"
+    },
+    "south": {
+     "uv": [
+      5.625,
+      2.875,
+      4.875,
+      3.625
+     ],
+     "texture": "#tex"
+    }
+   }
+  }
+ ]
+}

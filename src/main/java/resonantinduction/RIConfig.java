@@ -36,6 +36,7 @@ public final class RIConfig {
     public static final ModConfigSpec.IntValue ELECTRIC_FIREBOX_USE;
     public static final ModConfigSpec.DoubleValue GRATE_EFFECT;
     public static final ModConfigSpec.BooleanValue RADIOACTIVE_ORES;
+    public static final ModConfigSpec.DoubleValue ATOMIC_ENERGY_SCALE;
     public static final ModConfigSpec.BooleanValue TOXIC_WASTE;
     public static final ModConfigSpec.BooleanValue ANTIMATTER_EXPLOSIONS;
     public static final ModConfigSpec.DoubleValue FULMINATION_MULTIPLIER;
@@ -129,6 +130,9 @@ public final class RIConfig {
 
         b.push("atomic");
         RADIOACTIVE_ORES = b.comment("Uranium ore irradiates those who stand on or near it.").define("radioactiveOres", true);
+        ATOMIC_ENERGY_SCALE = b.comment("FE the atomic machines use per joule the original used (the Chemical Extractor 5000 a tick, the Nuclear Boiler",
+                        "50000, the Centrifuge 500000). Lower it to make them cheaper to run.")
+                .defineInRange("energyScale", 1.0, 0.0001, 1000.0);
         TOXIC_WASTE = b.comment("Fission reactors make toxic waste.").define("toxicWaste", true);
         ANTIMATTER_EXPLOSIONS = b.comment("Dropped antimatter explodes when it expires (the original's ban_antimatter_power flag, inverted).").define("antimatterExplosions", true);
         FULMINATION_MULTIPLIER = b.comment("Multiplier on the Fulmination Generator's output. Original: 1.").defineInRange("fulminationOutputMultiplier", 1.0, 0.0, 1000.0);

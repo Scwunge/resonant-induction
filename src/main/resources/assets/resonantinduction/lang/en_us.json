@@ -326,5 +326,22 @@
   "jei.resonantinduction.fissile_fuel_rod": "The primary fuel for fission reactors: put it in a Reactor Cell.",
   "jei.resonantinduction.breeder_fuel_rod": "Re-breeds decayed fissile fuel when burnt in a reactor.",
   "jei.resonantinduction.hazmat_mask": "Wear the whole hazmat suit to be safe from radiation.",
-  "jei.resonantinduction.antimatter": "Made in a Particle Accelerator. Dropped on the ground it annihilates after eight seconds, violently. Powers the Fulmination Generator."
+  "jei.resonantinduction.antimatter": "Made in a Particle Accelerator. Dropped on the ground it annihilates after eight seconds, violently. Powers the Fulmination Generator.",
+  "block.resonantinduction.chemical_extractor": "Chemical Extractor",
+  "block.resonantinduction.nuclear_boiler": "Nuclear Boiler",
+  "block.resonantinduction.centrifuge": "Centrifuge",
+  "gui.resonantinduction.chemical_extractor.1": "The extractor can extract",
+  "gui.resonantinduction.chemical_extractor.2": "uranium, deuterium and tritium.",
+  "gui.resonantinduction.chemical_extractor.3": "Place them in the input slot.",
+  "gui.resonantinduction.nuclear_boiler.1": "The nuclear boiler can boil",
+  "gui.resonantinduction.nuclear_boiler.2": "yellowcake into uranium",
+  "gui.resonantinduction.nuclear_boiler.3": "hexafluoride gas to be refined.",
+  "gui.resonantinduction.centrifuge.1": "The centrifuge spins",
+  "gui.resonantinduction.centrifuge.2": "uranium hexafluoride gas into",
+  "gui.resonantinduction.centrifuge.3": "enriched uranium for fission.",
+  "tooltip.resonantinduction.fluid_amount": "%s / %s mB",
+  "tooltip.resonantinduction.machine_use": "Uses %s FE a tick while working",
+  "jei.resonantinduction.chemical_extractor": "With water, it extracts uranium ore into yellowcake (a bucket of water and one ore make three). Without ore, it extracts water into deuterium and deuterium into tritium. Fill it with buckets, cells or pipes; empty cells in its right-hand slot take the product.",
+  "jei.resonantinduction.nuclear_boiler": "Boils yellowcake (or uranium ore) with a bucket of water into uranium hexafluoride gas, for the Centrifuge.",
+  "jei.resonantinduction.centrifuge": "Spins uranium hexafluoride into uranium: Uranium-235 two times in five, Uranium-238 otherwise. It draws the gas from anything next to it."
 }

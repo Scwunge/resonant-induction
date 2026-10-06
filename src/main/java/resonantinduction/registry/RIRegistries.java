@@ -36,6 +36,13 @@ import resonantinduction.mechanical.process.MachineBlock;
 import resonantinduction.mechanical.process.MechanicalPistonBlockEntity;
 import resonantinduction.mechanical.process.MixerBlockEntity;
 import resonantinduction.archaic.CastingMoldBlock;
+import resonantinduction.atomic.CellFluidHandler;
+import resonantinduction.atomic.machine.AtomicMachineBlock;
+import resonantinduction.atomic.machine.AtomicMachineBlockEntity;
+import resonantinduction.atomic.machine.CentrifugeBlockEntity;
+import resonantinduction.atomic.machine.ChemicalExtractorBlockEntity;
+import resonantinduction.atomic.machine.MachineMenu;
+import resonantinduction.atomic.machine.NuclearBoilerBlockEntity;
 import resonantinduction.atomic.AntimatterItem;
 import resonantinduction.atomic.FuelRodItem;
 import resonantinduction.atomic.HazmatArmorItem;
@@ -599,6 +606,36 @@ public final class RIRegistries {
         ITEMS.registerSimpleBlockItem(RADIOACTIVE_WASTE);
     }
 
+    // ---- atomic machines: chemical extractor, nuclear boiler, centrifuge ----
+    public static final DeferredHolder<MenuType<?>, MenuType<MachineMenu>> ATOMIC_MACHINE_MENU = MENUS.register("atomic_machine",
+            () -> IMenuTypeExtension.create(MachineMenu::fromNetwork));
+
+    private static BlockBehaviour.Properties atomicMachine() {
+        return BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3f, 6f).sound(SoundType.METAL).noOcclusion().requiresCorrectToolForDrops();
+    }
+
+    public static final DeferredBlock<AtomicMachineBlock> CHEMICAL_EXTRACTOR = BLOCKS.registerBlock("chemical_extractor",
+            p -> new AtomicMachineBlock(p, () -> RIRegistries.CHEMICAL_EXTRACTOR_BE.get(), ChemicalExtractorBlockEntity::new, net.minecraft.world.phys.shapes.Shapes.block()),
+            atomicMachine());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ChemicalExtractorBlockEntity>> CHEMICAL_EXTRACTOR_BE = BLOCK_ENTITIES.register("chemical_extractor",
+            () -> BlockEntityType.Builder.of(ChemicalExtractorBlockEntity::new, CHEMICAL_EXTRACTOR.get()).build(null));
+    public static final DeferredBlock<AtomicMachineBlock> NUCLEAR_BOILER = BLOCKS.registerBlock("nuclear_boiler",
+            p -> new AtomicMachineBlock(p, () -> RIRegistries.NUCLEAR_BOILER_BE.get(), NuclearBoilerBlockEntity::new, net.minecraft.world.phys.shapes.Shapes.block()),
+            atomicMachine());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<NuclearBoilerBlockEntity>> NUCLEAR_BOILER_BE = BLOCK_ENTITIES.register("nuclear_boiler",
+            () -> BlockEntityType.Builder.of(NuclearBoilerBlockEntity::new, NUCLEAR_BOILER.get()).build(null));
+    public static final DeferredBlock<AtomicMachineBlock> CENTRIFUGE = BLOCKS.registerBlock("centrifuge",
+            p -> new AtomicMachineBlock(p, () -> RIRegistries.CENTRIFUGE_BE.get(), CentrifugeBlockEntity::new, net.minecraft.world.phys.shapes.Shapes.block()),
+            atomicMachine());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CentrifugeBlockEntity>> CENTRIFUGE_BE = BLOCK_ENTITIES.register("centrifuge",
+            () -> BlockEntityType.Builder.of(CentrifugeBlockEntity::new, CENTRIFUGE.get()).build(null));
+
+    static {
+        ITEMS.registerSimpleBlockItem(CHEMICAL_EXTRACTOR);
+        ITEMS.registerSimpleBlockItem(NUCLEAR_BOILER);
+        ITEMS.registerSimpleBlockItem(CENTRIFUGE);
+    }
+
     public static final DeferredItem<HandCrankItem> HAND_CRANK = ITEMS.registerItem("hand_crank", HandCrankItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredHolder<SoundEvent, SoundEvent> GEAR_CRANK = SOUNDS.register("gear_crank",
             () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("gear_crank")));
@@ -697,6 +734,16 @@ public final class RIRegistries {
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, IMPRINTER_BE.get(), ImprinterBlockEntity::getItemCapability);
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, SORTER_BE.get(), SorterBlockEntity::getItemCapability);
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, PLACER_BE.get(), PlacerBlockEntity::getItemCapability);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, CHEMICAL_EXTRACTOR_BE.get(), AtomicMachineBlockEntity::getEnergyCapability);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, CHEMICAL_EXTRACTOR_BE.get(), ChemicalExtractorBlockEntity::getFluidCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CHEMICAL_EXTRACTOR_BE.get(), ChemicalExtractorBlockEntity::getItemCapability);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, NUCLEAR_BOILER_BE.get(), AtomicMachineBlockEntity::getEnergyCapability);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, NUCLEAR_BOILER_BE.get(), NuclearBoilerBlockEntity::getFluidCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, NUCLEAR_BOILER_BE.get(), NuclearBoilerBlockEntity::getItemCapability);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, CENTRIFUGE_BE.get(), AtomicMachineBlockEntity::getEnergyCapability);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, CENTRIFUGE_BE.get(), CentrifugeBlockEntity::getFluidCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CENTRIFUGE_BE.get(), CentrifugeBlockEntity::getItemCapability);
+        event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new CellFluidHandler(stack), EMPTY_CELL.get(), WATER_CELL.get(), DEUTERIUM_CELL.get(), TRITIUM_CELL.get());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CASTING_MOLD_BE.get(), CastingMoldBlockEntity::getItemCapability);
     }
 }

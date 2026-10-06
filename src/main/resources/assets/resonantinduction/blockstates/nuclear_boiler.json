@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "resonantinduction:block/atomic/nuclear_boiler"
+    },
+    "facing=east": {
+      "model": "resonantinduction:block/atomic/nuclear_boiler",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "resonantinduction:block/atomic/nuclear_boiler",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "resonantinduction:block/atomic/nuclear_boiler",
+      "y": 270
+    }
+  }
+}

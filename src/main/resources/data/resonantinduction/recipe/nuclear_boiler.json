@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "atomic"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "S S",
+    "FBF",
+    "SMS"
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:furnace"
+    },
+    "S": {
+      "tag": "resonantinduction:parts/plate_primary"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "M": {
+      "item": "resonantinduction:motor"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:nuclear_boiler",
+    "count": 1
+  }
+}

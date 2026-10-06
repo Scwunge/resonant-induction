@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "atomic"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BSB",
+    "MCM",
+    "BSB"
+  ],
+  "key": {
+    "C": {
+      "tag": "resonantinduction:parts/circuit_elite"
+    },
+    "S": {
+      "tag": "resonantinduction:parts/plate_primary"
+    },
+    "B": {
+      "tag": "resonantinduction:parts/metal_secondary"
+    },
+    "M": {
+      "item": "resonantinduction:motor"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:chemical_extractor",
+    "count": 1
+  }
+}

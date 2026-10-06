@@ -48,6 +48,9 @@ public final class RIClient {
         event.registerBlockEntityRenderer(RIRegistries.ENGINEERING_TABLE_BE.get(), TableRenderers.EngineeringTable::new);
         event.registerBlockEntityRenderer(RIRegistries.IMPRINTER_BE.get(), TableRenderers.Imprinter::new);
         event.registerBlockEntityRenderer(RIRegistries.PLACER_BE.get(), TableRenderers.Placer::new);
+        event.registerBlockEntityRenderer(RIRegistries.CHEMICAL_EXTRACTOR_BE.get(), AtomicMachineRenderer::new);
+        event.registerBlockEntityRenderer(RIRegistries.NUCLEAR_BOILER_BE.get(), AtomicMachineRenderer::new);
+        event.registerBlockEntityRenderer(RIRegistries.CENTRIFUGE_BE.get(), AtomicMachineRenderer::new);
     }
 
     /** Molten metal and dust mixture in tanks and pipes, tinted to their metal. */
@@ -106,6 +109,7 @@ public final class RIClient {
     @SubscribeEvent
     public static void menuScreens(RegisterMenuScreensEvent event) {
         event.register(RIRegistries.MULTIMETER_MENU.get(), MultimeterScreen::new);
+        event.register(RIRegistries.ATOMIC_MACHINE_MENU.get(), MachineScreen::new);
     }
 
     @SubscribeEvent
@@ -119,6 +123,10 @@ public final class RIClient {
         event.register(ProcessRenderer.GRINDER_TEETH);
         event.register(ProcessRenderer.MIXER_ROTOR);
         event.register(FluidBlockRenderers.PUMP_FIN);
+        event.register(AtomicMachineRenderer.EXTRACTOR_ROTOR);
+        event.register(AtomicMachineRenderer.CENTRIFUGE_ROTOR);
+        event.register(AtomicMachineRenderer.BOILER_BAR_1);
+        event.register(AtomicMachineRenderer.BOILER_BAR_2);
         event.register(FluidBlockRenderers.PUMP_INNER_FIN);
         for (String tier : MechanicalRenderer.TIERS) {
             event.register(MechanicalRenderer.model("gear_small_" + tier));
