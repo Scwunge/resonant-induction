@@ -35,6 +35,18 @@ public final class RIConfig {
     public static final ModConfigSpec.IntValue PISTON_BREAK_COUNT;
     public static final ModConfigSpec.IntValue ELECTRIC_FIREBOX_USE;
     public static final ModConfigSpec.DoubleValue GRATE_EFFECT;
+    public static final ModConfigSpec.BooleanValue RADIOACTIVE_ORES;
+    public static final ModConfigSpec.BooleanValue TOXIC_WASTE;
+    public static final ModConfigSpec.BooleanValue ANTIMATTER_EXPLOSIONS;
+    public static final ModConfigSpec.DoubleValue FULMINATION_MULTIPLIER;
+    public static final ModConfigSpec.DoubleValue TURBINE_MULTIPLIER;
+    public static final ModConfigSpec.DoubleValue FISSION_BOIL_MULTIPLIER;
+    public static final ModConfigSpec.BooleanValue TURBINE_STACKING;
+    public static final ModConfigSpec.IntValue URANIUM_HEXAFLUORIDE_RATIO;
+    public static final ModConfigSpec.IntValue WATER_PER_DEUTERIUM;
+    public static final ModConfigSpec.IntValue DEUTERIUM_PER_TRITIUM;
+    public static final ModConfigSpec.DoubleValue DARK_MATTER_CHANCE;
+    public static final ModConfigSpec.IntValue QUANTUM_ASSEMBLER_MODE;
     public static final ModConfigSpec.DoubleValue GRATE_DRAIN_SPEED;
 
     public static final ModConfigSpec.IntValue WIRE_FE_PER_AMP;
@@ -113,6 +125,21 @@ public final class RIConfig {
                 .defineInRange("grateEffectMultiplier", 5.0, 0.1, 100.0);
         GRATE_DRAIN_SPEED = b.comment("Buckets a Grate can hold per block it works on (it always holds at least one). Original: 0.01.")
                 .defineInRange("grateDrainSpeedMultiplier", 0.01, 0.0, 10.0);
+        b.pop();
+
+        b.push("atomic");
+        RADIOACTIVE_ORES = b.comment("Uranium ore irradiates those who stand on or near it.").define("radioactiveOres", true);
+        TOXIC_WASTE = b.comment("Fission reactors make toxic waste.").define("toxicWaste", true);
+        ANTIMATTER_EXPLOSIONS = b.comment("Dropped antimatter explodes when it expires (the original's ban_antimatter_power flag, inverted).").define("antimatterExplosions", true);
+        FULMINATION_MULTIPLIER = b.comment("Multiplier on the Fulmination Generator's output. Original: 1.").defineInRange("fulminationOutputMultiplier", 1.0, 0.0, 1000.0);
+        TURBINE_MULTIPLIER = b.comment("Multiplier on the Electric Turbine's output. Original: 1.").defineInRange("turbineOutputMultiplier", 1.0, 0.0, 1000.0);
+        FISSION_BOIL_MULTIPLIER = b.comment("Multiplier on the steam a reactor cell boils. Original: 1.").defineInRange("fissionBoilVolumeMultiplier", 1.0, 0.0, 1000.0);
+        TURBINE_STACKING = b.comment("Electric turbines can be stacked into bigger ones.").define("allowTurbineStacking", true);
+        URANIUM_HEXAFLUORIDE_RATIO = b.comment("mB of uranium hexafluoride a yellowcake boils into. Original: 200.").defineInRange("uraniumHexafluorideRatio", 200, 1, 10000);
+        WATER_PER_DEUTERIUM = b.comment("mB of water per mB of deuterium extracted. Original: 4.").defineInRange("waterPerDeuterium", 4, 1, 1000);
+        DEUTERIUM_PER_TRITIUM = b.comment("mB of deuterium per mB of tritium extracted. Original: 4.").defineInRange("deuteriumPerTritium", 4, 1, 1000);
+        DARK_MATTER_CHANCE = b.comment("Chance a particle collision makes dark matter. Original: 0.2.").defineInRange("darkMatterSpawnChance", 0.2, 0.0, 1.0);
+        QUANTUM_ASSEMBLER_MODE = b.comment("What the Quantum Assembler can copy: 0 nothing, 1 items, 2 items and blocks. Original: 1.").defineInRange("quantumAssemblerGenerateMode", 1, 0, 2);
         b.pop();
 
         b.push("wires");

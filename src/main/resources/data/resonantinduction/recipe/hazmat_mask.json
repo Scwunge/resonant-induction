@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "atomic"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SSS",
+    "SAS",
+    "SCS"
+  ],
+  "key": {
+    "S": {
+      "tag": "minecraft:wool"
+    },
+    "A": {
+      "item": "minecraft:leather_helmet"
+    },
+    "C": {
+      "tag": "resonantinduction:parts/circuit_basic"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:hazmat_mask",
+    "count": 1
+  }
+}

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * The original Resource Generator, done with tags: every metal that has both a {@code c:ores/<name>} and a
@@ -24,6 +25,13 @@ import java.util.Optional;
  */
 public final class Materials {
     private Materials() {}
+
+    /** Kept out, as the original's OreDetectionBlackList: uranium has its own processing; refined iron isn't an ore metal. */
+    private static final Set<String> BLACKLIST = Set.of("uranium", "refined_iron");
+
+    public static boolean allowed(String material) {
+        return !BLACKLIST.contains(material);
+    }
 
     public static TagKey<Item> ingotTag(String material) {
         return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "ingots/" + material));
@@ -44,7 +52,7 @@ public final class Materials {
             ResourceLocation id = pair.getFirst().location();
             if (id.getNamespace().equals("c") && id.getPath().startsWith("ores/")) {
                 String name = id.getPath().substring(5);
-                if (!name.contains("/") && pair.getSecond().size() > 0 && firstIngot(name).isPresent()) {
+                if (!name.contains("/") && allowed(name) && pair.getSecond().size() > 0 && firstIngot(name).isPresent()) {
                     out.add(name);
                 }
             }
@@ -74,7 +82,7 @@ public final class Materials {
             ResourceLocation id = tag.location();
             if (id.getNamespace().equals("c") && id.getPath().startsWith("ores/")) {
                 String name = id.getPath().substring(5);
-                if (!name.contains("/") && firstIngot(name).isPresent()) {
+                if (!name.contains("/") && allowed(name) && firstIngot(name).isPresent()) {
                     return name;
                 }
             }

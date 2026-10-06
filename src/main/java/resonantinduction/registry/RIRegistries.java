@@ -36,6 +36,18 @@ import resonantinduction.mechanical.process.MachineBlock;
 import resonantinduction.mechanical.process.MechanicalPistonBlockEntity;
 import resonantinduction.mechanical.process.MixerBlockEntity;
 import resonantinduction.archaic.CastingMoldBlock;
+import resonantinduction.atomic.AntimatterItem;
+import resonantinduction.atomic.FuelRodItem;
+import resonantinduction.atomic.HazmatArmorItem;
+import resonantinduction.atomic.Radiation;
+import resonantinduction.atomic.RadioactiveBlock;
+import resonantinduction.atomic.RadioactiveItem;
+import resonantinduction.atomic.ToxicWasteBlock;
+import resonantinduction.fluid.VirtualFluid;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import resonantinduction.logistic.BreakerBlock;
 import resonantinduction.logistic.ConveyorBeltBlock;
 import resonantinduction.logistic.DetectorBlock;
@@ -147,6 +159,8 @@ public final class RIRegistries {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ResonantInduction.MODID);
     public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, ResonantInduction.MODID);
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(Registries.FLUID, ResonantInduction.MODID);
+    public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, ResonantInduction.MODID);
+    public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS = DeferredRegister.create(Registries.ARMOR_MATERIAL, ResonantInduction.MODID);
 
     public static final ResourceKey<DamageType> ELECTROCUTION = ResourceKey.create(Registries.DAMAGE_TYPE, ResonantInduction.id("electrocution"));
 
@@ -515,6 +529,76 @@ public final class RIRegistries {
         }
     }
 
+    // ---- atomic: radiation, uranium, cells, fuel rods, hazmat, fluids ----
+    public static final DeferredHolder<MobEffect, Radiation.Effect> RADIATION = MOB_EFFECTS.register("radiation", Radiation.Effect::new);
+    public static final ResourceKey<DamageType> RADIATION_DAMAGE = ResourceKey.create(Registries.DAMAGE_TYPE, ResonantInduction.id("radiation"));
+    public static final DeferredHolder<SoundEvent, SoundEvent> ANTIMATTER_SOUND = SOUNDS.register("antimatter",
+            () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("antimatter")));
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> HAZMAT_MATERIAL = ARMOR_MATERIALS.register("hazmat", () -> new ArmorMaterial(
+            new EnumMap<>(java.util.Map.of(ArmorItem.Type.HELMET, 0, ArmorItem.Type.CHESTPLATE, 0, ArmorItem.Type.LEGGINGS, 0, ArmorItem.Type.BOOTS, 0, ArmorItem.Type.BODY, 0)),
+            0, net.minecraft.sounds.SoundEvents.ARMOR_EQUIP_LEATHER, () -> net.minecraft.world.item.crafting.Ingredient.of(net.minecraft.world.item.Items.WHITE_WOOL),
+            List.of(new ArmorMaterial.Layer(ResonantInduction.id("hazmat"))), 0, 0));
+
+    public static final DeferredBlock<RadioactiveBlock> URANIUM_ORE = BLOCKS.registerBlock("uranium_ore", p -> new RadioactiveBlock(true, 1, 0, false, p),
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2f, 3f).sound(SoundType.STONE).requiresCorrectToolForDrops());
+    public static final DeferredBlock<RadioactiveBlock> RADIOACTIVE_WASTE = BLOCKS.registerBlock("radioactive_waste", p -> new RadioactiveBlock(false, 5, 2, true, p),
+            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(0.6f).sound(SoundType.GRAVEL).lightLevel(s -> 5));
+
+    public static final DeferredItem<RadioactiveItem> YELLOWCAKE = ITEMS.registerItem("yellowcake", RadioactiveItem::new);
+    public static final DeferredItem<RadioactiveItem> URANIUM = ITEMS.registerItem("uranium", RadioactiveItem::new);
+    public static final DeferredItem<RadioactiveItem> URANIUM_238 = ITEMS.registerItem("uranium_238", RadioactiveItem::new);
+    public static final DeferredItem<Item> EMPTY_CELL = ITEMS.registerSimpleItem("empty_cell");
+    public static final DeferredItem<Item> WATER_CELL = ITEMS.register("water_cell", () -> new Item(new Item.Properties().craftRemainder(EMPTY_CELL.get())));
+    public static final DeferredItem<Item> DEUTERIUM_CELL = ITEMS.register("deuterium_cell", () -> new Item(new Item.Properties().craftRemainder(EMPTY_CELL.get())));
+    public static final DeferredItem<Item> TRITIUM_CELL = ITEMS.register("tritium_cell", () -> new Item(new Item.Properties().craftRemainder(EMPTY_CELL.get())));
+    public static final DeferredItem<Item> DARK_MATTER = ITEMS.register("dark_matter", () -> new Item(new Item.Properties().craftRemainder(EMPTY_CELL.get())));
+    public static final DeferredItem<AntimatterItem> ANTIMATTER = ITEMS.register("antimatter", () -> new AntimatterItem(0, new Item.Properties().craftRemainder(EMPTY_CELL.get())));
+    public static final DeferredItem<AntimatterItem> ANTIMATTER_GRAM = ITEMS.register("antimatter_gram", () -> new AntimatterItem(1, new Item.Properties().craftRemainder(EMPTY_CELL.get())));
+    public static final DeferredItem<FuelRodItem> FISSILE_FUEL_ROD = ITEMS.registerItem("fissile_fuel_rod", p -> new FuelRodItem(true, p));
+    public static final DeferredItem<FuelRodItem> BREEDER_FUEL_ROD = ITEMS.registerItem("breeder_fuel_rod", p -> new FuelRodItem(false, p));
+    public static final DeferredItem<HazmatArmorItem> HAZMAT_MASK = ITEMS.registerItem("hazmat_mask", p -> new HazmatArmorItem(HAZMAT_MATERIAL, ArmorItem.Type.HELMET, p));
+    public static final DeferredItem<HazmatArmorItem> HAZMAT_BODY = ITEMS.registerItem("hazmat_body", p -> new HazmatArmorItem(HAZMAT_MATERIAL, ArmorItem.Type.CHESTPLATE, p));
+    public static final DeferredItem<HazmatArmorItem> HAZMAT_LEGGINGS = ITEMS.registerItem("hazmat_leggings", p -> new HazmatArmorItem(HAZMAT_MATERIAL, ArmorItem.Type.LEGGINGS, p));
+    public static final DeferredItem<HazmatArmorItem> HAZMAT_BOOTS = ITEMS.registerItem("hazmat_boots", p -> new HazmatArmorItem(HAZMAT_MATERIAL, ArmorItem.Type.BOOTS, p));
+
+    /** Gases (lighter than air) for tanks and pipes; steam and plasma are hot. */
+    private static FluidType.Properties gas(int temperature) {
+        return FluidType.Properties.create().density(-1000).viscosity(200).temperature(temperature).canSwim(false).canDrown(false).supportsBoating(false);
+    }
+
+    public static final DeferredHolder<FluidType, FluidType> STEAM_TYPE = FLUID_TYPES.register("steam", () -> new FluidType(gas(373)));
+    public static final DeferredHolder<FluidType, FluidType> URANIUM_HEXAFLUORIDE_TYPE = FLUID_TYPES.register("uranium_hexafluoride", () -> new FluidType(gas(330)));
+    public static final DeferredHolder<FluidType, FluidType> DEUTERIUM_TYPE = FLUID_TYPES.register("deuterium", () -> new FluidType(gas(300)));
+    public static final DeferredHolder<FluidType, FluidType> TRITIUM_TYPE = FLUID_TYPES.register("tritium", () -> new FluidType(gas(300)));
+    public static final DeferredHolder<FluidType, FluidType> PLASMA_TYPE = FLUID_TYPES.register("plasma", () -> new FluidType(gas(100_000_000).lightLevel(15)));
+    public static final DeferredHolder<FluidType, FluidType> TOXIC_WASTE_TYPE = FLUID_TYPES.register("toxic_waste",
+            () -> new FluidType(FluidType.Properties.create().density(1500).viscosity(3000).temperature(310).canExtinguish(true)
+                    .sound(net.neoforged.neoforge.common.SoundActions.BUCKET_FILL, net.minecraft.sounds.SoundEvents.BUCKET_FILL)
+                    .sound(net.neoforged.neoforge.common.SoundActions.BUCKET_EMPTY, net.minecraft.sounds.SoundEvents.BUCKET_EMPTY)));
+    public static final DeferredHolder<Fluid, VirtualFluid> STEAM = FLUIDS.register("steam", () -> new VirtualFluid(STEAM_TYPE::get));
+    public static final DeferredHolder<Fluid, VirtualFluid> URANIUM_HEXAFLUORIDE = FLUIDS.register("uranium_hexafluoride", () -> new VirtualFluid(URANIUM_HEXAFLUORIDE_TYPE::get));
+    public static final DeferredHolder<Fluid, VirtualFluid> DEUTERIUM = FLUIDS.register("deuterium", () -> new VirtualFluid(DEUTERIUM_TYPE::get));
+    public static final DeferredHolder<Fluid, VirtualFluid> TRITIUM = FLUIDS.register("tritium", () -> new VirtualFluid(TRITIUM_TYPE::get));
+    public static final DeferredHolder<Fluid, VirtualFluid> PLASMA = FLUIDS.register("plasma", () -> new VirtualFluid(PLASMA_TYPE::get));
+    private static BaseFlowingFluid.Properties toxicProperties() {
+        return new BaseFlowingFluid.Properties(TOXIC_WASTE_TYPE, RIRegistries.TOXIC_WASTE, RIRegistries.TOXIC_WASTE_FLOWING)
+                .block(RIRegistries.TOXIC_WASTE_BLOCK).bucket(RIRegistries.TOXIC_WASTE_BUCKET).tickRate(20);
+    }
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> TOXIC_WASTE = FLUIDS.register("toxic_waste", () -> new BaseFlowingFluid.Source(toxicProperties()));
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> TOXIC_WASTE_FLOWING = FLUIDS.register("flowing_toxic_waste",
+            () -> new BaseFlowingFluid.Flowing(toxicProperties()));
+    public static final DeferredBlock<ToxicWasteBlock> TOXIC_WASTE_BLOCK = BLOCKS.registerBlock("toxic_waste", p -> new ToxicWasteBlock(TOXIC_WASTE.get(), p),
+            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).replaceable().noCollission().strength(100f).pushReaction(net.minecraft.world.level.material.PushReaction.DESTROY)
+                    .noLootTable().liquid().sound(SoundType.EMPTY));
+    public static final DeferredItem<net.minecraft.world.item.BucketItem> TOXIC_WASTE_BUCKET = ITEMS.registerItem("toxic_waste_bucket",
+            p -> new net.minecraft.world.item.BucketItem(TOXIC_WASTE.get(), p), new Item.Properties().craftRemainder(net.minecraft.world.item.Items.BUCKET).stacksTo(1));
+
+    static {
+        ITEMS.registerSimpleBlockItem(URANIUM_ORE);
+        ITEMS.registerSimpleBlockItem(RADIOACTIVE_WASTE);
+    }
+
     public static final DeferredItem<HandCrankItem> HAND_CRANK = ITEMS.registerItem("hand_crank", HandCrankItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredHolder<SoundEvent, SoundEvent> GEAR_CRANK = SOUNDS.register("gear_crank",
             () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("gear_crank")));
@@ -574,6 +658,8 @@ public final class RIRegistries {
         RECIPE_SERIALIZERS.register(modBus);
         FLUID_TYPES.register(modBus);
         FLUIDS.register(modBus);
+        MOB_EFFECTS.register(modBus);
+        ARMOR_MATERIALS.register(modBus);
     }
 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {

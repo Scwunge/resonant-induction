@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "atomic"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "resonantinduction:antimatter_gram"
+    }
+  ],
+  "result": {
+    "id": "resonantinduction:antimatter",
+    "count": 8
+  }
+}

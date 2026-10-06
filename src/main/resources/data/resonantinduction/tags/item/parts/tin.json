@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "#c:ingots/tin",
+      "required": false
+    },
+    {
+      "id": "#c:ingots/iron",
+      "required": false
+    }
+  ]
+}

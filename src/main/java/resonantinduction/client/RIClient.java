@@ -55,6 +55,32 @@ public final class RIClient {
     public static void clientExtensions(RegisterClientExtensionsEvent event) {
         event.registerFluidType(materialFluid("molten_flow"), RIRegistries.MOLTEN_METAL_TYPE.get());
         event.registerFluidType(materialFluid("mixture_flow"), RIRegistries.DUST_MIXTURE_TYPE.get());
+        event.registerFluidType(plainFluid("steam", 0xFFFFFFFF), RIRegistries.STEAM_TYPE.get());
+        event.registerFluidType(plainFluid("uranium_hexafluoride", 0xFFFFFFFF), RIRegistries.URANIUM_HEXAFLUORIDE_TYPE.get());
+        event.registerFluidType(plainFluid("deuterium", 0xFFFFFFFF), RIRegistries.DEUTERIUM_TYPE.get());
+        event.registerFluidType(plainFluid("tritium", 0xFFFFFFFF), RIRegistries.TRITIUM_TYPE.get());
+        event.registerFluidType(plainFluid("plasma", 0xFFFFFFFF), RIRegistries.PLASMA_TYPE.get());
+        event.registerFluidType(plainFluid("toxic_waste", 0xFFFFFFFF), RIRegistries.TOXIC_WASTE_TYPE.get());
+    }
+
+    private static IClientFluidTypeExtensions plainFluid(String texture, int tint) {
+        ResourceLocation tex = ResonantInduction.id("block/" + texture);
+        return new IClientFluidTypeExtensions() {
+            @Override
+            public ResourceLocation getStillTexture() {
+                return tex;
+            }
+
+            @Override
+            public ResourceLocation getFlowingTexture() {
+                return tex;
+            }
+
+            @Override
+            public int getTintColor() {
+                return tint;
+            }
+        };
     }
 
     private static IClientFluidTypeExtensions materialFluid(String texture) {
@@ -105,6 +131,8 @@ public final class RIClient {
 
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
+        net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(RIRegistries.TOXIC_WASTE.get(), net.minecraft.client.renderer.RenderType.translucent());
+        net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(RIRegistries.TOXIC_WASTE_FLOWING.get(), net.minecraft.client.renderer.RenderType.translucent());
         // Battery items light up coils by charge (0-8), like the original item renderer.
         event.enqueueWork(() -> ItemProperties.register(RIRegistries.BATTERY_ITEM.get(), ResonantInduction.id("level"),
                 (stack, level, entity, seed) -> Math.round(8f * stack.getOrDefault(RIRegistries.ENERGY.get(), 0) / Math.max(1, BatteryItem.capacity(stack))) / 8f));

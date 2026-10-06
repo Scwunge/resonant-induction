@@ -1,6 +1,8 @@
 package resonantinduction;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
+import org.slf4j.Logger;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -14,6 +16,7 @@ import resonantinduction.tesla.TeslaGrid;
 @Mod(ResonantInduction.MODID)
 public final class ResonantInduction {
     public static final String MODID = "resonantinduction";
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public ResonantInduction(IEventBus modBus, ModContainer container) {
         RIRegistries.register(modBus);

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "resonantinduction:block/radioactive_waste_top",
+    "side": "resonantinduction:block/radioactive_waste",
+    "bottom": "resonantinduction:block/radioactive_waste_bottom"
+  }
+}

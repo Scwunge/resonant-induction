@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "atomic"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CUC",
+    "CUC",
+    "CUC"
+  ],
+  "key": {
+    "U": {
+      "item": "resonantinduction:uranium"
+    },
+    "C": {
+      "item": "resonantinduction:empty_cell"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:fissile_fuel_rod",
+    "count": 1
+  }
+}

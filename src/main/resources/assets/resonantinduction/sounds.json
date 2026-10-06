@@ -37,5 +37,11 @@
     "sounds": [
       "resonantinduction:conveyor"
     ]
+  },
+  "antimatter": {
+    "subtitle": "subtitles.resonantinduction.antimatter",
+    "sounds": [
+      "resonantinduction:antimatter"
+    ]
   }
 }

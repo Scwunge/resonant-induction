@@ -1,0 +1,9 @@
+{
+  "values": [
+    {
+      "id": "#c:circuits/advanced",
+      "required": false
+    },
+    "minecraft:comparator"
+  ]
+}
