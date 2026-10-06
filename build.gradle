@@ -50,11 +50,19 @@ neoForge {
             if (findProperty('autotest')) {
                 jvmArguments.add("-Dcortex.autotest=${findProperty('autotest')}")
             }
+            // -PautotestServer=host:port makes the script join that server instead
+            if (findProperty('autotestServer')) {
+                jvmArguments.add("-Dcortex.autotest.server=${findProperty('autotestServer')}")
+            }
         }
+        // -PdevXmx=8G for a server with the pack's mods in runs/server/mods
         server {
             server()
             gameDirectory = file('runs/server')
             programArgument '--nogui'
+            if (findProperty('devXmx')) {
+                jvmArguments.add("-Xmx${findProperty('devXmx')}")
+            }
         }
         // Headless dedicated server that runs the GameTests and exits (EULA auto-accepted).
         // -PgametestDir=gametest-voltz runs it with the pack's server-side mods staged in runs/gametest-voltz/mods.
