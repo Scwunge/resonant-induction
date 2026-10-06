@@ -1,0 +1,32 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "transformer"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "WWW",
+    "WWW",
+    "III"
+  ],
+  "key": {
+    "W": {
+      "tag": "resonantinduction:wires"
+    },
+    "I": [
+      {
+        "tag": "c:ingots/steel"
+      },
+      {
+        "tag": "c:ingots/iron"
+      }
+    ]
+  },
+  "result": {
+    "id": "resonantinduction:transformer",
+    "count": 1
+  }
+}

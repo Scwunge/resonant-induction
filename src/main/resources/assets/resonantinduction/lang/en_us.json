@@ -116,5 +116,10 @@
   "gui.resonantinduction.multimeter.mode.greater_than_equal": ">=",
   "gui.resonantinduction.multimeter.mode.greater_than": ">",
   "message.resonantinduction.multimeter.detecting": "Multimeter measuring: %s",
-  "jei.resonantinduction.multimeter": "Place on the face of a block to read it: stored energy, flow (FE/t, or the current through a wire), capacity, fluid, and the torque, speed, temperature or pressure of blocks that have them. Multimeters side by side make one big screen. Right-click for settings: it can give a redstone signal when a reading is above, below or equal to a limit. A wrench pauses it."
+  "jei.resonantinduction.multimeter": "Place on the face of a block to read it: stored energy, flow (FE/t, or the current through a wire), capacity, fluid, and the torque, speed, temperature or pressure of blocks that have them. Multimeters side by side make one big screen. Right-click for settings: it can give a redstone signal when a reading is above, below or equal to a limit. A wrench pauses it.",
+  "block.resonantinduction.transformer": "Transformer",
+  "message.resonantinduction.transformer.up": "Transformer set to step up (x%s)",
+  "message.resonantinduction.transformer.down": "Transformer set to step down (/%s)",
+  "message.resonantinduction.transformer.winding": "Transformer winding: %sx",
+  "jei.resonantinduction.transformer": "Passes power in one direction: energy entering the side that faced you when you placed it comes out of the opposite side. Right-click to switch between stepping voltage up and down; a wrench turns it, sneak + wrench changes the winding (2x, 3x, 4x). Forge Energy has no voltage, so the amount of power passing through is not changed."
 }

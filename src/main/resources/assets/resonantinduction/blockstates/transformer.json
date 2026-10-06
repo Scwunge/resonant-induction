@@ -1,0 +1,49 @@
+{
+  "variants": {
+    "facing=north,multiplier=0": {
+      "model": "resonantinduction:block/transformer_0"
+    },
+    "facing=north,multiplier=1": {
+      "model": "resonantinduction:block/transformer_1"
+    },
+    "facing=north,multiplier=2": {
+      "model": "resonantinduction:block/transformer_2"
+    },
+    "facing=east,multiplier=0": {
+      "model": "resonantinduction:block/transformer_0",
+      "y": 90
+    },
+    "facing=east,multiplier=1": {
+      "model": "resonantinduction:block/transformer_1",
+      "y": 90
+    },
+    "facing=east,multiplier=2": {
+      "model": "resonantinduction:block/transformer_2",
+      "y": 90
+    },
+    "facing=south,multiplier=0": {
+      "model": "resonantinduction:block/transformer_0",
+      "y": 180
+    },
+    "facing=south,multiplier=1": {
+      "model": "resonantinduction:block/transformer_1",
+      "y": 180
+    },
+    "facing=south,multiplier=2": {
+      "model": "resonantinduction:block/transformer_2",
+      "y": 180
+    },
+    "facing=west,multiplier=0": {
+      "model": "resonantinduction:block/transformer_0",
+      "y": 270
+    },
+    "facing=west,multiplier=1": {
+      "model": "resonantinduction:block/transformer_1",
+      "y": 270
+    },
+    "facing=west,multiplier=2": {
+      "model": "resonantinduction:block/transformer_2",
+      "y": 270
+    }
+  }
+}

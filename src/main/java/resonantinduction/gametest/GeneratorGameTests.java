@@ -35,6 +35,21 @@ public class GeneratorGameTests {
     }
 
     @GameTest(template = TEMPLATE)
+    public static void transformerPassesPowerOneWay(GameTestHelper helper) {
+        BlockPos pos = new BlockPos(3, 1, 3);
+        helper.setBlock(pos, RIRegistries.TRANSFORMER.get().defaultBlockState()
+                .setValue(resonantinduction.transformer.TransformerBlock.FACING, net.minecraft.core.Direction.WEST));
+        helper.setBlock(pos.east(), RIRegistries.TESLA.get());
+        TeslaBlockEntity sink = helper.getBlockEntity(pos.east());
+        var level = helper.getLevel();
+        var in = level.getCapability(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.BLOCK, helper.absolutePos(pos), net.minecraft.core.Direction.WEST);
+        helper.assertTrue(in != null && in.receiveEnergy(700, false) == 700 && sink.getCharge() == 700, "transformer did not pass 700 FE through");
+        helper.assertTrue(level.getCapability(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.BLOCK, helper.absolutePos(pos),
+                net.minecraft.core.Direction.EAST) == null, "the output side should not take power");
+        helper.succeed();
+    }
+
+    @GameTest(template = TEMPLATE)
     public static void solarPanelWorksInDaylight(GameTestHelper helper) {
         helper.getLevel().setDayTime(6000);
         helper.getLevel().setWeatherParameters(6000, 0, false, false);

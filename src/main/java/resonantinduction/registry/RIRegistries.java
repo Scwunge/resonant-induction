@@ -30,6 +30,8 @@ import resonantinduction.laser.MiningLaserItem;
 import resonantinduction.battery.BatteryBlock;
 import resonantinduction.battery.BatteryBlockEntity;
 import resonantinduction.battery.BatteryItem;
+import resonantinduction.transformer.TransformerBlock;
+import resonantinduction.transformer.TransformerBlockEntity;
 import resonantinduction.multimeter.MultimeterBlock;
 import resonantinduction.multimeter.MultimeterBlockEntity;
 import resonantinduction.multimeter.MultimeterMenu;
@@ -164,6 +166,12 @@ public final class RIRegistries {
     public static final DeferredHolder<MenuType<?>, MenuType<MultimeterMenu>> MULTIMETER_MENU = MENUS.register("multimeter",
             () -> IMenuTypeExtension.create(MultimeterMenu::fromNetwork));
 
+    public static final DeferredBlock<TransformerBlock> TRANSFORMER = BLOCKS.registerBlock("transformer", TransformerBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(2f, 6f).sound(SoundType.METAL).noOcclusion());
+    public static final DeferredItem<BlockItem> TRANSFORMER_ITEM = ITEMS.registerSimpleBlockItem(TRANSFORMER);
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TransformerBlockEntity>> TRANSFORMER_BE = BLOCK_ENTITIES.register("transformer",
+            () -> BlockEntityType.Builder.of(TransformerBlockEntity::new, TRANSFORMER.get()).build(null));
+
     /** Stored FE of energy items. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ENERGY = COMPONENTS.registerComponentType("energy",
             b -> b.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT));
@@ -219,6 +227,7 @@ public final class RIRegistries {
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, CHARGER_BE.get(), ChargerBlockEntity::getEnergyCapability);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, WIRE_BE.get(), WireBlockEntity::getEnergyCapability);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, BATTERY_BE.get(), BatteryBlockEntity::getEnergyCapability);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, TRANSFORMER_BE.get(), TransformerBlockEntity::getEnergyCapability);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, SOLAR_PANEL_BE.get(), GeneratorBlockEntity::getEnergyCapability);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, THERMOPILE_BE.get(), GeneratorBlockEntity::getEnergyCapability);
         event.registerItem(Capabilities.EnergyStorage.ITEM, (stack, ctx) -> {

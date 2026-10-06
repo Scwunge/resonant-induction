@@ -7,6 +7,7 @@
     "resonantinduction:charger",
     "resonantinduction:battery",
     "resonantinduction:solar_panel",
-    "resonantinduction:thermopile"
+    "resonantinduction:thermopile",
+    "resonantinduction:transformer"
   ]
 }

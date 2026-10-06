@@ -1,0 +1,11 @@
+newmtl coil
+Kd 1 1 1
+map_Kd #coil
+
+newmtl core
+Kd 1 1 1
+map_Kd #core
+
+newmtl base
+Kd 1 1 1
+map_Kd #base

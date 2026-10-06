@@ -1,0 +1,22 @@
+{
+  "loader": "neoforge:obj",
+  "model": "resonantinduction:models/block/obj/transformer.obj",
+  "flip_v": true,
+  "visibility": {
+    "InsulatorLayerLow": false,
+    "OuterWindingLowBox": false,
+    "InnerWindingLowBox": false,
+    "InsulatorLayerMed": false,
+    "OuterWindingMedBox": false,
+    "InnerWindingMedBox": false,
+    "InnerWindingHighBox": true,
+    "InsulatorLayerHigh": true,
+    "OuterWindingHighBox": true
+  },
+  "textures": {
+    "coil": "resonantinduction:block/transformer_winding",
+    "core": "minecraft:block/iron_block",
+    "base": "minecraft:block/stone",
+    "particle": "minecraft:block/iron_block"
+  }
+}
