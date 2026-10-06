@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "resonantinduction:block/engineering_table"
+    },
+    "facing=east": {
+      "model": "resonantinduction:block/engineering_table",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "resonantinduction:block/engineering_table",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "resonantinduction:block/engineering_table",
+      "y": 270
+    }
+  }
+}

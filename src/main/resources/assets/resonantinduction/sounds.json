@@ -25,5 +25,11 @@
       "resonantinduction:grinder3",
       "resonantinduction:grinder4"
     ]
+  },
+  "hammer": {
+    "subtitle": "subtitles.resonantinduction.hammer",
+    "sounds": [
+      "resonantinduction:hammer"
+    ]
   }
 }

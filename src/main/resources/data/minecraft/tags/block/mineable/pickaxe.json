@@ -36,6 +36,10 @@
     "resonantinduction:plastic_pipe",
     "resonantinduction:iron_pipe",
     "resonantinduction:steel_pipe",
-    "resonantinduction:fiberglass_pipe"
+    "resonantinduction:fiberglass_pipe",
+    "resonantinduction:crate_iron",
+    "resonantinduction:crate_steel",
+    "resonantinduction:imprinter",
+    "resonantinduction:turntable"
   ]
 }

@@ -36,6 +36,16 @@ import resonantinduction.mechanical.process.MachineBlock;
 import resonantinduction.mechanical.process.MechanicalPistonBlockEntity;
 import resonantinduction.mechanical.process.MixerBlockEntity;
 import resonantinduction.archaic.CastingMoldBlock;
+import resonantinduction.archaic.CrateBlock;
+import resonantinduction.archaic.CrateBlockEntity;
+import resonantinduction.archaic.CrateContents;
+import resonantinduction.archaic.CrateItem;
+import resonantinduction.archaic.EngineeringTableBlock;
+import resonantinduction.archaic.EngineeringTableBlockEntity;
+import resonantinduction.archaic.HammerItem;
+import resonantinduction.archaic.ImprinterBlock;
+import resonantinduction.archaic.ImprinterBlockEntity;
+import resonantinduction.archaic.TurntableBlock;
 import resonantinduction.fluid.FluidNodeBlockEntity;
 import resonantinduction.fluid.GrateBlock;
 import resonantinduction.fluid.GrateBlockEntity;
@@ -408,6 +418,46 @@ public final class RIRegistries {
         ITEMS.registerSimpleBlockItem(PUMP);
     }
 
+    // ---- workshop: crates, engineering table, hammer, imprinter, turntable ----
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<CrateContents>> CRATE_CONTENTS = COMPONENTS.registerComponentType("crate_contents",
+            b -> b.persistent(CrateContents.CODEC).networkSynchronized(CrateContents.STREAM_CODEC));
+    public static final String[] CRATE_TIERS = {"wood", "iron", "steel"};
+    public static final List<DeferredBlock<CrateBlock>> CRATES = new ArrayList<>();
+    public static final List<DeferredItem<CrateItem>> CRATE_ITEMS = new ArrayList<>();
+
+    static {
+        for (int t = 0; t < 3; t++) {
+            int tier = t;
+            DeferredBlock<CrateBlock> crate = BLOCKS.registerBlock("crate_" + CRATE_TIERS[t], p -> new CrateBlock(tier, p),
+                    BlockBehaviour.Properties.of().mapColor(tier == 0 ? MapColor.WOOD : MapColor.METAL).strength(tier == 0 ? 2f : 3f, 6f)
+                            .sound(tier == 0 ? SoundType.WOOD : SoundType.METAL));
+            CRATES.add(crate);
+            CRATE_ITEMS.add(ITEMS.register("crate_" + CRATE_TIERS[t], () -> new CrateItem(crate.get(), new Item.Properties())));
+        }
+    }
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CrateBlockEntity>> CRATE_BE = BLOCK_ENTITIES.register("crate",
+            () -> BlockEntityType.Builder.of(CrateBlockEntity::new, CRATES.stream().map(DeferredBlock::get).toArray(net.minecraft.world.level.block.Block[]::new)).build(null));
+    public static final DeferredBlock<EngineeringTableBlock> ENGINEERING_TABLE = BLOCKS.registerBlock("engineering_table", EngineeringTableBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(2.5f).sound(SoundType.WOOD).noOcclusion());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EngineeringTableBlockEntity>> ENGINEERING_TABLE_BE = BLOCK_ENTITIES.register("engineering_table",
+            () -> BlockEntityType.Builder.of(EngineeringTableBlockEntity::new, ENGINEERING_TABLE.get()).build(null));
+    public static final DeferredItem<HammerItem> HAMMER = ITEMS.registerItem("hammer", HammerItem::new);
+    public static final DeferredHolder<SoundEvent, SoundEvent> HAMMER_SOUND = SOUNDS.register("hammer",
+            () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("hammer")));
+    public static final DeferredBlock<ImprinterBlock> IMPRINTER = BLOCKS.registerBlock("imprinter", ImprinterBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2.5f, 6f).sound(SoundType.STONE));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ImprinterBlockEntity>> IMPRINTER_BE = BLOCK_ENTITIES.register("imprinter",
+            () -> BlockEntityType.Builder.of(ImprinterBlockEntity::new, IMPRINTER.get()).build(null));
+    public static final DeferredBlock<TurntableBlock> TURNTABLE = BLOCKS.registerBlock("turntable", TurntableBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2.5f, 6f).sound(SoundType.STONE));
+
+    static {
+        ITEMS.registerSimpleBlockItem(ENGINEERING_TABLE);
+        ITEMS.registerSimpleBlockItem(IMPRINTER);
+        ITEMS.registerSimpleBlockItem(TURNTABLE);
+    }
+
     public static final DeferredItem<HandCrankItem> HAND_CRANK = ITEMS.registerItem("hand_crank", HandCrankItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredHolder<SoundEvent, SoundEvent> GEAR_CRANK = SOUNDS.register("gear_crank",
             () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("gear_crank")));
@@ -500,6 +550,8 @@ public final class RIRegistries {
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, GRATE_BE.get(), FluidNodeBlockEntity::getFluidCapability);
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, TANK_BE.get(), TankBlockEntity::getFluidCapability);
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, PUMP_BE.get(), PumpBlockEntity::getFluidCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CRATE_BE.get(), CrateBlockEntity::getItemCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, IMPRINTER_BE.get(), ImprinterBlockEntity::getItemCapability);
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CASTING_MOLD_BE.get(), CastingMoldBlockEntity::getItemCapability);
     }
 }

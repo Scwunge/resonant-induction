@@ -1,0 +1,31 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "workshop"
+    },
+    {
+      "type": "neoforge:tag_empty",
+      "tag": "c:ingots/steel"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WWW",
+    "WSW",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "tag": "c:storage_blocks/iron"
+    },
+    "S": {
+      "item": "resonantinduction:crate_iron"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:crate_steel",
+    "count": 1
+  }
+}

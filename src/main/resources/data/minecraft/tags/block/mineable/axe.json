@@ -5,6 +5,8 @@
     "resonantinduction:shaft_wood",
     "resonantinduction:wind_turbine_wood",
     "resonantinduction:water_turbine_wood",
-    "resonantinduction:grate"
+    "resonantinduction:grate",
+    "resonantinduction:crate_wood",
+    "resonantinduction:engineering_table"
   ]
 }

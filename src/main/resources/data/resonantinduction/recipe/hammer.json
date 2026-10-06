@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "workshop"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CC ",
+    "CS ",
+    "  S"
+  ],
+  "key": {
+    "C": {
+      "tag": "c:cobblestones"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:hammer",
+    "count": 1
+  }
+}

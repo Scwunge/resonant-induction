@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "resonantinduction:block/turntable"
+    },
+    "facing=down": {
+      "model": "resonantinduction:block/turntable",
+      "x": 180
+    },
+    "facing=north": {
+      "model": "resonantinduction:block/turntable",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "resonantinduction:block/turntable",
+      "x": 90,
+      "y": 180
+    },
+    "facing=east": {
+      "model": "resonantinduction:block/turntable",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west": {
+      "model": "resonantinduction:block/turntable",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
