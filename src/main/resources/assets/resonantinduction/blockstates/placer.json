@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "resonantinduction:block/placer"
+    },
+    "facing=east": {
+      "model": "resonantinduction:block/placer",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "resonantinduction:block/placer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "resonantinduction:block/placer",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "resonantinduction:block/placer",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "resonantinduction:block/placer",
+      "x": 90
+    }
+  }
+}

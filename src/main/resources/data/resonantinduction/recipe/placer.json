@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "logistics"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "CGC",
+    "CSC",
+    "CRC"
+  ],
+  "key": {
+    "C": {
+      "tag": "c:cobblestones"
+    },
+    "G": {
+      "item": "resonantinduction:gear_wood"
+    },
+    "S": {
+      "tag": "c:ingots/iron"
+    },
+    "R": {
+      "tag": "c:storage_blocks/redstone"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:placer",
+    "count": 1
+  }
+}

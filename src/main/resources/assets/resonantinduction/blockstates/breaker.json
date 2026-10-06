@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "resonantinduction:block/breaker"
+    },
+    "facing=east": {
+      "model": "resonantinduction:block/breaker",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "resonantinduction:block/breaker",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "resonantinduction:block/breaker",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "resonantinduction:block/breaker",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "resonantinduction:block/breaker",
+      "x": 90
+    }
+  }
+}

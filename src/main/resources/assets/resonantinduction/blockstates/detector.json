@@ -1,0 +1,96 @@
+{
+  "variants": {
+    "facing=north,inverted=false,powered=false": {
+      "model": "resonantinduction:block/detector_green"
+    },
+    "facing=north,inverted=false,powered=true": {
+      "model": "resonantinduction:block/detector_green"
+    },
+    "facing=north,inverted=true,powered=false": {
+      "model": "resonantinduction:block/detector_red"
+    },
+    "facing=north,inverted=true,powered=true": {
+      "model": "resonantinduction:block/detector_red"
+    },
+    "facing=east,inverted=false,powered=false": {
+      "model": "resonantinduction:block/detector_green",
+      "y": 90
+    },
+    "facing=east,inverted=false,powered=true": {
+      "model": "resonantinduction:block/detector_green",
+      "y": 90
+    },
+    "facing=east,inverted=true,powered=false": {
+      "model": "resonantinduction:block/detector_red",
+      "y": 90
+    },
+    "facing=east,inverted=true,powered=true": {
+      "model": "resonantinduction:block/detector_red",
+      "y": 90
+    },
+    "facing=south,inverted=false,powered=false": {
+      "model": "resonantinduction:block/detector_green",
+      "y": 180
+    },
+    "facing=south,inverted=false,powered=true": {
+      "model": "resonantinduction:block/detector_green",
+      "y": 180
+    },
+    "facing=south,inverted=true,powered=false": {
+      "model": "resonantinduction:block/detector_red",
+      "y": 180
+    },
+    "facing=south,inverted=true,powered=true": {
+      "model": "resonantinduction:block/detector_red",
+      "y": 180
+    },
+    "facing=west,inverted=false,powered=false": {
+      "model": "resonantinduction:block/detector_green",
+      "y": 270
+    },
+    "facing=west,inverted=false,powered=true": {
+      "model": "resonantinduction:block/detector_green",
+      "y": 270
+    },
+    "facing=west,inverted=true,powered=false": {
+      "model": "resonantinduction:block/detector_red",
+      "y": 270
+    },
+    "facing=west,inverted=true,powered=true": {
+      "model": "resonantinduction:block/detector_red",
+      "y": 270
+    },
+    "facing=up,inverted=false,powered=false": {
+      "model": "resonantinduction:block/detector_green",
+      "x": 270
+    },
+    "facing=up,inverted=false,powered=true": {
+      "model": "resonantinduction:block/detector_green",
+      "x": 270
+    },
+    "facing=up,inverted=true,powered=false": {
+      "model": "resonantinduction:block/detector_red",
+      "x": 270
+    },
+    "facing=up,inverted=true,powered=true": {
+      "model": "resonantinduction:block/detector_red",
+      "x": 270
+    },
+    "facing=down,inverted=false,powered=false": {
+      "model": "resonantinduction:block/detector_green",
+      "x": 90
+    },
+    "facing=down,inverted=false,powered=true": {
+      "model": "resonantinduction:block/detector_green",
+      "x": 90
+    },
+    "facing=down,inverted=true,powered=false": {
+      "model": "resonantinduction:block/detector_red",
+      "x": 90
+    },
+    "facing=down,inverted=true,powered=true": {
+      "model": "resonantinduction:block/detector_red",
+      "x": 90
+    }
+  }
+}

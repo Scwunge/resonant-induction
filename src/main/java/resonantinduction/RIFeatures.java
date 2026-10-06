@@ -35,6 +35,7 @@ public final class RIFeatures {
         feature(b, "processing", "Ore processing: Mechanical Piston, Grinding Wheel, Mixer, Filter, Millstone, the dusts, Firebox, Hot Plate and Casting Mold");
         feature(b, "fluids", "Gutters, Tanks, Grates, Pipes and the Pump");
         feature(b, "workshop", "Crates, Engineering Table, Hammer, Imprinter and Turntable");
+        feature(b, "logistics", "Conveyor Belts, Manipulators, Detectors, Sorters, Breakers and Placers");
         feature(b, "generators", "Solar Panel and Thermopile (overlap the Electrodynamics generators)");
         b.pop();
         SPEC = b.build();

@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=north,type=flat": {
+      "model": "resonantinduction:block/conveyor_belt"
+    },
+    "facing=north,type=raised": {
+      "model": "resonantinduction:block/conveyor_belt_raised"
+    },
+    "facing=north,type=slant_up": {
+      "model": "resonantinduction:block/conveyor_belt_slanted",
+      "y": 180
+    },
+    "facing=north,type=slant_down": {
+      "model": "resonantinduction:block/conveyor_belt_slanted"
+    },
+    "facing=east,type=flat": {
+      "model": "resonantinduction:block/conveyor_belt",
+      "y": 90
+    },
+    "facing=east,type=raised": {
+      "model": "resonantinduction:block/conveyor_belt_raised",
+      "y": 90
+    },
+    "facing=east,type=slant_up": {
+      "model": "resonantinduction:block/conveyor_belt_slanted",
+      "y": 270
+    },
+    "facing=east,type=slant_down": {
+      "model": "resonantinduction:block/conveyor_belt_slanted",
+      "y": 90
+    },
+    "facing=south,type=flat": {
+      "model": "resonantinduction:block/conveyor_belt",
+      "y": 180
+    },
+    "facing=south,type=raised": {
+      "model": "resonantinduction:block/conveyor_belt_raised",
+      "y": 180
+    },
+    "facing=south,type=slant_up": {
+      "model": "resonantinduction:block/conveyor_belt_slanted"
+    },
+    "facing=south,type=slant_down": {
+      "model": "resonantinduction:block/conveyor_belt_slanted",
+      "y": 180
+    },
+    "facing=west,type=flat": {
+      "model": "resonantinduction:block/conveyor_belt",
+      "y": 270
+    },
+    "facing=west,type=raised": {
+      "model": "resonantinduction:block/conveyor_belt_raised",
+      "y": 270
+    },
+    "facing=west,type=slant_up": {
+      "model": "resonantinduction:block/conveyor_belt_slanted",
+      "y": 90
+    },
+    "facing=west,type=slant_down": {
+      "model": "resonantinduction:block/conveyor_belt_slanted",
+      "y": 270
+    }
+  }
+}

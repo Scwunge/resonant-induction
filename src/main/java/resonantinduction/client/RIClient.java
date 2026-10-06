@@ -47,6 +47,7 @@ public final class RIClient {
         event.registerBlockEntityRenderer(RIRegistries.CRATE_BE.get(), CrateRenderer::new);
         event.registerBlockEntityRenderer(RIRegistries.ENGINEERING_TABLE_BE.get(), TableRenderers.EngineeringTable::new);
         event.registerBlockEntityRenderer(RIRegistries.IMPRINTER_BE.get(), TableRenderers.Imprinter::new);
+        event.registerBlockEntityRenderer(RIRegistries.PLACER_BE.get(), TableRenderers.Placer::new);
     }
 
     /** Molten metal and dust mixture in tanks and pipes, tinted to their metal. */

@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "front": "resonantinduction:block/detector_front_green",
+    "side": "resonantinduction:block/detector_side_green",
+    "top": "resonantinduction:block/detector_side_green",
+    "bottom": "resonantinduction:block/detector_side_green"
+  }
+}

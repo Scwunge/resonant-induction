@@ -40,6 +40,12 @@
     "resonantinduction:crate_iron",
     "resonantinduction:crate_steel",
     "resonantinduction:imprinter",
-    "resonantinduction:turntable"
+    "resonantinduction:turntable",
+    "resonantinduction:conveyor_belt",
+    "resonantinduction:manipulator",
+    "resonantinduction:detector",
+    "resonantinduction:sorter",
+    "resonantinduction:breaker",
+    "resonantinduction:placer"
   ]
 }

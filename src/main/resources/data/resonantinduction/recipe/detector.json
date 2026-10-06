@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "logistics"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "SWS",
+    "SRS",
+    "SWS"
+  ],
+  "key": {
+    "S": {
+      "tag": "c:ingots/iron"
+    },
+    "W": {
+      "item": "resonantinduction:copper_wire"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:detector",
+    "count": 1
+  }
+}

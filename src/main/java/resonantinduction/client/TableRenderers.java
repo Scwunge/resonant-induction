@@ -3,6 +3,7 @@ package resonantinduction.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -29,17 +30,23 @@ public final class TableRenderers {
         pose.popPose();
     }
 
+    /** The light in the space next to a block, for things drawn on its faces (inside a solid block it's dark). */
+    static int lightAt(BlockEntity be, Direction side, int fallback) {
+        return be.getLevel() == null ? fallback : LevelRenderer.getLightColor(be.getLevel(), be.getBlockPos().relative(side));
+    }
+
     static void sides(PoseStack pose, MultiBufferSource buffers, BlockEntity be, ItemStack stack, double height, int light) {
         if (stack.isEmpty()) {
             return;
         }
         for (Direction side : Direction.Plane.HORIZONTAL) {
+            int faceLight = lightAt(be, side, light);
             pose.pushPose();
             pose.translate(0.5, height, 0.5);
             pose.mulPose(Axis.YP.rotationDegrees(-side.toYRot()));
             pose.translate(0, 0, 0.505);
             pose.scale(0.4f, 0.4f, 0.4f);
-            Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, light, OverlayTexture.NO_OVERLAY, pose, buffers,
+            Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, faceLight, OverlayTexture.NO_OVERLAY, pose, buffers,
                     be.getLevel(), (int) be.getBlockPos().asLong() + side.ordinal());
             pose.popPose();
         }
@@ -62,6 +69,34 @@ public final class TableRenderers {
         }
     }
 
+    /** The placer's stack on its four sides (not front or back), as the original. */
+    public static class Placer implements BlockEntityRenderer<resonantinduction.logistic.PlacerBlockEntity> {
+        public Placer(BlockEntityRendererProvider.Context context) {}
+
+        @Override
+        public void render(resonantinduction.logistic.PlacerBlockEntity placer, float partialTick, PoseStack pose, MultiBufferSource buffers, int light, int overlay) {
+            ItemStack stack = placer.inventory().getStackInSlot(0);
+            if (stack.isEmpty()) {
+                return;
+            }
+            Direction facing = placer.facing();
+            for (Direction side : Direction.values()) {
+                if (side.getAxis() == facing.getAxis()) {
+                    continue;
+                }
+                pose.pushPose();
+                pose.translate(0.5, 0.5, 0.5);
+                pose.mulPose(side.getRotation());
+                pose.translate(0, 0.505, 0);
+                pose.mulPose(Axis.XP.rotationDegrees(-90));
+                pose.scale(0.4f, 0.4f, 0.4f);
+                Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, lightAt(placer, side, light), OverlayTexture.NO_OVERLAY, pose,
+                        buffers, placer.getLevel(), (int) placer.getBlockPos().asLong() + side.ordinal());
+                pose.popPose();
+            }
+        }
+    }
+
     public static class Imprinter implements BlockEntityRenderer<ImprinterBlockEntity> {
         public Imprinter(BlockEntityRendererProvider.Context context) {}
 
@@ -70,7 +105,8 @@ public final class TableRenderers {
             for (int i = 0; i < 9; i++) {
                 ItemStack s = imprinter.inventory().getStackInSlot(i);
                 if (!s.isEmpty()) {
-                    flat(pose, buffers, imprinter, s, (i % 3 + 0.5) / 3, 1.01, (i / 3 + 0.5) / 3, 0.25f, light, (int) imprinter.getBlockPos().asLong() + i);
+                    flat(pose, buffers, imprinter, s, (i % 3 + 0.5) / 3, 1.01, (i / 3 + 0.5) / 3, 0.25f, lightAt(imprinter, Direction.UP, light),
+                            (int) imprinter.getBlockPos().asLong() + i);
                 }
             }
             sides(pose, buffers, imprinter, imprinter.inventory().getStackInSlot(ImprinterBlockEntity.IMPRINT_SLOT), 0.5, light);

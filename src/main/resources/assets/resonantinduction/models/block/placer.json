@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "north": "resonantinduction:block/placer_front",
+    "south": "resonantinduction:block/placer_back",
+    "east": "resonantinduction:block/placer",
+    "west": "resonantinduction:block/placer",
+    "up": "resonantinduction:block/placer",
+    "down": "resonantinduction:block/placer",
+    "particle": "resonantinduction:block/placer"
+  }
+}

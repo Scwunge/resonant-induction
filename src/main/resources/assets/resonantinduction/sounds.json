@@ -31,5 +31,11 @@
     "sounds": [
       "resonantinduction:hammer"
     ]
+  },
+  "conveyor": {
+    "subtitle": "subtitles.resonantinduction.conveyor",
+    "sounds": [
+      "resonantinduction:conveyor"
+    ]
   }
 }

@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,output=false": {
+      "model": "resonantinduction:block/manipulator_input"
+    },
+    "facing=north,output=true": {
+      "model": "resonantinduction:block/manipulator_output"
+    },
+    "facing=east,output=false": {
+      "model": "resonantinduction:block/manipulator_input",
+      "y": 90
+    },
+    "facing=east,output=true": {
+      "model": "resonantinduction:block/manipulator_output",
+      "y": 90
+    },
+    "facing=south,output=false": {
+      "model": "resonantinduction:block/manipulator_input",
+      "y": 180
+    },
+    "facing=south,output=true": {
+      "model": "resonantinduction:block/manipulator_output",
+      "y": 180
+    },
+    "facing=west,output=false": {
+      "model": "resonantinduction:block/manipulator_input",
+      "y": 270
+    },
+    "facing=west,output=true": {
+      "model": "resonantinduction:block/manipulator_output",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "north": "resonantinduction:block/breaker_front",
+    "south": "resonantinduction:block/breaker_back",
+    "east": "resonantinduction:block/breaker",
+    "west": "resonantinduction:block/breaker",
+    "up": "resonantinduction:block/breaker",
+    "down": "resonantinduction:block/breaker",
+    "particle": "resonantinduction:block/breaker"
+  }
+}

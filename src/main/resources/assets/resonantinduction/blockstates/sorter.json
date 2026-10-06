@@ -1,0 +1,117 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "resonantinduction:block/sorter"
+      }
+    },
+    {
+      "when": {
+        "east": "true",
+        "inverted": "false"
+      },
+      "apply": {
+        "model": "resonantinduction:block/sorter_port_blue_east"
+      }
+    },
+    {
+      "when": {
+        "east": "true",
+        "inverted": "true"
+      },
+      "apply": {
+        "model": "resonantinduction:block/sorter_port_red_east"
+      }
+    },
+    {
+      "when": {
+        "west": "true",
+        "inverted": "false"
+      },
+      "apply": {
+        "model": "resonantinduction:block/sorter_port_blue_west"
+      }
+    },
+    {
+      "when": {
+        "west": "true",
+        "inverted": "true"
+      },
+      "apply": {
+        "model": "resonantinduction:block/sorter_port_red_west"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "inverted": "false"
+      },
+      "apply": {
+        "model": "resonantinduction:block/sorter_port_blue_north"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "inverted": "true"
+      },
+      "apply": {
+        "model": "resonantinduction:block/sorter_port_red_north"
+      }
+    },
+    {
+      "when": {
+        "south": "true",
+        "inverted": "false"
+      },
+      "apply": {
+        "model": "resonantinduction:block/sorter_port_blue_south"
+      }
+    },
+    {
+      "when": {
+        "south": "true",
+        "inverted": "true"
+      },
+      "apply": {
+        "model": "resonantinduction:block/sorter_port_red_south"
+      }
+    },
+    {
+      "when": {
+        "up": "true",
+        "inverted": "false"
+      },
+      "apply": {
+        "model": "resonantinduction:block/sorter_port_blue_up"
+      }
+    },
+    {
+      "when": {
+        "up": "true",
+        "inverted": "true"
+      },
+      "apply": {
+        "model": "resonantinduction:block/sorter_port_red_up"
+      }
+    },
+    {
+      "when": {
+        "down": "true",
+        "inverted": "false"
+      },
+      "apply": {
+        "model": "resonantinduction:block/sorter_port_blue_down"
+      }
+    },
+    {
+      "when": {
+        "down": "true",
+        "inverted": "true"
+      },
+      "apply": {
+        "model": "resonantinduction:block/sorter_port_red_down"
+      }
+    }
+  ]
+}

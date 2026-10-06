@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "logistics"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "CGC",
+    "CPC",
+    "CDC"
+  ],
+  "key": {
+    "C": {
+      "tag": "c:cobblestones"
+    },
+    "G": {
+      "item": "resonantinduction:gear_wood"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "D": {
+      "item": "minecraft:diamond_pickaxe"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:breaker",
+    "count": 1
+  }
+}

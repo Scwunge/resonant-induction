@@ -36,6 +36,16 @@ import resonantinduction.mechanical.process.MachineBlock;
 import resonantinduction.mechanical.process.MechanicalPistonBlockEntity;
 import resonantinduction.mechanical.process.MixerBlockEntity;
 import resonantinduction.archaic.CastingMoldBlock;
+import resonantinduction.logistic.BreakerBlock;
+import resonantinduction.logistic.ConveyorBeltBlock;
+import resonantinduction.logistic.DetectorBlock;
+import resonantinduction.logistic.DetectorBlockEntity;
+import resonantinduction.logistic.ManipulatorBlock;
+import resonantinduction.logistic.ManipulatorBlockEntity;
+import resonantinduction.logistic.PlacerBlock;
+import resonantinduction.logistic.PlacerBlockEntity;
+import resonantinduction.logistic.SorterBlock;
+import resonantinduction.logistic.SorterBlockEntity;
 import resonantinduction.archaic.CrateBlock;
 import resonantinduction.archaic.CrateBlockEntity;
 import resonantinduction.archaic.CrateContents;
@@ -458,6 +468,39 @@ public final class RIRegistries {
         ITEMS.registerSimpleBlockItem(TURNTABLE);
     }
 
+    // ---- logistics: conveyor belt, manipulator, detector, sorter, breaker, placer ----
+    public static final DeferredBlock<ConveyorBeltBlock> CONVEYOR_BELT = BLOCKS.registerBlock("conveyor_belt", ConveyorBeltBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(1.5f, 6f).sound(SoundType.METAL).noOcclusion());
+    public static final DeferredHolder<SoundEvent, SoundEvent> CONVEYOR_SOUND = SOUNDS.register("conveyor",
+            () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("conveyor")));
+    public static final DeferredBlock<ManipulatorBlock> MANIPULATOR = BLOCKS.registerBlock("manipulator", ManipulatorBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(2f, 6f).sound(SoundType.METAL).noOcclusion());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ManipulatorBlockEntity>> MANIPULATOR_BE = BLOCK_ENTITIES.register("manipulator",
+            () -> BlockEntityType.Builder.of(ManipulatorBlockEntity::new, MANIPULATOR.get()).build(null));
+    public static final DeferredBlock<DetectorBlock> DETECTOR = BLOCKS.registerBlock("detector", DetectorBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(2f, 6f).sound(SoundType.METAL).isRedstoneConductor((s, l, p) -> false));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DetectorBlockEntity>> DETECTOR_BE = BLOCK_ENTITIES.register("detector",
+            () -> BlockEntityType.Builder.of(DetectorBlockEntity::new, DETECTOR.get()).build(null));
+    public static final DeferredBlock<SorterBlock> SORTER = BLOCKS.registerBlock("sorter", SorterBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(2f, 6f).sound(SoundType.METAL).noOcclusion());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SorterBlockEntity>> SORTER_BE = BLOCK_ENTITIES.register("sorter",
+            () -> BlockEntityType.Builder.of(SorterBlockEntity::new, SORTER.get()).build(null));
+    public static final DeferredBlock<BreakerBlock> BREAKER = BLOCKS.registerBlock("breaker", BreakerBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(3f, 6f).sound(SoundType.METAL).requiresCorrectToolForDrops());
+    public static final DeferredBlock<PlacerBlock> PLACER = BLOCKS.registerBlock("placer", PlacerBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(3f, 6f).sound(SoundType.STONE).requiresCorrectToolForDrops());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PlacerBlockEntity>> PLACER_BE = BLOCK_ENTITIES.register("placer",
+            () -> BlockEntityType.Builder.of(PlacerBlockEntity::new, PLACER.get()).build(null));
+
+    static {
+        ITEMS.registerSimpleBlockItem(CONVEYOR_BELT);
+        ITEMS.registerSimpleBlockItem(MANIPULATOR);
+        ITEMS.registerSimpleBlockItem(DETECTOR);
+        ITEMS.registerSimpleBlockItem(SORTER);
+        ITEMS.registerSimpleBlockItem(BREAKER);
+        ITEMS.registerSimpleBlockItem(PLACER);
+    }
+
     public static final DeferredItem<HandCrankItem> HAND_CRANK = ITEMS.registerItem("hand_crank", HandCrankItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredHolder<SoundEvent, SoundEvent> GEAR_CRANK = SOUNDS.register("gear_crank",
             () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("gear_crank")));
@@ -552,6 +595,8 @@ public final class RIRegistries {
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, PUMP_BE.get(), PumpBlockEntity::getFluidCapability);
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CRATE_BE.get(), CrateBlockEntity::getItemCapability);
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, IMPRINTER_BE.get(), ImprinterBlockEntity::getItemCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, SORTER_BE.get(), SorterBlockEntity::getItemCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, PLACER_BE.get(), PlacerBlockEntity::getItemCapability);
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CASTING_MOLD_BE.get(), CastingMoldBlockEntity::getItemCapability);
     }
 }
