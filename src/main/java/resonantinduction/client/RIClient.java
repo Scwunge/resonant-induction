@@ -10,6 +10,11 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraft.client.renderer.item.ItemProperties;
 import resonantinduction.ResonantInduction;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.neoforged.neoforge.fluids.FluidStack;
+import resonantinduction.resource.MaterialFluid;
 import resonantinduction.battery.BatteryItem;
 import net.minecraft.util.FastColor;
 import resonantinduction.wire.WireBlockEntity;
@@ -33,6 +38,35 @@ public final class RIClient {
         event.registerBlockEntityRenderer(RIRegistries.MECHANICAL_PISTON_BE.get(), ProcessRenderer::new);
         event.registerBlockEntityRenderer(RIRegistries.GRINDING_WHEEL_BE.get(), ProcessRenderer::new);
         event.registerBlockEntityRenderer(RIRegistries.MIXER_BE.get(), ProcessRenderer::new);
+        event.registerBlockEntityRenderer(RIRegistries.HOT_PLATE_BE.get(), HotPlateRenderer::new);
+        event.registerBlockEntityRenderer(RIRegistries.CASTING_MOLD_BE.get(), CastingMoldRenderer::new);
+    }
+
+    /** Molten metal and dust mixture in tanks and pipes, tinted to their metal. */
+    @SubscribeEvent
+    public static void clientExtensions(RegisterClientExtensionsEvent event) {
+        event.registerFluidType(materialFluid("molten_flow"), RIRegistries.MOLTEN_METAL_TYPE.get());
+        event.registerFluidType(materialFluid("mixture_flow"), RIRegistries.DUST_MIXTURE_TYPE.get());
+    }
+
+    private static IClientFluidTypeExtensions materialFluid(String texture) {
+        ResourceLocation tex = ResonantInduction.id("block/" + texture);
+        return new IClientFluidTypeExtensions() {
+            @Override
+            public ResourceLocation getStillTexture() {
+                return tex;
+            }
+
+            @Override
+            public ResourceLocation getFlowingTexture() {
+                return tex;
+            }
+
+            @Override
+            public int getTintColor(FluidStack stack) {
+                return FastColor.ARGB32.opaque(MaterialColors.get(MaterialFluid.material(stack)));
+            }
+        };
     }
 
     @SubscribeEvent

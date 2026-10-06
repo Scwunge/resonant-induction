@@ -23,6 +23,10 @@
     "resonantinduction:grinding_wheel",
     "resonantinduction:mixer",
     "resonantinduction:filter",
-    "resonantinduction:millstone"
+    "resonantinduction:millstone",
+    "resonantinduction:firebox",
+    "resonantinduction:electric_firebox",
+    "resonantinduction:hot_plate",
+    "resonantinduction:casting_mold"
   ]
 }

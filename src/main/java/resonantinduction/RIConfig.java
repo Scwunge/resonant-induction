@@ -33,6 +33,7 @@ public final class RIConfig {
     public static final ModConfigSpec.IntValue BATTERY_MAX_OUTPUT;
 
     public static final ModConfigSpec.IntValue PISTON_BREAK_COUNT;
+    public static final ModConfigSpec.IntValue ELECTRIC_FIREBOX_USE;
 
     public static final ModConfigSpec.IntValue WIRE_FE_PER_AMP;
     public static final ModConfigSpec.BooleanValue WIRE_SHOCK;
@@ -101,6 +102,8 @@ public final class RIConfig {
         b.push("processing");
         PISTON_BREAK_COUNT = b.comment("Mechanical Piston strikes (one per turn) needed to crush a block. Original: 5.")
                 .defineInRange("pistonBreakCount", 5, 1, 100);
+        ELECTRIC_FIREBOX_USE = b.comment("FE the Electric Firebox uses per tick of burning (it buffers ten ticks' worth). Original: 10000 joules.")
+                .defineInRange("electricFireboxUse", 10000, 1, 1_000_000);
         b.pop();
 
         b.push("wires");

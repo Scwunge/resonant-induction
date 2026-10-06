@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "resonantinduction:block/electric_firebox_off"
+    },
+    "lit=true": {
+      "model": "resonantinduction:block/electric_firebox_on"
+    }
+  }
+}

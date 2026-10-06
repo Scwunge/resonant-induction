@@ -35,7 +35,17 @@ import resonantinduction.mechanical.process.GrindingWheelBlockEntity;
 import resonantinduction.mechanical.process.MachineBlock;
 import resonantinduction.mechanical.process.MechanicalPistonBlockEntity;
 import resonantinduction.mechanical.process.MixerBlockEntity;
+import resonantinduction.archaic.CastingMoldBlock;
+import resonantinduction.archaic.CastingMoldBlockEntity;
 import resonantinduction.archaic.FilterBlock;
+import resonantinduction.archaic.FireboxBlock;
+import resonantinduction.archaic.FireboxBlockEntity;
+import resonantinduction.archaic.HotPlateBlock;
+import resonantinduction.archaic.HotPlateBlockEntity;
+import resonantinduction.resource.MaterialFluid;
+import resonantinduction.resource.MaterialFluidType;
+import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.fluids.FluidType;
 import resonantinduction.archaic.ImprintItem;
 import resonantinduction.archaic.ImprintableBlockEntity;
 import resonantinduction.archaic.MillstoneBlock;
@@ -102,6 +112,8 @@ public final class RIRegistries {
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, ResonantInduction.MODID);
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, ResonantInduction.MODID);
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ResonantInduction.MODID);
+    public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, ResonantInduction.MODID);
+    public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(Registries.FLUID, ResonantInduction.MODID);
 
     public static final ResourceKey<DamageType> ELECTROCUTION = ResourceKey.create(Registries.DAMAGE_TYPE, ResonantInduction.id("electrocution"));
 
@@ -307,6 +319,39 @@ public final class RIRegistries {
         ITEMS.registerSimpleBlockItem(MILLSTONE);
     }
 
+    // ---- smelting: fluids, firebox, hot plate, casting mold ----
+    public static final DeferredHolder<FluidType, MaterialFluidType> MOLTEN_METAL_TYPE = FLUID_TYPES.register("molten_metal",
+            () -> new MaterialFluidType(FluidType.Properties.create().temperature(1811).lightLevel(12).density(7900).viscosity(6000)
+                    .canSwim(false).canDrown(false).canExtinguish(false).supportsBoating(false)));
+    public static final DeferredHolder<FluidType, MaterialFluidType> DUST_MIXTURE_TYPE = FLUID_TYPES.register("dust_mixture",
+            () -> new MaterialFluidType(FluidType.Properties.create().density(1500).viscosity(2000)));
+    public static final DeferredHolder<Fluid, MaterialFluid> MOLTEN_METAL = FLUIDS.register("molten_metal", () -> new MaterialFluid(MOLTEN_METAL_TYPE::get));
+    public static final DeferredHolder<Fluid, MaterialFluid> DUST_MIXTURE = FLUIDS.register("dust_mixture", () -> new MaterialFluid(DUST_MIXTURE_TYPE::get));
+
+    public static final DeferredBlock<FireboxBlock> FIREBOX = BLOCKS.registerBlock("firebox", p -> new FireboxBlock(false, p),
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(3.5f, 6f).sound(SoundType.STONE).requiresCorrectToolForDrops()
+                    .lightLevel(s -> s.getValue(FireboxBlock.LIT) ? 13 : 0));
+    public static final DeferredBlock<FireboxBlock> ELECTRIC_FIREBOX = BLOCKS.registerBlock("electric_firebox", p -> new FireboxBlock(true, p),
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.5f, 6f).sound(SoundType.METAL).requiresCorrectToolForDrops()
+                    .lightLevel(s -> s.getValue(FireboxBlock.LIT) ? 13 : 0));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FireboxBlockEntity>> FIREBOX_BE = BLOCK_ENTITIES.register("firebox",
+            () -> BlockEntityType.Builder.of(FireboxBlockEntity::new, FIREBOX.get(), ELECTRIC_FIREBOX.get()).build(null));
+    public static final DeferredBlock<HotPlateBlock> HOT_PLATE = BLOCKS.registerBlock("hot_plate", HotPlateBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2f, 6f).sound(SoundType.STONE).noOcclusion().requiresCorrectToolForDrops());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HotPlateBlockEntity>> HOT_PLATE_BE = BLOCK_ENTITIES.register("hot_plate",
+            () -> BlockEntityType.Builder.of(HotPlateBlockEntity::new, HOT_PLATE.get()).build(null));
+    public static final DeferredBlock<CastingMoldBlock> CASTING_MOLD = BLOCKS.registerBlock("casting_mold", CastingMoldBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3f, 6f).sound(SoundType.METAL).noOcclusion().requiresCorrectToolForDrops());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CastingMoldBlockEntity>> CASTING_MOLD_BE = BLOCK_ENTITIES.register("casting_mold",
+            () -> BlockEntityType.Builder.of(CastingMoldBlockEntity::new, CASTING_MOLD.get()).build(null));
+
+    static {
+        ITEMS.registerSimpleBlockItem(FIREBOX);
+        ITEMS.registerSimpleBlockItem(ELECTRIC_FIREBOX);
+        ITEMS.registerSimpleBlockItem(HOT_PLATE);
+        ITEMS.registerSimpleBlockItem(CASTING_MOLD);
+    }
+
     public static final DeferredItem<HandCrankItem> HAND_CRANK = ITEMS.registerItem("hand_crank", HandCrankItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredHolder<SoundEvent, SoundEvent> GEAR_CRANK = SOUNDS.register("gear_crank",
             () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("gear_crank")));
@@ -364,6 +409,8 @@ public final class RIRegistries {
         CONDITIONS.register(modBus);
         MENUS.register(modBus);
         RECIPE_SERIALIZERS.register(modBus);
+        FLUID_TYPES.register(modBus);
+        FLUIDS.register(modBus);
     }
 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
@@ -387,5 +434,11 @@ public final class RIRegistries {
             return new ComponentEnergyStorage(stack, ENERGY.get(), capacity, Math.max(1, capacity / 100), capacity);
         }, MINING_LASER.get());
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, QUANTUM_GATE_BE.get(), QuantumGateBlockEntity::getFluidCapability);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, FIREBOX_BE.get(), FireboxBlockEntity::getFluidCapability);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, FIREBOX_BE.get(), FireboxBlockEntity::getEnergyCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, FIREBOX_BE.get(), FireboxBlockEntity::getItemCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, HOT_PLATE_BE.get(), (be, side) -> be.inventory());
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, CASTING_MOLD_BE.get(), CastingMoldBlockEntity::getFluidCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CASTING_MOLD_BE.get(), CastingMoldBlockEntity::getItemCapability);
     }
 }

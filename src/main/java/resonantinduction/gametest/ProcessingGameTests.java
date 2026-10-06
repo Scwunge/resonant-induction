@@ -130,6 +130,8 @@ public class ProcessingGameTests {
     public static void filterWashesMixtureIntoRefinedDust(GameTestHelper helper) {
         BlockPos filter = new BlockPos(3, 2, 3);
         helper.setBlock(filter, RIRegistries.FILTER.get());
+        // Walled in, so the mixture can't spread out sideways.
+        SmeltingGameTests.wallIn(helper, filter.above(), null);
         PoolBlock.place(helper.getLevel(), helper.absolutePos(filter.above()), PoolBlock.Kind.MIXTURE, "copper", 8);
         helper.succeedWhen(() -> {
             helper.assertTrue(has(items(helper, filter.above(), 1.5), RIRegistries.REFINED_DUST.get(), "copper"), "no refined copper dust");

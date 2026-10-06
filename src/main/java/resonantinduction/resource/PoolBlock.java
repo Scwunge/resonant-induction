@@ -2,6 +2,9 @@ package resonantinduction.resource;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -27,14 +30,16 @@ import org.jetbrains.annotations.Nullable;
 import resonantinduction.registry.RIRegistries;
 
 /**
- * A still pool of molten metal or of dust mixture (dust stirred into water), one to eight levels deep: the original's finite
- * per-metal fluids. Mixtures are filtered into refined dust; molten metal is poured into casting molds. An empty bucket scoops a
+ * A pool of molten metal or of dust mixture (dust stirred into water), one to eight levels deep: the original's finite per-metal
+ * fluids. Like them it falls into the space below and spreads out sideways until it is a level deep. Mixtures are filtered into refined dust; molten metal is poured into casting molds. An empty bucket scoops a
  * full pool; molten metal burns.
  */
 public class PoolBlock extends BaseEntityBlock {
     public enum Kind { MOLTEN, MIXTURE }
 
     public static final IntegerProperty LEVEL = IntegerProperty.create("level", 1, 8);
+    /** A full pool is a bucket. */
+    public static final int MB_PER_LEVEL = 125;
     private static final VoxelShape[] SHAPES = new VoxelShape[9];
 
     static {
@@ -113,6 +118,99 @@ public class PoolBlock extends BaseEntityBlock {
         } else {
             level.setBlock(pos, state.setValue(LEVEL, left), 3);
         }
+    }
+
+    /** Molten metal is slow (viscosity 5000 in the original, so a flow every 25 ticks); a mixture flows like water. */
+    private int flowDelay() {
+        return kind == Kind.MOLTEN ? 25 : 5;
+    }
+
+    @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        super.onPlace(state, level, pos, oldState, movedByPiston);
+        if (!level.isClientSide && !oldState.is(this)) {
+            level.scheduleTick(pos, this, flowDelay());
+        }
+    }
+
+    @Override
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighbor, BlockPos neighborPos, boolean movedByPiston) {
+        if (!level.isClientSide) {
+            level.scheduleTick(pos, this, flowDelay());
+        }
+    }
+
+    /** Levels a neighbour holds that this pool could flow into: 0 for an empty space, its level for the same pool, -1 otherwise. */
+    private int levelAt(Level level, BlockPos pos, String material) {
+        BlockState state = level.getBlockState(pos);
+        if (state.is(this)) {
+            return material.equals(material(level, pos)) ? state.getValue(LEVEL) : -1;
+        }
+        return state.canBeReplaced() && state.getFluidState().isEmpty() && !(state.getBlock() instanceof PoolBlock) ? 0 : -1;
+    }
+
+    private void setLevel(Level level, BlockPos pos, String material, int amount) {
+        BlockState state = level.getBlockState(pos);
+        if (amount <= 0) {
+            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+        } else if (state.is(this)) {
+            if (state.getValue(LEVEL) != amount) {
+                level.setBlock(pos, state.setValue(LEVEL, amount), 3);
+            }
+        } else {
+            place(level, pos, kind, material, amount);
+        }
+    }
+
+    /** Forge's finite fluid flow, as the original used: fall first, then share out with lower neighbours. */
+    @Override
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        String material = material(level, pos);
+        int amount = state.getValue(LEVEL);
+        BlockPos below = pos.below();
+        int under = level.isOutsideBuildHeight(below) ? -1 : levelAt(level, below, material);
+        if (under >= 0 && under < 8) {
+            int moved = Math.min(amount, 8 - under);
+            setLevel(level, below, material, under + moved);
+            amount -= moved;
+            if (amount <= 0) {
+                level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+                return;
+            }
+        }
+        int total = amount;
+        int count = 1;
+        int[] levels = new int[4];
+        Direction[] sides = {Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST};
+        for (int i = 0; i < 4; i++) {
+            int l = levelAt(level, pos.relative(sides[i]), material);
+            levels[i] = l >= 0 && l < amount - 1 ? l : -1;
+            if (levels[i] >= 0) {
+                count++;
+                total += levels[i];
+            }
+        }
+        if (count == 1) {
+            setLevel(level, pos, material, amount);
+            return;
+        }
+        int each = total / count;
+        int rem = total % count;
+        for (int i = 0; i < 4; i++) {
+            if (levels[i] < 0) {
+                continue;
+            }
+            int share = each;
+            if (rem == count || rem > 1) {
+                rem--;
+                share++;
+            }
+            if (share != levels[i]) {
+                setLevel(level, pos.relative(sides[i]), material, share);
+            }
+            count--;
+        }
+        setLevel(level, pos, material, rem > 0 ? each + 1 : each);
     }
 
     @Override

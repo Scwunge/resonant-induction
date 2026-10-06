@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "resonantinduction:block/firebox_electric_top_off",
+    "side": "resonantinduction:block/firebox_electric_side_off",
+    "bottom": "resonantinduction:block/material_stone_slab"
+  }
+}

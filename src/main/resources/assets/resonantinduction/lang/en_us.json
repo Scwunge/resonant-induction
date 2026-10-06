@@ -195,5 +195,17 @@
   "jei.resonantinduction.mixer": "Turned from above or below. Wall in its four diagonal neighbours and it stirs everything around it: dirty dust stirred over water for 12 seconds turns the water into a dust mixture, and more dust thickens it. Put a Filter under the mixture to wash it into refined dust.",
   "jei.resonantinduction.filter": "Under a dust mixture it lets it drip through as water and catches refined dust. Give it an Imprint and the items on the imprint fall through it while others stay on top (sneak + wrench inverts that).",
   "jei.resonantinduction.millstone": "Put rubble, cobblestone, gravel or glass in it and turn it with a Hand Crank; every twentieth turn grinds one.",
-  "jei.resonantinduction.imprint": "Lists items for filters, sorters, detectors and manipulators. Make one in the Imprinter."
+  "jei.resonantinduction.imprint": "Lists items for filters, sorters, detectors and manipulators. Make one in the Imprinter.",
+  "block.resonantinduction.firebox": "Firebox",
+  "block.resonantinduction.electric_firebox": "Electric Firebox",
+  "block.resonantinduction.hot_plate": "Hot Plate",
+  "block.resonantinduction.casting_mold": "Casting Mold",
+  "fluid_type.resonantinduction.molten_metal": "Molten Metal",
+  "fluid_type.resonantinduction.molten_metal.named": "Molten %s",
+  "fluid_type.resonantinduction.dust_mixture": "Dust Mixture",
+  "fluid_type.resonantinduction.dust_mixture.named": "%s Mixture",
+  "jei.resonantinduction.firebox": "Burns furnace fuel (right-click it in, left-click takes it back) or a bucket of lava, and heats the block above it. A dust pile on top melts into a pool of molten metal (refined dust gives twice as much), water on top boils away, and a Hot Plate on top cooks.",
+  "jei.resonantinduction.electric_firebox": "A Firebox that also burns on power from any side but the top.",
+  "jei.resonantinduction.hot_plate": "Put it on a burning Firebox. Right-click a quarter of the plate to put the held stack there; each quarter smelts its whole stack at once, 10 seconds per item. Don't stand on it.",
+  "jei.resonantinduction.casting_mold": "Pour molten metal on it (a pool sitting on top, or pipes) and it casts ingots, 100 mB each. Click it to take them, or put a hopper under it."
 }
