@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "resonantinduction:block/steam_funnel"
+        "model": "resonantinduction:block/electromagnet_glass"
       }
     },
     {
@@ -10,7 +10,7 @@
         "north": "false"
       },
       "apply": {
-        "model": "resonantinduction:block/edge/funnel"
+        "model": "resonantinduction:block/edge/atomic"
       }
     },
     {
@@ -18,7 +18,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "resonantinduction:block/edge/funnel",
+        "model": "resonantinduction:block/edge/atomic",
         "y": 90
       }
     },
@@ -27,7 +27,7 @@
         "south": "false"
       },
       "apply": {
-        "model": "resonantinduction:block/edge/funnel",
+        "model": "resonantinduction:block/edge/atomic",
         "y": 180
       }
     },
@@ -36,7 +36,7 @@
         "west": "false"
       },
       "apply": {
-        "model": "resonantinduction:block/edge/funnel",
+        "model": "resonantinduction:block/edge/atomic",
         "y": 270
       }
     },
@@ -45,7 +45,7 @@
         "up": "false"
       },
       "apply": {
-        "model": "resonantinduction:block/edge/funnel",
+        "model": "resonantinduction:block/edge/atomic",
         "x": 270
       }
     },
@@ -54,7 +54,7 @@
         "down": "false"
       },
       "apply": {
-        "model": "resonantinduction:block/edge/funnel",
+        "model": "resonantinduction:block/edge/atomic",
         "x": 90
       }
     }

@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "atomic"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SCS",
+    "CMC",
+    "SCS"
+  ],
+  "key": {
+    "M": {
+      "item": "resonantinduction:motor"
+    },
+    "C": {
+      "tag": "resonantinduction:parts/circuit_elite"
+    },
+    "S": {
+      "tag": "resonantinduction:parts/plate_primary"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:particle_accelerator",
+    "count": 1
+  }
+}

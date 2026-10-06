@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "resonantinduction:block/quantum_assembler"
+    },
+    "facing=east": {
+      "model": "resonantinduction:block/quantum_assembler"
+    },
+    "facing=south": {
+      "model": "resonantinduction:block/quantum_assembler"
+    },
+    "facing=west": {
+      "model": "resonantinduction:block/quantum_assembler"
+    }
+  }
+}

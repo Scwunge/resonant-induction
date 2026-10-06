@@ -31,23 +31,6 @@ public class MultimeterRenderer implements BlockEntityRenderer<MultimeterBlockEn
         this.font = context.getFont();
     }
 
-    public static String format(double value, Measure measure) {
-        double abs = Math.abs(value);
-        String number;
-        if (abs >= 1e9) {
-            number = String.format("%.2fG", value / 1e9);
-        } else if (abs >= 1e6) {
-            number = String.format("%.2fM", value / 1e6);
-        } else if (abs >= 1e4) {
-            number = String.format("%.1fk", value / 1e3);
-        } else if (value == Math.rint(value)) {
-            number = Long.toString((long) value);
-        } else {
-            number = String.format("%.2f", value);
-        }
-        return number + " " + measure.unit;
-    }
-
     /** Multimeters joined to this one on the same face, or null if they don't form a full rectangle. */
     static List<MultimeterBlockEntity> group(MultimeterBlockEntity start) {
         Level level = start.getLevel();
@@ -98,7 +81,7 @@ public class MultimeterRenderer implements BlockEntityRenderer<MultimeterBlockEn
                 total += g.value(m);
             }
             if (total != 0 || m == meter.graphType()) {
-                lines.add(Component.translatable(m.key()).append(": " + format(total, m)));
+                lines.add(Component.translatable(m.key()).append(": " + m.format(total)));
             }
         }
 

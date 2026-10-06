@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "atomic"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CCC",
+    "SXS",
+    "SSS"
+  ],
+  "key": {
+    "X": {
+      "item": "resonantinduction:centrifuge"
+    },
+    "C": {
+      "tag": "resonantinduction:parts/circuit_elite"
+    },
+    "S": {
+      "tag": "resonantinduction:parts/plate_primary"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:quantum_assembler",
+    "count": 1
+  }
+}

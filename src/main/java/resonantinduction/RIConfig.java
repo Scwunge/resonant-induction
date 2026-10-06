@@ -42,6 +42,7 @@ public final class RIConfig {
     public static final ModConfigSpec.BooleanValue TOXIC_WASTE;
     public static final ModConfigSpec.BooleanValue ANTIMATTER_EXPLOSIONS;
     public static final ModConfigSpec.DoubleValue FULMINATION_MULTIPLIER;
+    public static final ModConfigSpec.DoubleValue ANTIMATTER_ENERGY_SCALE;
     public static final ModConfigSpec.DoubleValue TURBINE_MULTIPLIER;
     public static final ModConfigSpec.DoubleValue FISSION_BOIL_MULTIPLIER;
     public static final ModConfigSpec.BooleanValue TURBINE_STACKING;
@@ -50,6 +51,7 @@ public final class RIConfig {
     public static final ModConfigSpec.IntValue DEUTERIUM_PER_TRITIUM;
     public static final ModConfigSpec.DoubleValue DARK_MATTER_CHANCE;
     public static final ModConfigSpec.IntValue QUANTUM_ASSEMBLER_MODE;
+    public static final ModConfigSpec.ConfigValue<java.util.List<? extends String>> QUANTUM_ASSEMBLER_RECIPES;
     public static final ModConfigSpec.DoubleValue GRATE_DRAIN_SPEED;
 
     public static final ModConfigSpec.IntValue WIRE_FE_PER_AMP;
@@ -142,6 +144,10 @@ public final class RIConfig {
                 .defineInRange("steamEnergy", 100.0, 0.0, 100000.0);
         ANTIMATTER_EXPLOSIONS = b.comment("Dropped antimatter explodes when it expires (the original's ban_antimatter_power flag, inverted).").define("antimatterExplosions", true);
         FULMINATION_MULTIPLIER = b.comment("Multiplier on the Fulmination Generator's output. Original: 1.").defineInRange("fulminationOutputMultiplier", 1.0, 0.0, 1000.0);
+        ANTIMATTER_ENERGY_SCALE = b.comment("FE per original joule for the Fulmination Generator and the Quantum Assembler. Their original figures (a buffer",
+                        "and a tick of work of 10^13 J) are far past what FE can carry, so they are scaled down together, keeping the original's",
+                        "balance: a milligram of antimatter going off fills a generator, which powers one tick of the assembler's two-minute job.")
+                .defineInRange("antimatterEnergyScale", 0.000001, 0.0000000001, 0.0001);
         TURBINE_MULTIPLIER = b.comment("Multiplier on the Electric Turbine's output. Original: 1.").defineInRange("turbineOutputMultiplier", 1.0, 0.0, 1000.0);
         FISSION_BOIL_MULTIPLIER = b.comment("Multiplier on the steam a reactor cell boils. Original: 1.").defineInRange("fissionBoilVolumeMultiplier", 1.0, 0.0, 1000.0);
         TURBINE_STACKING = b.comment("Electric turbines can be stacked into bigger ones.").define("allowTurbineStacking", true);
@@ -150,6 +156,8 @@ public final class RIConfig {
         DEUTERIUM_PER_TRITIUM = b.comment("mB of deuterium per mB of tritium extracted. Original: 4.").defineInRange("deuteriumPerTritium", 4, 1, 1000);
         DARK_MATTER_CHANCE = b.comment("Chance a particle collision makes dark matter. Original: 0.2.").defineInRange("darkMatterSpawnChance", 0.2, 0.0, 1.0);
         QUANTUM_ASSEMBLER_MODE = b.comment("What the Quantum Assembler can copy: 0 nothing, 1 items, 2 items and blocks. Original: 1.").defineInRange("quantumAssemblerGenerateMode", 1, 0, 2);
+        QUANTUM_ASSEMBLER_RECIPES = b.comment("More items the Quantum Assembler can copy whatever the mode, by id (e.g. \"minecraft:diamond_block\").")
+                .defineListAllowEmpty("quantumAssemblerRecipes", java.util.List.of(), () -> "", o -> o instanceof String);
         b.pop();
 
         b.push("wires");
@@ -187,6 +195,10 @@ public final class RIConfig {
     }
 
     public static boolean get(ModConfigSpec.BooleanValue v) {
+        return SPEC.isLoaded() ? v.get() : v.getDefault();
+    }
+
+    public static <T> T get(ModConfigSpec.ConfigValue<T> v) {
         return SPEC.isLoaded() ? v.get() : v.getDefault();
     }
 }

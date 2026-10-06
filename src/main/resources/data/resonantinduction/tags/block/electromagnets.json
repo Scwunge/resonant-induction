@@ -1,7 +1,5 @@
 {
   "values": [
-    "minecraft:bedrock",
-    "minecraft:iron_block",
     "resonantinduction:electromagnet",
     "resonantinduction:electromagnet_glass",
     "resonantinduction:particle_accelerator"

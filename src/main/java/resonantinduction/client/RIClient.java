@@ -12,7 +12,10 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import resonantinduction.ResonantInduction;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.neoforged.neoforge.fluids.FluidStack;
 import resonantinduction.resource.MaterialFluid;
 import resonantinduction.battery.BatteryItem;
@@ -54,6 +57,8 @@ public final class RIClient {
         event.registerBlockEntityRenderer(RIRegistries.REACTOR_CELL_BE.get(), ReactorRenderers.Cell::new);
         event.registerBlockEntityRenderer(RIRegistries.THERMOMETER_BE.get(), ReactorRenderers.Thermometer::new);
         event.registerBlockEntityRenderer(RIRegistries.ELECTRIC_TURBINE_BE.get(), ReactorRenderers.Turbine::new);
+        event.registerBlockEntityRenderer(RIRegistries.QUANTUM_ASSEMBLER_BE.get(), QuantumAssemblerRenderer::new);
+        event.registerEntityRenderer(RIRegistries.PARTICLE.get(), ParticleRenderer::new);
     }
 
     /** Molten metal and dust mixture in tanks and pipes, tinted to their metal. */
@@ -67,6 +72,18 @@ public final class RIClient {
         event.registerFluidType(plainFluid("tritium", 0xFFFFFFFF), RIRegistries.TRITIUM_TYPE.get());
         event.registerFluidType(plainFluid("plasma", 0xFFFFFFFF), RIRegistries.PLASMA_TYPE.get());
         event.registerFluidType(plainFluid("toxic_waste", 0xFFFFFFFF), RIRegistries.TOXIC_WASTE_TYPE.get());
+        event.registerItem(new IClientItemExtensions() {
+            private QuantumAssemblerRenderer.Item renderer;
+
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                if (renderer == null) {
+                    Minecraft mc = Minecraft.getInstance();
+                    renderer = new QuantumAssemblerRenderer.Item(mc.getBlockEntityRenderDispatcher(), mc.getEntityModels());
+                }
+                return renderer;
+            }
+        }, RIRegistries.QUANTUM_ASSEMBLER.get().asItem());
     }
 
     private static IClientFluidTypeExtensions plainFluid(String texture, int tint) {

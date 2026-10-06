@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "atomic"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BBB",
+    "BMB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "tag": "resonantinduction:parts/metal_secondary"
+    },
+    "M": {
+      "item": "resonantinduction:motor"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:electromagnet",
+    "count": 2
+  }
+}

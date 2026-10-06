@@ -120,13 +120,13 @@ public class MultimeterScreen extends AbstractContainerScreen<MultimeterMenu> {
             return;
         }
         Measure d = Measure.byIndex(detect);
-        g.drawString(font, Component.translatable("gui.resonantinduction.multimeter.value", MultimeterRenderer.format(meter.value(d), d)), 8, 46, 0x404040, false);
+        g.drawString(font, Component.translatable("gui.resonantinduction.multimeter.value", d.format(meter.value(d))), 8, 46, 0x404040, false);
         g.drawString(font, Component.translatable(meter.redstoneOn() ? "gui.resonantinduction.multimeter.redstone_on" : "gui.resonantinduction.multimeter.redstone_off"),
                 8, 108, meter.redstoneOn() ? 0xAA0000 : 0x404040, false);
         int y = 22;
         for (Measure m : Measure.values()) {
             g.drawString(font, Component.translatable(m.key()), 128, y, 0x7FFF7F, false);
-            String v = MultimeterRenderer.format(meter.value(m), m);
+            String v = m.format(meter.value(m));
             g.drawString(font, v, imageWidth - 10 - font.width(v), y, m == Measure.byIndex(graph) ? 0xFFFF55 : 0xCCFFCC, false);
             y += 15;
         }

@@ -61,5 +61,17 @@
     "sounds": [
       "resonantinduction:turbine"
     ]
+  },
+  "accelerator": {
+    "subtitle": "subtitles.resonantinduction.accelerator",
+    "sounds": [
+      "resonantinduction:accelerator"
+    ]
+  },
+  "assembler": {
+    "subtitle": "subtitles.resonantinduction.assembler",
+    "sounds": [
+      "resonantinduction:assembler"
+    ]
   }
 }

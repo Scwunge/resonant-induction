@@ -8,6 +8,8 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.world.chunk.RegisterTicketControllersEvent;
+import resonantinduction.atomic.particle.ParticleEntity;
 import resonantinduction.network.RINetwork;
 import resonantinduction.quantum.QuantumTeleports;
 import resonantinduction.registry.RIRegistries;
@@ -28,6 +30,7 @@ public final class ResonantInduction {
         NeoForge.EVENT_BUS.addListener(QuantumTeleports::onServerTick);
         NeoForge.EVENT_BUS.addListener(QuantumTeleports::onServerStopped);
         NeoForge.EVENT_BUS.addListener(resonantinduction.atomic.ThermalGrid::onLevelTick);
+        modBus.addListener((RegisterTicketControllersEvent e) -> e.register(ParticleEntity.TICKETS));
     }
 
     public static ResourceLocation id(String path) {

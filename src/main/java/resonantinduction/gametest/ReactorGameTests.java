@@ -18,6 +18,8 @@ import resonantinduction.atomic.reactor.ReactorCellBlockEntity;
 import resonantinduction.atomic.reactor.ThermometerBlock;
 import resonantinduction.registry.RIRegistries;
 
+import java.util.List;
+
 @GameTestHolder(ResonantInduction.MODID)
 @PrefixGameTestTemplate(false)
 public class ReactorGameTests {
@@ -126,22 +128,23 @@ public class ReactorGameTests {
         });
     }
 
-    @GameTest(template = TEMPLATE, timeoutTicks = 60)
+    /**
+     * Plasma tries each side with a 40% chance once a second while it lasts: with four open sides it is all but sure to spread
+     * into one, and never into the iron above, below or beyond.
+     */
+    @GameTest(template = TEMPLATE, timeoutTicks = 110)
     public static void plasmaSpreadsButNotThroughIron(GameTestHelper helper) {
-        BlockPos pos = new BlockPos(3, 2, 3);
-        for (Direction d : Direction.values()) {
-            helper.setBlock(pos.relative(d), Blocks.IRON_BLOCK);
-        }
-        helper.setBlock(pos.relative(Direction.EAST), Blocks.AIR);
-        helper.setBlock(pos.relative(Direction.EAST, 2), Blocks.IRON_BLOCK);
+        BlockPos pos = new BlockPos(5, 3, 3);
+        List<BlockPos> iron = List.of(pos.above(), pos.below(), pos.east(2), pos.west(2));
+        iron.forEach(p -> helper.setBlock(p, Blocks.IRON_BLOCK));
         helper.setBlock(pos, RIRegistries.PLASMA_BLOCK.get());
         helper.succeedWhen(() -> {
-            helper.assertBlockPresent(RIRegistries.PLASMA_BLOCK.get(), pos.east());
-            for (Direction d : Direction.values()) {
-                if (d != Direction.EAST) {
-                    helper.assertBlockPresent(Blocks.IRON_BLOCK, pos.relative(d));
-                }
+            boolean spread = false;
+            for (Direction d : Direction.Plane.HORIZONTAL) {
+                spread |= helper.getBlockState(pos.relative(d)).is(RIRegistries.PLASMA_BLOCK.get());
             }
+            helper.assertTrue(spread, "plasma did not spread");
+            iron.forEach(p -> helper.assertBlockPresent(Blocks.IRON_BLOCK, p));
             helper.assertTrue(temperature(helper, pos) > 10000, "plasma is cold: " + temperature(helper, pos));
         });
     }

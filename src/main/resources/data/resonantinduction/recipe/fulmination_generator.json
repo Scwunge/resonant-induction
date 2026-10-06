@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "atomic"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "OSO",
+    "SCS",
+    "OSO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "C": {
+      "tag": "resonantinduction:parts/circuit_advanced"
+    },
+    "S": {
+      "tag": "resonantinduction:parts/plate_primary"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:fulmination_generator",
+    "count": 1
+  }
+}

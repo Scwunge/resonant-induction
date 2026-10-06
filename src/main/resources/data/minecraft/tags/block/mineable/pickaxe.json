@@ -67,6 +67,11 @@
     "resonantinduction:thermometer",
     "resonantinduction:siren",
     "resonantinduction:electric_turbine",
-    "resonantinduction:steam_funnel"
+    "resonantinduction:steam_funnel",
+    "resonantinduction:electromagnet",
+    "resonantinduction:electromagnet_glass",
+    "resonantinduction:particle_accelerator",
+    "resonantinduction:fulmination_generator",
+    "resonantinduction:quantum_assembler"
   ]
 }

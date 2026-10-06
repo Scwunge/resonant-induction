@@ -23,6 +23,24 @@ public enum Measure {
         return "multimeter.resonantinduction." + name().toLowerCase(Locale.ROOT);
     }
 
+    /** The value with a k, M or G suffix and this unit. */
+    public String format(double value) {
+        double abs = Math.abs(value);
+        String number;
+        if (abs >= 1e9) {
+            number = String.format("%.2fG", value / 1e9);
+        } else if (abs >= 1e6) {
+            number = String.format("%.2fM", value / 1e6);
+        } else if (abs >= 1e4) {
+            number = String.format("%.1fk", value / 1e3);
+        } else if (value == Math.rint(value)) {
+            number = Long.toString((long) value);
+        } else {
+            number = String.format("%.2f", value);
+        }
+        return number + " " + unit;
+    }
+
     public static Measure byIndex(int i) {
         Measure[] values = values();
         return values[Math.floorMod(i, values.length)];

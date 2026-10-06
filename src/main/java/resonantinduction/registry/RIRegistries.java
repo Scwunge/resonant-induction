@@ -36,7 +36,15 @@ import resonantinduction.mechanical.process.MachineBlock;
 import resonantinduction.mechanical.process.MechanicalPistonBlockEntity;
 import resonantinduction.mechanical.process.MixerBlockEntity;
 import resonantinduction.archaic.CastingMoldBlock;
+import resonantinduction.atomic.fusion.ElectromagnetBlock;
 import resonantinduction.atomic.fusion.PlasmaBlock;
+import resonantinduction.atomic.particle.AcceleratorBlock;
+import resonantinduction.atomic.particle.AcceleratorBlockEntity;
+import resonantinduction.atomic.particle.FulminationBlock;
+import resonantinduction.atomic.particle.ParticleEntity;
+import resonantinduction.atomic.particle.QuantumAssemblerBlockEntity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import resonantinduction.atomic.reactor.ControlRodBlock;
 import resonantinduction.atomic.reactor.ElectricTurbineBlock;
 import resonantinduction.atomic.reactor.ElectricTurbineBlockEntity;
@@ -177,6 +185,7 @@ public final class RIRegistries {
     public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, ResonantInduction.MODID);
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(Registries.FLUID, ResonantInduction.MODID);
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, ResonantInduction.MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, ResonantInduction.MODID);
     public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS = DeferredRegister.create(Registries.ARMOR_MATERIAL, ResonantInduction.MODID);
 
     public static final ResourceKey<DamageType> ELECTROCUTION = ResourceKey.create(Registries.DAMAGE_TYPE, ResonantInduction.id("electrocution"));
@@ -689,6 +698,42 @@ public final class RIRegistries {
         ITEMS.registerSimpleBlockItem(FUNNEL);
     }
 
+    // ---- atomic: electromagnets, particle accelerator, fulmination generator, quantum assembler ----
+    public static final DeferredHolder<SoundEvent, SoundEvent> ACCELERATOR_SOUND = SOUNDS.register("accelerator",
+            () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("accelerator")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> ASSEMBLER_SOUND = SOUNDS.register("assembler",
+            () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("assembler")));
+
+    public static final DeferredBlock<ElectromagnetBlock> ELECTROMAGNET = BLOCKS.registerBlock("electromagnet", p -> new ElectromagnetBlock(false, p),
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3f, 12f).sound(SoundType.METAL).requiresCorrectToolForDrops());
+    public static final DeferredBlock<ElectromagnetBlock> ELECTROMAGNET_GLASS = BLOCKS.registerBlock("electromagnet_glass", p -> new ElectromagnetBlock(true, p),
+            BlockBehaviour.Properties.of().mapColor(MapColor.NONE).strength(3f, 12f).sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()
+                    .isValidSpawn((s, l, p, e) -> false).isRedstoneConductor((s, l, p) -> false).isSuffocating((s, l, p) -> false).isViewBlocking((s, l, p) -> false));
+    public static final DeferredBlock<AcceleratorBlock> ACCELERATOR = BLOCKS.registerBlock("particle_accelerator", AcceleratorBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3f, 6f).sound(SoundType.METAL).requiresCorrectToolForDrops());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AcceleratorBlockEntity>> ACCELERATOR_BE = BLOCK_ENTITIES.register("particle_accelerator",
+            () -> BlockEntityType.Builder.of(AcceleratorBlockEntity::new, ACCELERATOR.get()).build(null));
+    public static final DeferredHolder<EntityType<?>, EntityType<ParticleEntity>> PARTICLE = ENTITY_TYPES.register("accelerated_particle",
+            () -> EntityType.Builder.<ParticleEntity>of(ParticleEntity::new, MobCategory.MISC).sized(0.3f, 0.3f).clientTrackingRange(16).updateInterval(1)
+                    .noSave().fireImmune().build("accelerated_particle"));
+    public static final DeferredBlock<FulminationBlock> FULMINATION = BLOCKS.registerBlock("fulmination_generator", FulminationBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(10f, 5000f).sound(SoundType.METAL).requiresCorrectToolForDrops());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FulminationBlock.Tile>> FULMINATION_BE = BLOCK_ENTITIES.register("fulmination_generator",
+            () -> BlockEntityType.Builder.of(FulminationBlock.Tile::new, FULMINATION.get()).build(null));
+    public static final DeferredBlock<AtomicMachineBlock> QUANTUM_ASSEMBLER = BLOCKS.registerBlock("quantum_assembler",
+            p -> new AtomicMachineBlock(p, () -> RIRegistries.QUANTUM_ASSEMBLER_BE.get(), QuantumAssemblerBlockEntity::new, net.minecraft.world.phys.shapes.Shapes.block()),
+            atomicMachine());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<QuantumAssemblerBlockEntity>> QUANTUM_ASSEMBLER_BE = BLOCK_ENTITIES.register("quantum_assembler",
+            () -> BlockEntityType.Builder.of(QuantumAssemblerBlockEntity::new, QUANTUM_ASSEMBLER.get()).build(null));
+
+    static {
+        ITEMS.registerSimpleBlockItem(ELECTROMAGNET);
+        ITEMS.registerSimpleBlockItem(ELECTROMAGNET_GLASS);
+        ITEMS.registerSimpleBlockItem(ACCELERATOR);
+        ITEMS.registerSimpleBlockItem(FULMINATION);
+        ITEMS.registerSimpleBlockItem(QUANTUM_ASSEMBLER);
+    }
+
     public static final DeferredItem<HandCrankItem> HAND_CRANK = ITEMS.registerItem("hand_crank", HandCrankItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredHolder<SoundEvent, SoundEvent> GEAR_CRANK = SOUNDS.register("gear_crank",
             () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("gear_crank")));
@@ -750,6 +795,7 @@ public final class RIRegistries {
         FLUIDS.register(modBus);
         MOB_EFFECTS.register(modBus);
         ARMOR_MATERIALS.register(modBus);
+        ENTITY_TYPES.register(modBus);
     }
 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
@@ -794,6 +840,11 @@ public final class RIRegistries {
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, NUCLEAR_BOILER_BE.get(), NuclearBoilerBlockEntity::getFluidCapability);
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, NUCLEAR_BOILER_BE.get(), NuclearBoilerBlockEntity::getItemCapability);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, CENTRIFUGE_BE.get(), AtomicMachineBlockEntity::getEnergyCapability);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, ACCELERATOR_BE.get(), AcceleratorBlockEntity::getEnergyCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ACCELERATOR_BE.get(), AcceleratorBlockEntity::getItemCapability);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, FULMINATION_BE.get(), FulminationBlock.Tile::getEnergyCapability);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, QUANTUM_ASSEMBLER_BE.get(), AtomicMachineBlockEntity::getEnergyCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, QUANTUM_ASSEMBLER_BE.get(), QuantumAssemblerBlockEntity::getItemCapability);
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, CENTRIFUGE_BE.get(), CentrifugeBlockEntity::getFluidCapability);
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CENTRIFUGE_BE.get(), CentrifugeBlockEntity::getItemCapability);
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, REACTOR_CELL_BE.get(), ReactorCellBlockEntity::getFluidCapability);

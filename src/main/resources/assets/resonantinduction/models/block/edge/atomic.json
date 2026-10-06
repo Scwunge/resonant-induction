@@ -1,0 +1,66 @@
+{
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "edge": "resonantinduction:block/atomic_edge",
+    "particle": "resonantinduction:block/atomic_edge"
+  },
+  "elements": [
+    {
+      "from": [
+        -0.01,
+        -0.01,
+        -0.01
+      ],
+      "to": [
+        16.01,
+        16.01,
+        16.01
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#edge",
+          "cullface": "up"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#edge",
+          "cullface": "down",
+          "rotation": 180
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#edge",
+          "cullface": "east",
+          "rotation": 90
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#edge",
+          "cullface": "west",
+          "rotation": 270
+        }
+      }
+    }
+  ]
+}

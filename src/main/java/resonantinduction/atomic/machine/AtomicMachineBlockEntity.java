@@ -218,11 +218,17 @@ public abstract class AtomicMachineBlockEntity extends BlockEntity implements Me
         return fitsIn(slot, stack);
     }
 
-    private void syncTanks() {
+    /** What the client sees, hashed: when it changes, the machine sends an update. */
+    protected long syncHash() {
         long hash = timer > 0 ? 1 : 2;
         for (FluidTank t : tanks()) {
             hash = hash * 31 + FluidStack.hashFluidAndComponents(t.getFluid()) * 7 + t.getFluidAmount();
         }
+        return hash;
+    }
+
+    private void syncTanks() {
+        long hash = syncHash();
         if (hash != syncedHash) {
             syncedHash = hash;
             level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 2);

@@ -5,29 +5,58 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.Nullable;
+import resonantinduction.atomic.Edges;
 import resonantinduction.registry.RIRegistries;
 
 /**
  * Steam Funnel, as the original: catches gas (steam) rising into it from below, holds sixteen buckets, and passes it up into the
- * turbine or funnel above.
+ * turbine or funnel above. Funnels side by side share one border.
  */
 public class FunnelBlock extends BaseEntityBlock {
     public static final MapCodec<FunnelBlock> CODEC = simpleCodec(FunnelBlock::new);
 
     public FunnelBlock(Properties properties) {
         super(properties);
+        BlockState state = stateDefinition.any();
+        for (Direction dir : Direction.values()) {
+            state = state.setValue(Edges.property(dir), false);
+        }
+        registerDefaultState(state);
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        Edges.addProperties(builder);
+    }
+
+    private boolean joins(BlockState other) {
+        return other.is(this);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return Edges.join(defaultBlockState(), context.getLevel(), context.getClickedPos(), this::joins);
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState state, Direction dir, BlockState neighbour, LevelAccessor level, BlockPos pos, BlockPos neighbourPos) {
+        return Edges.update(state, dir, neighbour, this::joins);
     }
 
     @Override

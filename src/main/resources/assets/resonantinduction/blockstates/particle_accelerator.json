@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "resonantinduction:block/particle_accelerator"
+    },
+    "facing=east": {
+      "model": "resonantinduction:block/particle_accelerator",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "resonantinduction:block/particle_accelerator",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "resonantinduction:block/particle_accelerator",
+      "y": 270
+    }
+  }
+}
