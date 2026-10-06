@@ -1,0 +1,533 @@
+{
+  "textures": {
+    "tex": "resonantinduction:model/pipe",
+    "particle": "resonantinduction:model/pipe"
+  },
+  "elements": [
+    {
+      "name": "Mid",
+      "from": [
+        5.0,
+        5.0,
+        5.0
+      ],
+      "to": [
+        11.0,
+        11.0,
+        11.0
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            6.25,
+            9.5,
+            7.0,
+            12.5
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "west": {
+          "uv": [
+            7.75,
+            9.5,
+            8.5,
+            12.5
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "up": {
+          "uv": [
+            7.75,
+            6.5,
+            7.0,
+            9.5
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "down": {
+          "uv": [
+            8.5,
+            6.5,
+            7.75,
+            9.5
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "north": {
+          "uv": [
+            7.75,
+            9.5,
+            7.0,
+            12.5
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "south": {
+          "uv": [
+            9.25,
+            9.5,
+            8.5,
+            12.5
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        }
+      }
+    },
+    {
+      "name": "RightPipe",
+      "from": [
+        1.0,
+        5.0,
+        5.0
+      ],
+      "to": [
+        5.0,
+        11.0,
+        11.0
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            3.125,
+            3.0,
+            3.875,
+            6.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        },
+        "west": {
+          "uv": [
+            4.375,
+            3.0,
+            5.125,
+            6.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        },
+        "up": {
+          "uv": [
+            4.375,
+            0.0,
+            3.875,
+            3.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        },
+        "down": {
+          "uv": [
+            4.875,
+            0.0,
+            4.375,
+            3.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        },
+        "north": {
+          "uv": [
+            4.375,
+            3.0,
+            3.875,
+            6.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        },
+        "south": {
+          "uv": [
+            5.625,
+            3.0,
+            5.125,
+            6.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        }
+      }
+    },
+    {
+      "name": "RightInter",
+      "from": [
+        5.0,
+        4.0,
+        4.0
+      ],
+      "to": [
+        6.0,
+        12.0,
+        12.0
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            12.25,
+            4.0,
+            13.25,
+            8.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "west": {
+          "uv": [
+            13.375,
+            4.0,
+            14.375,
+            8.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "up": {
+          "uv": [
+            13.375,
+            0.0,
+            13.25,
+            4.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "down": {
+          "uv": [
+            13.5,
+            0.0,
+            13.375,
+            4.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "north": {
+          "uv": [
+            13.375,
+            4.0,
+            13.25,
+            8.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "south": {
+          "uv": [
+            14.5,
+            4.0,
+            14.375,
+            8.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        }
+      }
+    },
+    {
+      "name": "RightConnect",
+      "from": [
+        0.0,
+        4.0,
+        4.0
+      ],
+      "to": [
+        1.0,
+        12.0,
+        12.0
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            12.25,
+            4.0,
+            13.25,
+            8.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "west": {
+          "uv": [
+            13.375,
+            4.0,
+            14.375,
+            8.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "up": {
+          "uv": [
+            13.375,
+            0.0,
+            13.25,
+            4.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "down": {
+          "uv": [
+            13.5,
+            0.0,
+            13.375,
+            4.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "north": {
+          "uv": [
+            13.375,
+            4.0,
+            13.25,
+            8.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "south": {
+          "uv": [
+            14.5,
+            4.0,
+            14.375,
+            8.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        }
+      }
+    },
+    {
+      "name": "LeftInter",
+      "from": [
+        10.0,
+        4.0,
+        4.0
+      ],
+      "to": [
+        11.0,
+        12.0,
+        12.0
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            12.25,
+            4.0,
+            13.25,
+            8.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "west": {
+          "uv": [
+            13.375,
+            4.0,
+            14.375,
+            8.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "up": {
+          "uv": [
+            13.375,
+            0.0,
+            13.25,
+            4.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "down": {
+          "uv": [
+            13.5,
+            0.0,
+            13.375,
+            4.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "north": {
+          "uv": [
+            13.375,
+            4.0,
+            13.25,
+            8.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "south": {
+          "uv": [
+            14.5,
+            4.0,
+            14.375,
+            8.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        }
+      }
+    },
+    {
+      "name": "LeftPipe",
+      "from": [
+        11.0,
+        5.0,
+        5.0
+      ],
+      "to": [
+        15.0,
+        11.0,
+        11.0
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            3.125,
+            3.0,
+            3.875,
+            6.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        },
+        "west": {
+          "uv": [
+            4.375,
+            3.0,
+            5.125,
+            6.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        },
+        "up": {
+          "uv": [
+            4.375,
+            0.0,
+            3.875,
+            3.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        },
+        "down": {
+          "uv": [
+            4.875,
+            0.0,
+            4.375,
+            3.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        },
+        "north": {
+          "uv": [
+            4.375,
+            3.0,
+            3.875,
+            6.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        },
+        "south": {
+          "uv": [
+            5.625,
+            3.0,
+            5.125,
+            6.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        }
+      }
+    },
+    {
+      "name": "LeftConnect",
+      "from": [
+        15.0,
+        4.0,
+        4.0
+      ],
+      "to": [
+        16.0,
+        12.0,
+        12.0
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            12.25,
+            4.0,
+            13.25,
+            8.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "west": {
+          "uv": [
+            13.375,
+            4.0,
+            14.375,
+            8.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "up": {
+          "uv": [
+            13.375,
+            0.0,
+            13.25,
+            4.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "down": {
+          "uv": [
+            13.5,
+            0.0,
+            13.375,
+            4.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "north": {
+          "uv": [
+            13.375,
+            4.0,
+            13.25,
+            8.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "south": {
+          "uv": [
+            14.5,
+            4.0,
+            14.375,
+            8.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        }
+      }
+    }
+  ]
+}

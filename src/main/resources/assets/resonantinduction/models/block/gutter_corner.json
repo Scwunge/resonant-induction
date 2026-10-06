@@ -1,0 +1,77 @@
+{
+  "textures": {
+    "tex": "resonantinduction:model/gutter",
+    "particle": "resonantinduction:block/material_wood_surface"
+  },
+  "elements": [
+    {
+      "name": "backCornerL",
+      "from": [
+        14.0,
+        2.0,
+        14.0
+      ],
+      "to": [
+        16.0,
+        16.0,
+        16.0
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            0.0,
+            0.5,
+            0.5,
+            4.0
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            1.0,
+            0.5,
+            1.5,
+            4.0
+          ],
+          "texture": "#tex"
+        },
+        "up": {
+          "uv": [
+            1.0,
+            0.0,
+            0.5,
+            0.5
+          ],
+          "texture": "#tex"
+        },
+        "down": {
+          "uv": [
+            1.5,
+            0.0,
+            1.0,
+            0.5
+          ],
+          "texture": "#tex"
+        },
+        "north": {
+          "uv": [
+            1.0,
+            0.5,
+            0.5,
+            4.0
+          ],
+          "texture": "#tex"
+        },
+        "south": {
+          "uv": [
+            2.0,
+            0.5,
+            1.5,
+            4.0
+          ],
+          "texture": "#tex"
+        }
+      }
+    }
+  ]
+}

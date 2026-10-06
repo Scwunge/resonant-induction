@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "#c:plastics",
+      "required": false
+    },
+    {
+      "id": "#c:plates/plastic",
+      "required": false
+    },
+    {
+      "id": "#c:rubbers",
+      "required": false
+    },
+    {
+      "id": "#c:rubber",
+      "required": false
+    }
+  ]
+}

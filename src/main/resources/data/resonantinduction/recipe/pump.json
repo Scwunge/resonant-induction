@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "fluids"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "GGG",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "tag": "resonantinduction:pipes"
+    },
+    "G": {
+      "item": "resonantinduction:gear_metal"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:pump",
+    "count": 1
+  }
+}

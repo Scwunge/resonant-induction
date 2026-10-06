@@ -1,0 +1,41 @@
+{
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "edge": "resonantinduction:block/tank_edge",
+    "particle": "resonantinduction:block/tank"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        15,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        1
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            1
+          ],
+          "texture": "#edge"
+        },
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            1
+          ],
+          "texture": "#edge"
+        }
+      }
+    }
+  ]
+}

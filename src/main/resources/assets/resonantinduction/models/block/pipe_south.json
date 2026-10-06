@@ -1,0 +1,233 @@
+{
+  "textures": {
+    "tex": "resonantinduction:model/pipe",
+    "particle": "resonantinduction:model/pipe"
+  },
+  "elements": [
+    {
+      "name": "BackPipe",
+      "from": [
+        5.0,
+        5.0,
+        11.0
+      ],
+      "to": [
+        11.0,
+        11.0,
+        15.0
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            0.0,
+            2.0,
+            0.5,
+            5.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        },
+        "west": {
+          "uv": [
+            1.25,
+            2.0,
+            1.75,
+            5.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        },
+        "up": {
+          "uv": [
+            1.25,
+            0.0,
+            0.5,
+            2.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        },
+        "down": {
+          "uv": [
+            2.0,
+            0.0,
+            1.25,
+            2.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        },
+        "north": {
+          "uv": [
+            1.25,
+            2.0,
+            0.5,
+            5.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        },
+        "south": {
+          "uv": [
+            2.5,
+            2.0,
+            1.75,
+            5.0
+          ],
+          "texture": "#tex",
+          "tintindex": 1
+        }
+      }
+    },
+    {
+      "name": "BackInter",
+      "from": [
+        4.0,
+        4.0,
+        10.0
+      ],
+      "to": [
+        12.0,
+        12.0,
+        11.0
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            0.0,
+            12.0,
+            0.125,
+            16.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "west": {
+          "uv": [
+            1.125,
+            12.0,
+            1.25,
+            16.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "up": {
+          "uv": [
+            1.125,
+            11.5,
+            0.125,
+            12.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "down": {
+          "uv": [
+            2.125,
+            11.5,
+            1.125,
+            12.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "north": {
+          "uv": [
+            1.125,
+            12.0,
+            0.125,
+            16.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "south": {
+          "uv": [
+            2.25,
+            12.0,
+            1.25,
+            16.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        }
+      }
+    },
+    {
+      "name": "BackConnect",
+      "from": [
+        4.0,
+        4.0,
+        15.0
+      ],
+      "to": [
+        12.0,
+        12.0,
+        16.0
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            0.0,
+            12.0,
+            0.125,
+            16.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "west": {
+          "uv": [
+            1.125,
+            12.0,
+            1.25,
+            16.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "up": {
+          "uv": [
+            1.125,
+            11.5,
+            0.125,
+            12.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "down": {
+          "uv": [
+            2.125,
+            11.5,
+            1.125,
+            12.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "north": {
+          "uv": [
+            1.125,
+            12.0,
+            0.125,
+            16.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        },
+        "south": {
+          "uv": [
+            2.25,
+            12.0,
+            1.25,
+            16.0
+          ],
+          "texture": "#tex",
+          "tintindex": 0
+        }
+      }
+    }
+  ]
+}

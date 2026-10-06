@@ -22,6 +22,7 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 import resonantinduction.RIConfig;
+import resonantinduction.fluid.GutterBlockEntity;
 import resonantinduction.registry.RIRegistries;
 import resonantinduction.resource.DustPileBlock;
 import resonantinduction.resource.MaterialBlockEntity;
@@ -29,8 +30,8 @@ import resonantinduction.resource.PoolBlock;
 
 /**
  * Firebox, as the original: burns fuel items (or a bucket of lava, or, the electric one, power) and heats the block above it.
- * Over it a dust pile melts into a pool of molten metal (refined dust gives twice as much), water boils away, and a Hot Plate
- * cooks. A lit firebox keeps fire burning on top when there's room.
+ * Over it a dust pile melts into a pool of molten metal (refined dust gives twice as much), water (or the water in a gutter)
+ * boils away, and a Hot Plate cooks. A lit firebox keeps fire burning on top when there's room.
  */
 public class FireboxBlockEntity extends BlockEntity {
     /** Heat per second, as the original's POWER (watts). */
@@ -125,6 +126,15 @@ public class FireboxBlockEntity extends BlockEntity {
                         boiled = 0;
                         level.setBlockAndUpdate(above, Blocks.AIR.defaultBlockState());
                     }
+                }
+            } else if (level.getBlockEntity(above) instanceof GutterBlockEntity gutter) {
+                used = true;
+                FluidStack water = gutter.tank().getFluid();
+                int volume = Math.min(water.getAmount(), 10);
+                if (volume > 0 && water.getFluid().isSame(Fluids.WATER) && heat >= Thermal.boilEnergy(level, worldPosition, volume)) {
+                    gutter.tank().drain(volume, IFluidHandler.FluidAction.EXECUTE);
+                    gutter.onFluidChanged();
+                    heat = 0;
                 }
             } else if (level.getBlockEntity(above) instanceof HotPlateBlockEntity) {
                 used = true;

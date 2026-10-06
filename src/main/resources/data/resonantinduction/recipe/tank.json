@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "fluids"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GGG",
+    "GSG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "S": {
+      "tag": "c:ingots/iron"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:tank",
+    "count": 1
+  }
+}

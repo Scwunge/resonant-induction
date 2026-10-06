@@ -1,0 +1,77 @@
+{
+  "textures": {
+    "tex": "resonantinduction:model/pump",
+    "particle": "resonantinduction:model/pump"
+  },
+  "elements": [
+    {
+      "name": "innerFin1",
+      "from": [
+        7.5,
+        7.0,
+        5.0
+      ],
+      "to": [
+        8.5,
+        12.0,
+        12.0
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            12.0,
+            1.75,
+            13.75,
+            3.0
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            14.0,
+            1.75,
+            15.75,
+            3.0
+          ],
+          "texture": "#tex"
+        },
+        "up": {
+          "uv": [
+            14.0,
+            0.0,
+            13.75,
+            1.75
+          ],
+          "texture": "#tex"
+        },
+        "down": {
+          "uv": [
+            14.25,
+            0.0,
+            14.0,
+            1.75
+          ],
+          "texture": "#tex"
+        },
+        "north": {
+          "uv": [
+            14.0,
+            1.75,
+            13.75,
+            3.0
+          ],
+          "texture": "#tex"
+        },
+        "south": {
+          "uv": [
+            16.0,
+            1.75,
+            15.75,
+            3.0
+          ],
+          "texture": "#tex"
+        }
+      }
+    }
+  ]
+}

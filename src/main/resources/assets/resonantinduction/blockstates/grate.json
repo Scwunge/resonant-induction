@@ -1,0 +1,26 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "resonantinduction:block/grate_vertical"
+    },
+    "facing=down": {
+      "model": "resonantinduction:block/grate_vertical",
+      "x": 180
+    },
+    "facing=north": {
+      "model": "resonantinduction:block/grate"
+    },
+    "facing=east": {
+      "model": "resonantinduction:block/grate",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "resonantinduction:block/grate",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "resonantinduction:block/grate",
+      "y": 270
+    }
+  }
+}

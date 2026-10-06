@@ -40,6 +40,10 @@ public final class RIClient {
         event.registerBlockEntityRenderer(RIRegistries.MIXER_BE.get(), ProcessRenderer::new);
         event.registerBlockEntityRenderer(RIRegistries.HOT_PLATE_BE.get(), HotPlateRenderer::new);
         event.registerBlockEntityRenderer(RIRegistries.CASTING_MOLD_BE.get(), CastingMoldRenderer::new);
+        event.registerBlockEntityRenderer(RIRegistries.GUTTER_BE.get(), FluidBlockRenderers.Gutter::new);
+        event.registerBlockEntityRenderer(RIRegistries.TANK_BE.get(), FluidBlockRenderers.Tank::new);
+        event.registerBlockEntityRenderer(RIRegistries.PIPE_BE.get(), FluidBlockRenderers.Pipe::new);
+        event.registerBlockEntityRenderer(RIRegistries.PUMP_BE.get(), FluidBlockRenderers.Pump::new);
     }
 
     /** Molten metal and dust mixture in tanks and pipes, tinted to their metal. */
@@ -84,6 +88,8 @@ public final class RIClient {
         event.register(ProcessRenderer.GRINDER_WHEEL);
         event.register(ProcessRenderer.GRINDER_TEETH);
         event.register(ProcessRenderer.MIXER_ROTOR);
+        event.register(FluidBlockRenderers.PUMP_FIN);
+        event.register(FluidBlockRenderers.PUMP_INNER_FIN);
         for (String tier : MechanicalRenderer.TIERS) {
             event.register(MechanicalRenderer.model("gear_small_" + tier));
             event.register(MechanicalRenderer.model("gear_large_" + tier));
@@ -120,6 +126,20 @@ public final class RIClient {
                 RIRegistries.DUST_PILE.get(), RIRegistries.REFINED_DUST_PILE.get(), RIRegistries.MOLTEN_POOL.get(), RIRegistries.MIXTURE_POOL.get());
     }
 
+    /** Pipes: tint 0 is the material, tint 1 (the tube) the dye if it has one. */
+    @SubscribeEvent
+    public static void pipeColors(RegisterColorHandlersEvent.Block event) {
+        for (var e : RIRegistries.PIPES.entrySet()) {
+            int material = e.getKey().color;
+            event.register((state, level, pos, tint) -> {
+                if (tint == 1 && level != null && pos != null && level.getBlockEntity(pos) instanceof resonantinduction.fluid.PipeBlockEntity pipe && pipe.color() != null) {
+                    return FastColor.ARGB32.opaque(pipe.color().getTextureDiffuseColor());
+                }
+                return FastColor.ARGB32.opaque(material);
+            }, e.getValue().get());
+        }
+    }
+
     @SubscribeEvent
     public static void reload(net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent event) {
         event.registerReloadListener((net.minecraft.server.packs.resources.ResourceManagerReloadListener) manager -> MaterialColors.clear());
@@ -134,6 +154,10 @@ public final class RIClient {
         for (WireMaterial m : WireMaterial.values()) {
             event.register((stack, tint) -> tint == 0 ? FastColor.ARGB32.opaque(((WireItem) stack.getItem()).material().color) : -1,
                     RIRegistries.WIRE_ITEMS.get(m).get());
+        }
+        for (var e : RIRegistries.PIPES.entrySet()) {
+            int material = e.getKey().color;
+            event.register((stack, tint) -> FastColor.ARGB32.opaque(material), e.getValue().get());
         }
     }
 }

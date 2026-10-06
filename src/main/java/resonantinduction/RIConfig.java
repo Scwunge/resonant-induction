@@ -34,6 +34,8 @@ public final class RIConfig {
 
     public static final ModConfigSpec.IntValue PISTON_BREAK_COUNT;
     public static final ModConfigSpec.IntValue ELECTRIC_FIREBOX_USE;
+    public static final ModConfigSpec.DoubleValue GRATE_EFFECT;
+    public static final ModConfigSpec.DoubleValue GRATE_DRAIN_SPEED;
 
     public static final ModConfigSpec.IntValue WIRE_FE_PER_AMP;
     public static final ModConfigSpec.BooleanValue WIRE_SHOCK;
@@ -104,6 +106,13 @@ public final class RIConfig {
                 .defineInRange("pistonBreakCount", 5, 1, 100);
         ELECTRIC_FIREBOX_USE = b.comment("FE the Electric Firebox uses per tick of burning (it buffers ten ticks' worth). Original: 10000 joules.")
                 .defineInRange("electricFireboxUse", 10000, 1, 1_000_000);
+        b.pop();
+
+        b.push("fluids");
+        GRATE_EFFECT = b.comment("How many blocks a Grate works on each half second, per point of pressure. Original: 5.")
+                .defineInRange("grateEffectMultiplier", 5.0, 0.1, 100.0);
+        GRATE_DRAIN_SPEED = b.comment("Buckets a Grate can hold per block it works on (it always holds at least one). Original: 0.01.")
+                .defineInRange("grateDrainSpeedMultiplier", 0.01, 0.0, 10.0);
         b.pop();
 
         b.push("wires");

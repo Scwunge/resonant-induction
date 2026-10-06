@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "resonantinduction:block/pump"
+    },
+    "facing=south": {
+      "model": "resonantinduction:block/pump",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "resonantinduction:block/pump",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "resonantinduction:block/pump",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "resonantinduction:block/pump",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "resonantinduction:block/pump",
+      "x": 90
+    }
+  }
+}

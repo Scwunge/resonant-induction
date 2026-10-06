@@ -36,6 +36,19 @@ import resonantinduction.mechanical.process.MachineBlock;
 import resonantinduction.mechanical.process.MechanicalPistonBlockEntity;
 import resonantinduction.mechanical.process.MixerBlockEntity;
 import resonantinduction.archaic.CastingMoldBlock;
+import resonantinduction.fluid.FluidNodeBlockEntity;
+import resonantinduction.fluid.GrateBlock;
+import resonantinduction.fluid.GrateBlockEntity;
+import resonantinduction.fluid.GutterBlock;
+import resonantinduction.fluid.GutterBlockEntity;
+import resonantinduction.fluid.PipeBlock;
+import resonantinduction.fluid.PipeBlockEntity;
+import resonantinduction.fluid.PipeMaterial;
+import resonantinduction.fluid.PumpBlockEntity;
+import resonantinduction.fluid.TankBlock;
+import resonantinduction.fluid.TankBlockEntity;
+import resonantinduction.fluid.TankItem;
+import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import resonantinduction.archaic.CastingMoldBlockEntity;
 import resonantinduction.archaic.FilterBlock;
 import resonantinduction.archaic.FireboxBlock;
@@ -352,6 +365,49 @@ public final class RIRegistries {
         ITEMS.registerSimpleBlockItem(CASTING_MOLD);
     }
 
+    // ---- fluids: gutter, tank, grate, pipes, pump ----
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<SimpleFluidContent>> FLUID_CONTENT = COMPONENTS.registerComponentType("fluid",
+            b -> b.persistent(SimpleFluidContent.CODEC).networkSynchronized(SimpleFluidContent.STREAM_CODEC));
+    public static final DeferredBlock<GutterBlock> GUTTER = BLOCKS.registerBlock("gutter", GutterBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(1.5f, 6f).sound(SoundType.STONE).noOcclusion());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GutterBlockEntity>> GUTTER_BE = BLOCK_ENTITIES.register("gutter",
+            () -> BlockEntityType.Builder.of(GutterBlockEntity::new, GUTTER.get()).build(null));
+    public static final DeferredBlock<TankBlock> TANK = BLOCKS.registerBlock("tank", TankBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.NONE).strength(1f, 6f).sound(SoundType.GLASS).noOcclusion()
+                    .isValidSpawn((s, l, p, e) -> false).isRedstoneConductor((s, l, p) -> false).isSuffocating((s, l, p) -> false).isViewBlocking((s, l, p) -> false));
+    public static final DeferredItem<TankItem> TANK_ITEM = ITEMS.register("tank", () -> new TankItem(TANK.get(), new Item.Properties()));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TankBlockEntity>> TANK_BE = BLOCK_ENTITIES.register("tank",
+            () -> BlockEntityType.Builder.of(TankBlockEntity::new, TANK.get()).build(null));
+    public static final DeferredBlock<GrateBlock> GRATE = BLOCKS.registerBlock("grate", GrateBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(2f, 6f).sound(SoundType.WOOD));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GrateBlockEntity>> GRATE_BE = BLOCK_ENTITIES.register("grate",
+            () -> BlockEntityType.Builder.of(GrateBlockEntity::new, GRATE.get()).build(null));
+    public static final Map<PipeMaterial, DeferredBlock<PipeBlock>> PIPES = new EnumMap<>(PipeMaterial.class);
+
+    static {
+        ITEMS.registerSimpleBlockItem(GUTTER);
+        ITEMS.registerSimpleBlockItem(GRATE);
+        for (PipeMaterial m : PipeMaterial.values()) {
+            DeferredBlock<PipeBlock> pipe = BLOCKS.registerBlock(m.getSerializedName() + "_pipe", p -> new PipeBlock(m, p),
+                    BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(1f, 4f).sound(m == PipeMaterial.CERAMIC ? SoundType.STONE : SoundType.METAL)
+                            .noOcclusion().forceSolidOn());
+            PIPES.put(m, pipe);
+            ITEMS.registerSimpleBlockItem(pipe);
+        }
+    }
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PipeBlockEntity>> PIPE_BE = BLOCK_ENTITIES.register("pipe",
+            () -> BlockEntityType.Builder.of(PipeBlockEntity::new, PIPES.values().stream().map(DeferredBlock::get).toArray(net.minecraft.world.level.block.Block[]::new)).build(null));
+    public static final DeferredBlock<MachineBlock> PUMP = BLOCKS.registerBlock("pump",
+            p -> new MachineBlock(p, () -> RIRegistries.PUMP_BE.get(), PumpBlockEntity::new, net.minecraft.world.level.block.Block.box(0, 0, 0, 16, 14, 16), RenderShape.MODEL),
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3f, 6f).sound(SoundType.METAL).noOcclusion().requiresCorrectToolForDrops());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PumpBlockEntity>> PUMP_BE = BLOCK_ENTITIES.register("pump",
+            () -> BlockEntityType.Builder.of(PumpBlockEntity::new, PUMP.get()).build(null));
+
+    static {
+        ITEMS.registerSimpleBlockItem(PUMP);
+    }
+
     public static final DeferredItem<HandCrankItem> HAND_CRANK = ITEMS.registerItem("hand_crank", HandCrankItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredHolder<SoundEvent, SoundEvent> GEAR_CRANK = SOUNDS.register("gear_crank",
             () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("gear_crank")));
@@ -439,6 +495,11 @@ public final class RIRegistries {
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, FIREBOX_BE.get(), FireboxBlockEntity::getItemCapability);
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, HOT_PLATE_BE.get(), (be, side) -> be.inventory());
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, CASTING_MOLD_BE.get(), CastingMoldBlockEntity::getFluidCapability);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, GUTTER_BE.get(), FluidNodeBlockEntity::getFluidCapability);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, PIPE_BE.get(), FluidNodeBlockEntity::getFluidCapability);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, GRATE_BE.get(), FluidNodeBlockEntity::getFluidCapability);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, TANK_BE.get(), TankBlockEntity::getFluidCapability);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, PUMP_BE.get(), PumpBlockEntity::getFluidCapability);
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CASTING_MOLD_BE.get(), CastingMoldBlockEntity::getItemCapability);
     }
 }

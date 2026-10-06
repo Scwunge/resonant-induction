@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/orientable_vertical",
+  "textures": {
+    "front": "resonantinduction:block/grate_front",
+    "side": "resonantinduction:block/grate"
+  }
+}
