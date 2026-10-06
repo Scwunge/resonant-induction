@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "generators"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "ORO",
+    "OWO",
+    "OOO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    },
+    "W": {
+      "tag": "resonantinduction:wires"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:thermopile",
+    "count": 1
+  }
+}

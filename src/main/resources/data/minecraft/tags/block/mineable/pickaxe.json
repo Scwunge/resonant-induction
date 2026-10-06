@@ -5,6 +5,8 @@
     "resonantinduction:levitator",
     "resonantinduction:quantum_gate",
     "resonantinduction:charger",
-    "resonantinduction:battery"
+    "resonantinduction:battery",
+    "resonantinduction:solar_panel",
+    "resonantinduction:thermopile"
   ]
 }

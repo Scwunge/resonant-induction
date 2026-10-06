@@ -1,0 +1,35 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "generators"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "CCC",
+    "WWW",
+    "III"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:coal"
+    },
+    "W": {
+      "tag": "resonantinduction:wires"
+    },
+    "I": [
+      {
+        "tag": "c:ingots/steel"
+      },
+      {
+        "tag": "c:ingots/iron"
+      }
+    ]
+  },
+  "result": {
+    "id": "resonantinduction:solar_panel",
+    "count": 1
+  }
+}

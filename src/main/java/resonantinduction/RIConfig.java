@@ -22,6 +22,8 @@ public final class RIConfig {
     public static final ModConfigSpec.DoubleValue LEVITATOR_ACCELERATION;
     public static final ModConfigSpec.IntValue LEVITATOR_MAX_PATH;
 
+    public static final ModConfigSpec.IntValue SOLAR_OUTPUT;
+
     public static final ModConfigSpec.IntValue BATTERY_TIER1;
     public static final ModConfigSpec.IntValue BATTERY_TIER2;
     public static final ModConfigSpec.IntValue BATTERY_TIER3;
@@ -70,6 +72,11 @@ public final class RIConfig {
                 .defineInRange("acceleration", 0.02, 0.001, 1.0);
         LEVITATOR_MAX_PATH = b.comment("Longest distance between two linked levitators. Original: 200.")
                 .defineInRange("maxPathDistance", 200, 2, 1024);
+        b.pop();
+
+        b.push("generators");
+        SOLAR_OUTPUT = b.comment("Solar Panel output in FE per tick in clear daylight. Original: 50.")
+                .defineInRange("solarOutput", 50, 0, 100000);
         b.pop();
 
         b.push("battery");

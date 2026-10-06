@@ -27,6 +27,7 @@ public final class RIFeatures {
         feature(b, "laser", "Mining Laser");
         feature(b, "wires", "Wires (overlaps the Electrodynamics wires)");
         feature(b, "battery", "Battery (overlaps the Electrodynamics batteries)");
+        feature(b, "generators", "Solar Panel and Thermopile (overlap the Electrodynamics generators)");
         b.pop();
         SPEC = b.build();
     }

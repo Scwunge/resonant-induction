@@ -30,6 +30,10 @@ import resonantinduction.laser.MiningLaserItem;
 import resonantinduction.battery.BatteryBlock;
 import resonantinduction.battery.BatteryBlockEntity;
 import resonantinduction.battery.BatteryItem;
+import resonantinduction.generator.GeneratorBlock;
+import resonantinduction.generator.GeneratorBlockEntity;
+import resonantinduction.generator.SolarPanelBlockEntity;
+import resonantinduction.generator.ThermopileBlockEntity;
 import resonantinduction.wire.FlatWireBlock;
 import resonantinduction.wire.FramedWireBlock;
 import resonantinduction.wire.WireBlock;
@@ -133,6 +137,19 @@ public final class RIRegistries {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BatteryBlockEntity>> BATTERY_BE = BLOCK_ENTITIES.register("battery",
             () -> BlockEntityType.Builder.of(BatteryBlockEntity::new, BATTERY.get()).build(null));
 
+    public static final DeferredBlock<GeneratorBlock> SOLAR_PANEL = BLOCKS.registerBlock("solar_panel",
+            p -> new GeneratorBlock(p, () -> RIRegistries.SOLAR_PANEL_BE.get(), SolarPanelBlockEntity::new, net.minecraft.world.level.block.Block.box(0, 0, 0, 16, 4.8, 16)),
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(2f, 6f).sound(SoundType.METAL).noOcclusion().requiresCorrectToolForDrops());
+    public static final DeferredItem<BlockItem> SOLAR_PANEL_ITEM = ITEMS.registerSimpleBlockItem(SOLAR_PANEL);
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SolarPanelBlockEntity>> SOLAR_PANEL_BE = BLOCK_ENTITIES.register("solar_panel",
+            () -> BlockEntityType.Builder.of(SolarPanelBlockEntity::new, SOLAR_PANEL.get()).build(null));
+    public static final DeferredBlock<GeneratorBlock> THERMOPILE = BLOCKS.registerBlock("thermopile",
+            p -> new GeneratorBlock(p, () -> RIRegistries.THERMOPILE_BE.get(), ThermopileBlockEntity::new, GeneratorBlock.full()),
+            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(5f, 1200f).sound(SoundType.STONE).requiresCorrectToolForDrops());
+    public static final DeferredItem<BlockItem> THERMOPILE_ITEM = ITEMS.registerSimpleBlockItem(THERMOPILE);
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ThermopileBlockEntity>> THERMOPILE_BE = BLOCK_ENTITIES.register("thermopile",
+            () -> BlockEntityType.Builder.of(ThermopileBlockEntity::new, THERMOPILE.get()).build(null));
+
     /** Stored FE of energy items. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ENERGY = COMPONENTS.registerComponentType("energy",
             b -> b.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT));
@@ -187,6 +204,8 @@ public final class RIRegistries {
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, CHARGER_BE.get(), ChargerBlockEntity::getEnergyCapability);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, WIRE_BE.get(), WireBlockEntity::getEnergyCapability);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, BATTERY_BE.get(), BatteryBlockEntity::getEnergyCapability);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, SOLAR_PANEL_BE.get(), GeneratorBlockEntity::getEnergyCapability);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, THERMOPILE_BE.get(), GeneratorBlockEntity::getEnergyCapability);
         event.registerItem(Capabilities.EnergyStorage.ITEM, (stack, ctx) -> {
             int capacity = BatteryItem.capacity(stack);
             return new ComponentEnergyStorage(stack, ENERGY.get(), capacity, Math.max(1, capacity / 100), Math.max(1, capacity / 100));

@@ -88,5 +88,9 @@
   "direction.resonantinduction.south": "South",
   "direction.resonantinduction.west": "West",
   "direction.resonantinduction.east": "East",
-  "jei.resonantinduction.battery": "Stores FE. Batteries placed against each other merge into one bank and share their energy. Every face starts as an input; use a wrench (or sneak-use with an empty hand) on a face to switch it between input, output and off. Output faces push energy into whatever is next to them. Keeps its charge when broken, and can be charged in a Charger. Tier 2 is made from eight tier 1 batteries, tier 3 from eight tier 2."
+  "jei.resonantinduction.battery": "Stores FE. Batteries placed against each other merge into one bank and share their energy. Every face starts as an input; use a wrench (or sneak-use with an empty hand) on a face to switch it between input, output and off. Output faces push energy into whatever is next to them. Keeps its charge when broken, and can be charged in a Charger. Tier 2 is made from eight tier 1 batteries, tier 3 from eight tier 2.",
+  "block.resonantinduction.solar_panel": "Solar Panel",
+  "block.resonantinduction.thermopile": "Thermopile",
+  "jei.resonantinduction.solar_panel": "Makes 50 FE a tick under open sky in daytime, when it is not raining. Pushes power out of every side.",
+  "jei.resonantinduction.thermopile": "Makes power from hot and cold blocks touching it: water (1) or ice and snow (2) on the cold side, fire (1) or lava (2) on the hot side. Output is 15 FE a tick times (3 - the difference), when it has both. After two minutes of use the sources reach equilibrium: water boils away, ice melts, fire dies and lava cools to stone."
 }

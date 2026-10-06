@@ -1,0 +1,26 @@
+{
+  "values": [
+    "resonantinduction:copper_wire",
+    "resonantinduction:tin_wire",
+    "resonantinduction:iron_wire",
+    "resonantinduction:aluminum_wire",
+    "resonantinduction:silver_wire",
+    "resonantinduction:superconductor_wire",
+    {
+      "id": "electrodynamics:wirecopper",
+      "required": false
+    },
+    {
+      "id": "electrodynamics:wiretin",
+      "required": false
+    },
+    {
+      "id": "electrodynamics:wireiron",
+      "required": false
+    },
+    {
+      "id": "electrodynamics:wiresilver",
+      "required": false
+    }
+  ]
+}
