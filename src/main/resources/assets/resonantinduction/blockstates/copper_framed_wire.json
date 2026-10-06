@@ -1,0 +1,128 @@
+{
+ "multipart": [
+  {
+   "when": {
+    "insulated": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/framed_core_bare"
+   }
+  },
+  {
+   "when": {
+    "insulated": "false",
+    "down": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/framed_down_bare"
+   }
+  },
+  {
+   "when": {
+    "insulated": "false",
+    "up": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/framed_up_bare"
+   }
+  },
+  {
+   "when": {
+    "insulated": "false",
+    "north": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/framed_north_bare"
+   }
+  },
+  {
+   "when": {
+    "insulated": "false",
+    "south": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/framed_south_bare"
+   }
+  },
+  {
+   "when": {
+    "insulated": "false",
+    "west": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/framed_west_bare"
+   }
+  },
+  {
+   "when": {
+    "insulated": "false",
+    "east": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/framed_east_bare"
+   }
+  },
+  {
+   "when": {
+    "insulated": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/framed_core_insulated"
+   }
+  },
+  {
+   "when": {
+    "insulated": "true",
+    "down": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/framed_down_insulated"
+   }
+  },
+  {
+   "when": {
+    "insulated": "true",
+    "up": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/framed_up_insulated"
+   }
+  },
+  {
+   "when": {
+    "insulated": "true",
+    "north": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/framed_north_insulated"
+   }
+  },
+  {
+   "when": {
+    "insulated": "true",
+    "south": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/framed_south_insulated"
+   }
+  },
+  {
+   "when": {
+    "insulated": "true",
+    "west": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/framed_west_insulated"
+   }
+  },
+  {
+   "when": {
+    "insulated": "true",
+    "east": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/framed_east_insulated"
+   }
+  }
+ ]
+}

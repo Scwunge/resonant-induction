@@ -27,6 +27,15 @@ import resonantinduction.ResonantInduction;
 import resonantinduction.charger.ChargerBlock;
 import resonantinduction.charger.ChargerBlockEntity;
 import resonantinduction.laser.MiningLaserItem;
+import resonantinduction.wire.FlatWireBlock;
+import resonantinduction.wire.FramedWireBlock;
+import resonantinduction.wire.WireBlock;
+import resonantinduction.wire.WireBlockEntity;
+import resonantinduction.wire.WireItem;
+import resonantinduction.wire.WireMaterial;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.Map;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -87,6 +96,34 @@ public final class RIRegistries {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ChargerBlockEntity>> CHARGER_BE = BLOCK_ENTITIES.register("charger",
             () -> BlockEntityType.Builder.of(ChargerBlockEntity::new, CHARGER.get()).build(null));
 
+    public static final Map<WireMaterial, DeferredBlock<FlatWireBlock>> FLAT_WIRES = new EnumMap<>(WireMaterial.class);
+    public static final Map<WireMaterial, DeferredBlock<FramedWireBlock>> FRAMED_WIRES = new EnumMap<>(WireMaterial.class);
+    public static final Map<WireMaterial, DeferredItem<WireItem>> WIRE_ITEMS = new EnumMap<>(WireMaterial.class);
+
+    static {
+        for (WireMaterial m : WireMaterial.values()) {
+            String name = m.getSerializedName();
+            DeferredBlock<FlatWireBlock> flat = BLOCKS.registerBlock(name + "_wire", p -> new FlatWireBlock(m, p), wireProperties());
+            DeferredBlock<FramedWireBlock> framed = BLOCKS.registerBlock(name + "_framed_wire", p -> new FramedWireBlock(m, p), wireProperties());
+            FLAT_WIRES.put(m, flat);
+            FRAMED_WIRES.put(m, framed);
+            WIRE_ITEMS.put(m, ITEMS.register(name + "_wire", () -> new WireItem(flat.get(), framed, m, new Item.Properties())));
+        }
+    }
+
+    private static BlockBehaviour.Properties wireProperties() {
+        return BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(0.1f).sound(SoundType.WOOL)
+                .noOcclusion().pushReaction(net.minecraft.world.level.material.PushReaction.DESTROY);
+    }
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WireBlockEntity>> WIRE_BE = BLOCK_ENTITIES.register("wire",
+            () -> {
+                List<net.minecraft.world.level.block.Block> blocks = new ArrayList<>();
+                FLAT_WIRES.values().forEach(b -> blocks.add(b.get()));
+                FRAMED_WIRES.values().forEach(b -> blocks.add(b.get()));
+                return BlockEntityType.Builder.of(WireBlockEntity::new, blocks.toArray(new net.minecraft.world.level.block.Block[0])).build(null);
+            });
+
     /** Stored FE of energy items. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ENERGY = COMPONENTS.registerComponentType("energy",
             b -> b.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT));
@@ -131,6 +168,7 @@ public final class RIRegistries {
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, TESLA_BE.get(), TeslaBlockEntity::getEnergyCapability);
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, QUANTUM_GATE_BE.get(), QuantumGateBlockEntity::getItemCapability);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, CHARGER_BE.get(), ChargerBlockEntity::getEnergyCapability);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, WIRE_BE.get(), WireBlockEntity::getEnergyCapability);
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CHARGER_BE.get(), ChargerBlockEntity::getItemCapability);
         // Original transfer rate: a hundredth of the battery per tick.
         event.registerItem(Capabilities.EnergyStorage.ITEM, (stack, ctx) -> {

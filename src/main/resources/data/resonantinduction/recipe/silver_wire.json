@@ -1,0 +1,29 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "wires"
+    },
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ingots/silver"
+      }
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "tag": "c:ingots/silver"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:silver_wire",
+    "count": 1
+  }
+}

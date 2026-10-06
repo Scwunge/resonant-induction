@@ -22,6 +22,9 @@ public final class RIConfig {
     public static final ModConfigSpec.DoubleValue LEVITATOR_ACCELERATION;
     public static final ModConfigSpec.IntValue LEVITATOR_MAX_PATH;
 
+    public static final ModConfigSpec.IntValue WIRE_FE_PER_AMP;
+    public static final ModConfigSpec.BooleanValue WIRE_SHOCK;
+
     public static final ModConfigSpec.IntValue LASER_CAPACITY;
     public static final ModConfigSpec.IntValue LASER_COST_REMOVE;
     public static final ModConfigSpec.IntValue LASER_RANGE;
@@ -62,6 +65,14 @@ public final class RIConfig {
                 .defineInRange("acceleration", 0.02, 0.001, 1.0);
         LEVITATOR_MAX_PATH = b.comment("Longest distance between two linked levitators. Original: 200.")
                 .defineInRange("maxPathDistance", 200, 2, 1024);
+        b.pop();
+
+        b.push("wires");
+        WIRE_FE_PER_AMP = b.comment("Wire capacity in FE per tick = the metal's original amp rating times this. Copper 200 A, tin 100, iron 800,",
+                        "aluminium 600, silver 700, superconductor 1000000.")
+                .defineInRange("fePerAmp", 10, 1, 10000);
+        WIRE_SHOCK = b.comment("Bare (uninsulated) wires that carried power in the last second hurt whatever touches them.")
+                .define("bareWiresShock", true);
         b.pop();
 
         b.push("mining_laser");

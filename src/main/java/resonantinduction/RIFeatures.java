@@ -25,6 +25,7 @@ public final class RIFeatures {
         feature(b, "quantum", "Quantum Glyphs and Quantum Gates");
         feature(b, "charger", "Charger (overlaps the Electrodynamics chargers)");
         feature(b, "laser", "Mining Laser");
+        feature(b, "wires", "Wires (overlaps the Electrodynamics wires)");
         b.pop();
         SPEC = b.build();
     }

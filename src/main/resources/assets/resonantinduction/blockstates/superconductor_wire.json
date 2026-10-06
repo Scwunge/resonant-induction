@@ -1,0 +1,592 @@
+{
+ "multipart": [
+  {
+   "when": {
+    "facing": "down",
+    "insulated": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_down_center_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "down",
+    "insulated": "false",
+    "north": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_down_north_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "down",
+    "insulated": "false",
+    "south": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_down_south_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "down",
+    "insulated": "false",
+    "west": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_down_west_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "down",
+    "insulated": "false",
+    "east": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_down_east_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "down",
+    "insulated": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_down_center_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "down",
+    "insulated": "true",
+    "north": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_down_north_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "down",
+    "insulated": "true",
+    "south": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_down_south_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "down",
+    "insulated": "true",
+    "west": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_down_west_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "down",
+    "insulated": "true",
+    "east": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_down_east_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "up",
+    "insulated": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_up_center_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "up",
+    "insulated": "false",
+    "north": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_up_north_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "up",
+    "insulated": "false",
+    "south": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_up_south_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "up",
+    "insulated": "false",
+    "west": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_up_west_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "up",
+    "insulated": "false",
+    "east": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_up_east_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "up",
+    "insulated": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_up_center_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "up",
+    "insulated": "true",
+    "north": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_up_north_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "up",
+    "insulated": "true",
+    "south": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_up_south_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "up",
+    "insulated": "true",
+    "west": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_up_west_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "up",
+    "insulated": "true",
+    "east": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_up_east_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "north",
+    "insulated": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_north_center_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "north",
+    "insulated": "false",
+    "down": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_north_down_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "north",
+    "insulated": "false",
+    "up": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_north_up_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "north",
+    "insulated": "false",
+    "west": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_north_west_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "north",
+    "insulated": "false",
+    "east": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_north_east_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "north",
+    "insulated": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_north_center_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "north",
+    "insulated": "true",
+    "down": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_north_down_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "north",
+    "insulated": "true",
+    "up": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_north_up_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "north",
+    "insulated": "true",
+    "west": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_north_west_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "north",
+    "insulated": "true",
+    "east": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_north_east_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "south",
+    "insulated": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_south_center_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "south",
+    "insulated": "false",
+    "down": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_south_down_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "south",
+    "insulated": "false",
+    "up": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_south_up_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "south",
+    "insulated": "false",
+    "west": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_south_west_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "south",
+    "insulated": "false",
+    "east": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_south_east_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "south",
+    "insulated": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_south_center_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "south",
+    "insulated": "true",
+    "down": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_south_down_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "south",
+    "insulated": "true",
+    "up": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_south_up_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "south",
+    "insulated": "true",
+    "west": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_south_west_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "south",
+    "insulated": "true",
+    "east": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_south_east_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "west",
+    "insulated": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_west_center_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "west",
+    "insulated": "false",
+    "down": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_west_down_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "west",
+    "insulated": "false",
+    "up": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_west_up_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "west",
+    "insulated": "false",
+    "north": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_west_north_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "west",
+    "insulated": "false",
+    "south": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_west_south_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "west",
+    "insulated": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_west_center_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "west",
+    "insulated": "true",
+    "down": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_west_down_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "west",
+    "insulated": "true",
+    "up": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_west_up_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "west",
+    "insulated": "true",
+    "north": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_west_north_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "west",
+    "insulated": "true",
+    "south": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_west_south_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "east",
+    "insulated": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_east_center_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "east",
+    "insulated": "false",
+    "down": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_east_down_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "east",
+    "insulated": "false",
+    "up": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_east_up_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "east",
+    "insulated": "false",
+    "north": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_east_north_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "east",
+    "insulated": "false",
+    "south": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_east_south_bare"
+   }
+  },
+  {
+   "when": {
+    "facing": "east",
+    "insulated": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_east_center_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "east",
+    "insulated": "true",
+    "down": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_east_down_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "east",
+    "insulated": "true",
+    "up": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_east_up_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "east",
+    "insulated": "true",
+    "north": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_east_north_insulated"
+   }
+  },
+  {
+   "when": {
+    "facing": "east",
+    "insulated": "true",
+    "south": "true"
+   },
+   "apply": {
+    "model": "resonantinduction:block/wire/flat_east_south_insulated"
+   }
+  }
+ ]
+}

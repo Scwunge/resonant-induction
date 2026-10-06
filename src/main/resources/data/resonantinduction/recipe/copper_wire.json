@@ -1,0 +1,29 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "wires"
+    },
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ingots/copper"
+      }
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "tag": "c:ingots/copper"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:copper_wire",
+    "count": 3
+  }
+}

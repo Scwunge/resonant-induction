@@ -1,0 +1,84 @@
+{
+ "textures": {
+  "wire": "resonantinduction:block/wire",
+  "flat": "resonantinduction:block/flat_wire",
+  "insulation": "resonantinduction:block/insulation",
+  "particle": "resonantinduction:block/flat"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    7,
+    0
+   ],
+   "to": [
+    7,
+    9,
+    1
+   ],
+   "faces": {
+    "down": {
+     "uv": [
+      0,
+      0,
+      7,
+      1
+     ],
+     "texture": "#flat",
+     "tintindex": 0
+    },
+    "up": {
+     "uv": [
+      0,
+      0,
+      7,
+      1
+     ],
+     "texture": "#flat",
+     "tintindex": 0
+    },
+    "north": {
+     "uv": [
+      0,
+      7,
+      7,
+      9
+     ],
+     "texture": "#flat",
+     "tintindex": 0
+    },
+    "south": {
+     "uv": [
+      0,
+      7,
+      7,
+      9
+     ],
+     "texture": "#flat",
+     "tintindex": 0
+    },
+    "west": {
+     "uv": [
+      0,
+      7,
+      1,
+      9
+     ],
+     "texture": "#flat",
+     "tintindex": 0
+    },
+    "east": {
+     "uv": [
+      0,
+      7,
+      1,
+      9
+     ],
+     "texture": "#flat",
+     "tintindex": 0
+    }
+   }
+  }
+ ]
+}
