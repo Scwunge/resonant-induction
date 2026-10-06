@@ -1,6 +1,6 @@
 {
   "loader": "neoforge:obj",
-  "model": "resonantinduction:models/block/turbine/windTurbines.obj",
+  "model": "resonantinduction:models/block/turbine/wind_turbines.obj",
   "flip_v": true,
   "visibility": {
     "LargeBlade": false,

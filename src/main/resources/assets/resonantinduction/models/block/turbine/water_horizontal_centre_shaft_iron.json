@@ -1,6 +1,6 @@
 {
   "loader": "neoforge:obj",
-  "model": "resonantinduction:models/block/turbine/waterTurbines.obj",
+  "model": "resonantinduction:models/block/turbine/water_turbines.obj",
   "flip_v": true,
   "visibility": {
     "bigwheel_endknot": false,
