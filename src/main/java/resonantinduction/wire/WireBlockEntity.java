@@ -136,6 +136,10 @@ public class WireBlockEntity extends BlockEntity {
         insulated = tag.getBoolean("insulated");
         color = DyeColor.byName(tag.getString("color"), DEFAULT_COLOR);
         switched = tag.getBoolean("switched");
+        // Data set by commands or structures arrives after placement: bring the block state and network up to date.
+        if (level != null && !level.isClientSide) {
+            WireBlock.refresh(level, worldPosition);
+        }
     }
 
     @Override

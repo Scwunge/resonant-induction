@@ -3,7 +3,7 @@
   "wire": "resonantinduction:block/wire",
   "flat": "resonantinduction:block/flat_wire",
   "insulation": "resonantinduction:block/insulation",
-  "particle": "resonantinduction:block/flat"
+  "particle": "resonantinduction:block/flat_wire"
  },
  "elements": [
   {

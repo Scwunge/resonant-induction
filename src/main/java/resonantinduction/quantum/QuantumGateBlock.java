@@ -77,6 +77,14 @@ public class QuantumGateBlock extends BaseEntityBlock {
                 : createTickerHelper(type, RIRegistries.QUANTUM_GATE_BE.get(), QuantumGateBlockEntity::serverTick);
     }
 
+    /** Clicking a gate with a glyph adds it (the item handles that); any other item leaves the gate alone. */
+    @Override
+    protected net.minecraft.world.ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
+                                                                  net.minecraft.world.InteractionHand hand, BlockHitResult hit) {
+        return stack.isEmpty() ? net.minecraft.world.ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
+                : net.minecraft.world.ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+    }
+
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (!(level.getBlockEntity(pos) instanceof QuantumGateBlockEntity gate)) {

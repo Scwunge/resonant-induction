@@ -85,6 +85,35 @@ public class QuantumGateGameTests {
         });
     }
 
+    /** Clicks like a player would: four corners on the floor, then the tops of those four glyphs. */
+    @GameTest(template = TEMPLATE)
+    @SuppressWarnings("removal")
+    public static void glyphItemsFillCornersWhereClicked(GameTestHelper helper) {
+        BlockPos floor = new BlockPos(3, 0, 3);
+        helper.setBlock(floor, net.minecraft.world.level.block.Blocks.STONE);
+        net.minecraft.world.entity.player.Player player = helper.makeMockServerPlayerInLevel();
+        net.minecraft.world.item.ItemStack glyphs = new net.minecraft.world.item.ItemStack(RIRegistries.GLYPHS.get(1).get(), 8);
+        player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, glyphs);
+        BlockPos gatePos = helper.absolutePos(floor.above());
+        double[][] corners = {{0.25, 0.25}, {0.25, 0.75}, {0.75, 0.25}, {0.75, 0.75}};
+        for (double y : new double[]{1.0, 1.5}) {
+            for (double[] c : corners) {
+                net.minecraft.world.phys.Vec3 hit = new net.minecraft.world.phys.Vec3(gatePos.getX() + c[0], gatePos.getY() - 1 + y, gatePos.getZ() + c[1]);
+                BlockPos clicked = y == 1.0 ? gatePos.below() : gatePos;
+                net.minecraft.world.phys.BlockHitResult result = new net.minecraft.world.phys.BlockHitResult(hit, Direction.UP, clicked, false);
+                player.getMainHandItem().useOn(new net.minecraft.world.item.context.UseOnContext(player, net.minecraft.world.InteractionHand.MAIN_HAND, result));
+            }
+        }
+        QuantumGateBlockEntity gate = helper.getBlockEntity(floor.above());
+        helper.assertTrue(gate.glyphCount() == 8, "placed " + gate.glyphCount() + " of 8 glyphs");
+        int expected = 0;
+        for (int i = 0, w = 1; i < 8; i++, w *= 4) {
+            expected += w;
+        }
+        helper.assertTrue(gate.frequency() == expected, "frequency " + gate.frequency());
+        helper.succeed();
+    }
+
     @GameTest(template = TEMPLATE)
     public static void gatesShareInventoryAndTank(GameTestHelper helper) {
         int[] glyphs = {0, 1, 0, 1, 0, 1, 0, 1};

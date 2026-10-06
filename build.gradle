@@ -46,6 +46,10 @@ neoForge {
             if (findProperty('quickPlay')) {
                 programArguments.addAll('--quickPlaySingleplayer', (String) findProperty('quickPlay'))
             }
+            // -Pautotest=<script> drives the client from a script (needs the test harness mod in runs/client/mods)
+            if (findProperty('autotest')) {
+                jvmArguments.add("-Dcortex.autotest=${findProperty('autotest')}")
+            }
         }
         server {
             server()
