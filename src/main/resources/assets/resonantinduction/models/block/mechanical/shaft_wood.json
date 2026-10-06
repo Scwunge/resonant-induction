@@ -1,0 +1,14 @@
+{
+  "loader": "neoforge:obj",
+  "model": "resonantinduction:models/block/mechanical/gears.obj",
+  "flip_v": true,
+  "visibility": {
+    "SmallGear": false,
+    "LargeGear": false,
+    "Shaft": true
+  },
+  "textures": {
+    "tex": "minecraft:block/oak_planks",
+    "particle": "minecraft:block/oak_planks"
+  }
+}

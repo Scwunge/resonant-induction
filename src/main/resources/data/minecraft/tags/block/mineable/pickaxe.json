@@ -8,6 +8,11 @@
     "resonantinduction:battery",
     "resonantinduction:solar_panel",
     "resonantinduction:thermopile",
-    "resonantinduction:transformer"
+    "resonantinduction:transformer",
+    "resonantinduction:gear_stone",
+    "resonantinduction:gear_metal",
+    "resonantinduction:shaft_stone",
+    "resonantinduction:shaft_metal",
+    "resonantinduction:gear_creative"
   ]
 }

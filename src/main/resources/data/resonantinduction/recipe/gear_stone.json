@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "gears"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    " W ",
+    "WGW",
+    " W "
+  ],
+  "key": {
+    "G": {
+      "item": "resonantinduction:gear_wood"
+    },
+    "W": {
+      "tag": "c:cobblestones"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:gear_stone",
+    "count": 1
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "gears"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    " W ",
+    "WGW",
+    " W "
+  ],
+  "key": {
+    "G": {
+      "item": "resonantinduction:gear_stone"
+    },
+    "W": {
+      "tag": "c:ingots/iron"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:gear_metal",
+    "count": 1
+  }
+}

@@ -30,6 +30,11 @@ import resonantinduction.laser.MiningLaserItem;
 import resonantinduction.battery.BatteryBlock;
 import resonantinduction.battery.BatteryBlockEntity;
 import resonantinduction.battery.BatteryItem;
+import resonantinduction.mechanical.gear.GearBlock;
+import resonantinduction.mechanical.gear.GearBlockEntity;
+import resonantinduction.mechanical.gear.HandCrankItem;
+import resonantinduction.mechanical.shaft.ShaftBlock;
+import resonantinduction.mechanical.shaft.ShaftBlockEntity;
 import resonantinduction.transformer.TransformerBlock;
 import resonantinduction.transformer.TransformerBlockEntity;
 import resonantinduction.multimeter.MultimeterBlock;
@@ -171,6 +176,36 @@ public final class RIRegistries {
     public static final DeferredItem<BlockItem> TRANSFORMER_ITEM = ITEMS.registerSimpleBlockItem(TRANSFORMER);
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TransformerBlockEntity>> TRANSFORMER_BE = BLOCK_ENTITIES.register("transformer",
             () -> BlockEntityType.Builder.of(TransformerBlockEntity::new, TRANSFORMER.get()).build(null));
+
+    public static final String[] MECH_TIERS = {"wood", "stone", "metal", "creative"};
+    public static final List<DeferredBlock<GearBlock>> GEARS = new ArrayList<>();
+    public static final List<DeferredBlock<ShaftBlock>> SHAFTS = new ArrayList<>();
+
+    static {
+        for (int t = 0; t < 4; t++) {
+            int tier = t;
+            DeferredBlock<GearBlock> gear = BLOCKS.registerBlock("gear_" + MECH_TIERS[t], p -> new GearBlock(tier, p),
+                    BlockBehaviour.Properties.of().mapColor(tier == 0 ? MapColor.WOOD : tier == 1 ? MapColor.STONE : MapColor.METAL)
+                            .strength(1.5f, 4f).sound(tier == 0 ? SoundType.WOOD : tier == 1 ? SoundType.STONE : SoundType.METAL).noOcclusion());
+            GEARS.add(gear);
+            ITEMS.registerSimpleBlockItem(gear);
+            if (t < 3) {
+                DeferredBlock<ShaftBlock> shaft = BLOCKS.registerBlock("shaft_" + MECH_TIERS[t], p -> new ShaftBlock(tier, p),
+                        BlockBehaviour.Properties.of().mapColor(tier == 0 ? MapColor.WOOD : tier == 1 ? MapColor.STONE : MapColor.METAL)
+                                .strength(1.5f, 4f).sound(tier == 0 ? SoundType.WOOD : tier == 1 ? SoundType.STONE : SoundType.METAL).noOcclusion());
+                SHAFTS.add(shaft);
+                ITEMS.registerSimpleBlockItem(shaft);
+            }
+        }
+    }
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GearBlockEntity>> GEAR_BE = BLOCK_ENTITIES.register("gear",
+            () -> BlockEntityType.Builder.of(GearBlockEntity::new, GEARS.stream().map(DeferredBlock::get).toArray(net.minecraft.world.level.block.Block[]::new)).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ShaftBlockEntity>> SHAFT_BE = BLOCK_ENTITIES.register("shaft",
+            () -> BlockEntityType.Builder.of(ShaftBlockEntity::new, SHAFTS.stream().map(DeferredBlock::get).toArray(net.minecraft.world.level.block.Block[]::new)).build(null));
+    public static final DeferredItem<HandCrankItem> HAND_CRANK = ITEMS.registerItem("hand_crank", HandCrankItem::new, new Item.Properties().stacksTo(1));
+    public static final DeferredHolder<SoundEvent, SoundEvent> GEAR_CRANK = SOUNDS.register("gear_crank",
+            () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("gear_crank")));
 
     /** Stored FE of energy items. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ENERGY = COMPONENTS.registerComponentType("energy",

@@ -1,0 +1,14 @@
+{
+  "loader": "neoforge:obj",
+  "model": "resonantinduction:models/block/mechanical/gears.obj",
+  "flip_v": true,
+  "visibility": {
+    "SmallGear": true,
+    "LargeGear": false,
+    "Shaft": false
+  },
+  "textures": {
+    "tex": "minecraft:block/iron_block",
+    "particle": "minecraft:block/iron_block"
+  }
+}

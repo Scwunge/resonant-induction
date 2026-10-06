@@ -29,6 +29,7 @@ public final class RIFeatures {
         feature(b, "battery", "Battery (overlaps the Electrodynamics batteries)");
         feature(b, "transformer", "Transformer");
         feature(b, "multimeter", "Multimeter (overlaps the Electrodynamics multimeter)");
+        feature(b, "gears", "Gears, shafts and the Hand Crank");
         feature(b, "generators", "Solar Panel and Thermopile (overlap the Electrodynamics generators)");
         b.pop();
         SPEC = b.build();

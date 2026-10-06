@@ -10,5 +10,11 @@
       "resonantinduction:electricshock6",
       "resonantinduction:electricshock7"
     ]
+  },
+  "gear_crank": {
+    "subtitle": "subtitles.resonantinduction.gear_crank",
+    "sounds": [
+      "resonantinduction:gear_crank"
+    ]
   }
 }

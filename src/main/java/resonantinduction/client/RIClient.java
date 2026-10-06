@@ -27,6 +27,8 @@ public final class RIClient {
         event.registerBlockEntityRenderer(RIRegistries.CHARGER_BE.get(), ChargerRenderer::new);
         event.registerBlockEntityRenderer(RIRegistries.BATTERY_BE.get(), BatteryRenderer::new);
         event.registerBlockEntityRenderer(RIRegistries.MULTIMETER_BE.get(), MultimeterRenderer::new);
+        event.registerBlockEntityRenderer(RIRegistries.GEAR_BE.get(), MechanicalRenderer::new);
+        event.registerBlockEntityRenderer(RIRegistries.SHAFT_BE.get(), MechanicalRenderer::new);
     }
 
     @SubscribeEvent
@@ -38,6 +40,13 @@ public final class RIClient {
     public static void additionalModels(ModelEvent.RegisterAdditional event) {
         event.register(BatteryRenderer.CONNECTOR_IN);
         event.register(BatteryRenderer.CONNECTOR_OUT);
+        for (String tier : MechanicalRenderer.TIERS) {
+            event.register(MechanicalRenderer.model("gear_small_" + tier));
+            event.register(MechanicalRenderer.model("gear_large_" + tier));
+            if (!tier.equals("creative")) {
+                event.register(MechanicalRenderer.model("shaft_" + tier));
+            }
+        }
     }
 
     @SubscribeEvent
