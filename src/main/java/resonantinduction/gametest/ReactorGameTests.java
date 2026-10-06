@@ -185,4 +185,22 @@ public class ReactorGameTests {
             helper.assertTrue(out, "no plasma came out");
         });
     }
+
+    /** The usual build: a cell in the middle of a 3x3 pool, turbines over one row of the water. */
+    @GameTest(template = TEMPLATE, timeoutTicks = 600)
+    public static void reactorPoolTurnsTurbines(GameTestHelper helper) {
+        BlockPos pos = new BlockPos(4, 2, 3);
+        for (int x = -2; x <= 2; x++) {
+            for (int z = -2; z <= 2; z++) {
+                helper.setBlock(pos.offset(x, 0, z), Math.abs(x) == 2 || Math.abs(z) == 2 ? Blocks.GLASS : Blocks.WATER);
+            }
+        }
+        cell(helper, pos, true);
+        for (int x = -1; x <= 1; x++) {
+            helper.setBlock(pos.offset(x, 1, -1), RIRegistries.ELECTRIC_TURBINE.get());
+        }
+        ElectricTurbineBlockEntity turbine = helper.getBlockEntity(pos.offset(0, 1, -1));
+        helper.succeedWhen(() -> helper.assertTrue(turbine.produced() > 0, "turbine idle at " + temperature(helper, pos) + " K, water "
+                + temperature(helper, pos.north()) + " K"));
+    }
 }
