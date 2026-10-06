@@ -1,0 +1,79 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "rod": "resonantinduction:block/control_rod",
+    "particle": "resonantinduction:block/control_rod"
+  },
+  "elements": [
+    {
+      "from": [
+        4.8,
+        0,
+        4.8
+      ],
+      "to": [
+        11.2,
+        16,
+        11.2
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            4.8,
+            4.8,
+            11.2,
+            11.2
+          ],
+          "texture": "#rod",
+          "cullface": "down"
+        },
+        "up": {
+          "uv": [
+            4.8,
+            4.8,
+            11.2,
+            11.2
+          ],
+          "texture": "#rod",
+          "cullface": "up"
+        },
+        "north": {
+          "uv": [
+            4.8,
+            0,
+            11.2,
+            16
+          ],
+          "texture": "#rod"
+        },
+        "south": {
+          "uv": [
+            4.8,
+            0,
+            11.2,
+            16
+          ],
+          "texture": "#rod"
+        },
+        "west": {
+          "uv": [
+            4.8,
+            0,
+            11.2,
+            16
+          ],
+          "texture": "#rod"
+        },
+        "east": {
+          "uv": [
+            4.8,
+            0,
+            11.2,
+            16
+          ],
+          "texture": "#rod"
+        }
+      }
+    }
+  ]
+}

@@ -34,7 +34,7 @@ import java.util.List;
  * Base of the atomic machines: an inventory (slot 0 a battery that powers it), an FE buffer, tanks, a work timer and a GUI. Each
  * machine says how much it uses a tick (the original's joules, times the atomic energy scale) and lays out its screen.
  */
-public abstract class AtomicMachineBlockEntity extends BlockEntity implements MenuProvider {
+public abstract class AtomicMachineBlockEntity extends BlockEntity implements MenuProvider, MachineHost {
     public static final int BATTERY_SLOT = 0;
 
     protected final ItemStackHandler inventory;
@@ -58,6 +58,7 @@ public abstract class AtomicMachineBlockEntity extends BlockEntity implements Me
         };
     }
 
+    @Override
     public ItemStackHandler inventory() {
         return inventory;
     }
@@ -99,6 +100,21 @@ public abstract class AtomicMachineBlockEntity extends BlockEntity implements Me
 
     /** What the screen shows. */
     public abstract MachineLayout layout();
+
+    @Override
+    public MachineLayout layout(ContainerData data) {
+        return layout();
+    }
+
+    @Override
+    public ContainerData data() {
+        return data;
+    }
+
+    @Override
+    public BlockEntity self() {
+        return this;
+    }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, AtomicMachineBlockEntity be) {
         be.tickServer();

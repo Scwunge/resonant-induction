@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "atomic"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SSS",
+    "GCG",
+    "GSG"
+  ],
+  "key": {
+    "S": {
+      "tag": "resonantinduction:parts/metal_primary"
+    },
+    "G": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "C": {
+      "tag": "resonantinduction:parts/circuit_basic"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:thermometer",
+    "count": 1
+  }
+}

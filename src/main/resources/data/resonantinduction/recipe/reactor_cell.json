@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "atomic"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SCS",
+    "MEM",
+    "SCS"
+  ],
+  "key": {
+    "E": {
+      "item": "resonantinduction:empty_cell"
+    },
+    "C": {
+      "tag": "resonantinduction:parts/circuit_advanced"
+    },
+    "S": {
+      "tag": "resonantinduction:parts/plate_primary"
+    },
+    "M": {
+      "item": "resonantinduction:motor"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:reactor_cell",
+    "count": 1
+  }
+}

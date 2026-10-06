@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "part=single": {
+      "model": "resonantinduction:block/atomic/reactor_cell_single"
+    },
+    "part=top": {
+      "model": "resonantinduction:block/atomic/reactor_cell_top"
+    },
+    "part=middle": {
+      "model": "resonantinduction:block/atomic/reactor_cell_middle"
+    },
+    "part=bottom": {
+      "model": "resonantinduction:block/atomic/reactor_cell_bottom"
+    }
+  }
+}

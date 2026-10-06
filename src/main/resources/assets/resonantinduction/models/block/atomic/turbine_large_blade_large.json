@@ -1,0 +1,77 @@
+{
+ "textures": {
+  "tex": "resonantinduction:block/model/turbine_large",
+  "particle": "resonantinduction:block/model/turbine_large"
+ },
+ "elements": [
+  {
+   "name": "LargeBlade3",
+   "from": [
+    5.0,
+    3.0,
+    -12.0
+   ],
+   "to": [
+    11.0,
+    4.0,
+    28.0
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      0.0,
+      11.125,
+      5.0,
+      11.25
+     ],
+     "texture": "#tex"
+    },
+    "west": {
+     "uv": [
+      5.75,
+      11.125,
+      10.75,
+      11.25
+     ],
+     "texture": "#tex"
+    },
+    "up": {
+     "uv": [
+      5.75,
+      6.125,
+      5.0,
+      11.125
+     ],
+     "texture": "#tex"
+    },
+    "down": {
+     "uv": [
+      6.5,
+      6.125,
+      5.75,
+      11.125
+     ],
+     "texture": "#tex"
+    },
+    "north": {
+     "uv": [
+      5.75,
+      11.125,
+      5.0,
+      11.25
+     ],
+     "texture": "#tex"
+    },
+    "south": {
+     "uv": [
+      11.5,
+      11.125,
+      10.75,
+      11.25
+     ],
+     "texture": "#tex"
+    }
+   }
+  }
+ ]
+}

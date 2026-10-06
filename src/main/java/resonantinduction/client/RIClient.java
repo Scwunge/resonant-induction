@@ -51,6 +51,9 @@ public final class RIClient {
         event.registerBlockEntityRenderer(RIRegistries.CHEMICAL_EXTRACTOR_BE.get(), AtomicMachineRenderer::new);
         event.registerBlockEntityRenderer(RIRegistries.NUCLEAR_BOILER_BE.get(), AtomicMachineRenderer::new);
         event.registerBlockEntityRenderer(RIRegistries.CENTRIFUGE_BE.get(), AtomicMachineRenderer::new);
+        event.registerBlockEntityRenderer(RIRegistries.REACTOR_CELL_BE.get(), ReactorRenderers.Cell::new);
+        event.registerBlockEntityRenderer(RIRegistries.THERMOMETER_BE.get(), ReactorRenderers.Thermometer::new);
+        event.registerBlockEntityRenderer(RIRegistries.ELECTRIC_TURBINE_BE.get(), ReactorRenderers.Turbine::new);
     }
 
     /** Molten metal and dust mixture in tanks and pipes, tinted to their metal. */
@@ -127,6 +130,8 @@ public final class RIClient {
         event.register(AtomicMachineRenderer.CENTRIFUGE_ROTOR);
         event.register(AtomicMachineRenderer.BOILER_BAR_1);
         event.register(AtomicMachineRenderer.BOILER_BAR_2);
+        ReactorRenderers.SMALL.forEach(p -> event.register(p.model()));
+        ReactorRenderers.LARGE.forEach(p -> event.register(p.model()));
         event.register(FluidBlockRenderers.PUMP_INNER_FIN);
         for (String tier : MechanicalRenderer.TIERS) {
             event.register(MechanicalRenderer.model("gear_small_" + tier));
@@ -140,6 +145,7 @@ public final class RIClient {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(RIRegistries.TOXIC_WASTE.get(), net.minecraft.client.renderer.RenderType.translucent());
+        net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(RIRegistries.PLASMA_BLOCK.get(), net.minecraft.client.renderer.RenderType.translucent());
         net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(RIRegistries.TOXIC_WASTE_FLOWING.get(), net.minecraft.client.renderer.RenderType.translucent());
         // Battery items light up coils by charge (0-8), like the original item renderer.
         event.enqueueWork(() -> ItemProperties.register(RIRegistries.BATTERY_ITEM.get(), ResonantInduction.id("level"),

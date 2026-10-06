@@ -36,6 +36,16 @@ import resonantinduction.mechanical.process.MachineBlock;
 import resonantinduction.mechanical.process.MechanicalPistonBlockEntity;
 import resonantinduction.mechanical.process.MixerBlockEntity;
 import resonantinduction.archaic.CastingMoldBlock;
+import resonantinduction.atomic.fusion.PlasmaBlock;
+import resonantinduction.atomic.reactor.ControlRodBlock;
+import resonantinduction.atomic.reactor.ElectricTurbineBlock;
+import resonantinduction.atomic.reactor.ElectricTurbineBlockEntity;
+import resonantinduction.atomic.reactor.FunnelBlock;
+import resonantinduction.atomic.reactor.ReactorCellBlock;
+import resonantinduction.atomic.reactor.ReactorCellBlockEntity;
+import resonantinduction.atomic.reactor.SirenBlock;
+import resonantinduction.atomic.reactor.ThermometerBlock;
+import resonantinduction.atomic.reactor.ThermometerItem;
 import resonantinduction.atomic.CellFluidHandler;
 import resonantinduction.atomic.machine.AtomicMachineBlock;
 import resonantinduction.atomic.machine.AtomicMachineBlockEntity;
@@ -636,6 +646,49 @@ public final class RIRegistries {
         ITEMS.registerSimpleBlockItem(CENTRIFUGE);
     }
 
+    // ---- atomic: fission reactor, turbine, sensors, plasma ----
+    public static final DeferredHolder<SoundEvent, SoundEvent> REACTOR_CELL_SOUND = SOUNDS.register("reactorcell",
+            () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("reactorcell")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> ALARM_SOUND = SOUNDS.register("alarm",
+            () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("alarm")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> TURBINE_SOUND = SOUNDS.register("turbine",
+            () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("turbine")));
+
+    public static final DeferredBlock<ReactorCellBlock> REACTOR_CELL = BLOCKS.registerBlock("reactor_cell", ReactorCellBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(4f, 12f).sound(SoundType.METAL).noOcclusion().requiresCorrectToolForDrops());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ReactorCellBlockEntity>> REACTOR_CELL_BE = BLOCK_ENTITIES.register("reactor_cell",
+            () -> BlockEntityType.Builder.of(ReactorCellBlockEntity::new, REACTOR_CELL.get()).build(null));
+    public static final DeferredBlock<ControlRodBlock> CONTROL_ROD = BLOCKS.registerBlock("control_rod", ControlRodBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3f, 6f).sound(SoundType.METAL).noOcclusion().requiresCorrectToolForDrops());
+    public static final DeferredBlock<ThermometerBlock> THERMOMETER = BLOCKS.registerBlock("thermometer", ThermometerBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(2f, 6f).sound(SoundType.METAL).requiresCorrectToolForDrops());
+    public static final DeferredItem<ThermometerItem> THERMOMETER_ITEM = ITEMS.register("thermometer", () -> new ThermometerItem(THERMOMETER.get(), new Item.Properties()));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ThermometerBlock.Tile>> THERMOMETER_BE = BLOCK_ENTITIES.register("thermometer",
+            () -> BlockEntityType.Builder.of(ThermometerBlock.Tile::new, THERMOMETER.get()).build(null));
+    public static final DeferredBlock<SirenBlock> SIREN = BLOCKS.registerBlock("siren", SirenBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(2f, 6f).sound(SoundType.METAL).requiresCorrectToolForDrops());
+    public static final DeferredBlock<ElectricTurbineBlock> ELECTRIC_TURBINE = BLOCKS.registerBlock("electric_turbine", ElectricTurbineBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3f, 6f).sound(SoundType.METAL).noOcclusion().requiresCorrectToolForDrops());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ElectricTurbineBlockEntity>> ELECTRIC_TURBINE_BE = BLOCK_ENTITIES.register("electric_turbine",
+            () -> BlockEntityType.Builder.of(ElectricTurbineBlockEntity::new, ELECTRIC_TURBINE.get()).build(null));
+    public static final DeferredBlock<FunnelBlock> FUNNEL = BLOCKS.registerBlock("steam_funnel", FunnelBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(2f, 6f).sound(SoundType.METAL).requiresCorrectToolForDrops());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FunnelBlock.Tile>> FUNNEL_BE = BLOCK_ENTITIES.register("steam_funnel",
+            () -> BlockEntityType.Builder.of(FunnelBlock.Tile::new, FUNNEL.get()).build(null));
+    public static final DeferredBlock<PlasmaBlock> PLASMA_BLOCK = BLOCKS.registerBlock("plasma", PlasmaBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).strength(-1f, 3600000f).noLootTable().noOcclusion().noCollission().lightLevel(s -> 7)
+                    .replaceable().pushReaction(net.minecraft.world.level.material.PushReaction.DESTROY));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PlasmaBlock.Tile>> PLASMA_BE = BLOCK_ENTITIES.register("plasma",
+            () -> BlockEntityType.Builder.of(PlasmaBlock.Tile::new, PLASMA_BLOCK.get()).build(null));
+
+    static {
+        ITEMS.registerSimpleBlockItem(REACTOR_CELL);
+        ITEMS.registerSimpleBlockItem(CONTROL_ROD);
+        ITEMS.registerSimpleBlockItem(SIREN);
+        ITEMS.registerSimpleBlockItem(ELECTRIC_TURBINE);
+        ITEMS.registerSimpleBlockItem(FUNNEL);
+    }
+
     public static final DeferredItem<HandCrankItem> HAND_CRANK = ITEMS.registerItem("hand_crank", HandCrankItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredHolder<SoundEvent, SoundEvent> GEAR_CRANK = SOUNDS.register("gear_crank",
             () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("gear_crank")));
@@ -743,6 +796,10 @@ public final class RIRegistries {
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, CENTRIFUGE_BE.get(), AtomicMachineBlockEntity::getEnergyCapability);
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, CENTRIFUGE_BE.get(), CentrifugeBlockEntity::getFluidCapability);
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CENTRIFUGE_BE.get(), CentrifugeBlockEntity::getItemCapability);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, REACTOR_CELL_BE.get(), ReactorCellBlockEntity::getFluidCapability);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ELECTRIC_TURBINE_BE.get(), ElectricTurbineBlockEntity::getFluidCapability);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, FUNNEL_BE.get(), FunnelBlock.Tile::getFluidCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, REACTOR_CELL_BE.get(), (be, side) -> be.primary().inventory());
         event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new CellFluidHandler(stack), EMPTY_CELL.get(), WATER_CELL.get(), DEUTERIUM_CELL.get(), TRITIUM_CELL.get());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CASTING_MOLD_BE.get(), CastingMoldBlockEntity::getItemCapability);
     }

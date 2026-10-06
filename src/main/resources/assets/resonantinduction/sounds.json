@@ -43,5 +43,23 @@
     "sounds": [
       "resonantinduction:antimatter"
     ]
+  },
+  "reactorcell": {
+    "subtitle": "subtitles.resonantinduction.reactor_cell",
+    "sounds": [
+      "resonantinduction:reactorcell"
+    ]
+  },
+  "alarm": {
+    "subtitle": "subtitles.resonantinduction.alarm",
+    "sounds": [
+      "resonantinduction:alarm"
+    ]
+  },
+  "turbine": {
+    "subtitle": "subtitles.resonantinduction.turbine",
+    "sounds": [
+      "resonantinduction:turbine"
+    ]
   }
 }

@@ -24,17 +24,21 @@ public final class FluidRender {
         }
         IClientFluidTypeExtensions ext = IClientFluidTypeExtensions.of(fluid.getFluid());
         TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(ext.getStillTexture(fluid));
-        int color = ext.getTintColor(fluid);
-        int a = (color >>> 24) & 0xFF;
-        int r = (color >> 16) & 0xFF;
-        int g = (color >> 8) & 0xFF;
-        int b = color & 0xFF;
         int glow = fluid.getFluidType().getLightLevel(fluid);
         if (glow > 0) {
             int block = Math.max(light & 0xFFFF, glow << 4);
             light = (light & 0xFFFF0000) | block;
         }
-        VertexConsumer vc = buffers.getBuffer(RenderType.translucent());
+        spriteBox(pose, buffers.getBuffer(RenderType.translucent()), sprite, ext.getTintColor(fluid), x0, y0, z0, x1, y1, z1, light, skip);
+    }
+
+    /** A box textured with {@code sprite} (tinted ARGB {@code color}) into {@code vc}. */
+    public static void spriteBox(PoseStack pose, VertexConsumer vc, TextureAtlasSprite sprite, int color, float x0, float y0, float z0, float x1, float y1, float z1,
+                                 int light, int skip) {
+        int a = (color >>> 24) & 0xFF;
+        int r = (color >> 16) & 0xFF;
+        int g = (color >> 8) & 0xFF;
+        int b = color & 0xFF;
         Matrix4f m = pose.last().pose();
         float u0 = sprite.getU0();
         float v0 = sprite.getV0();

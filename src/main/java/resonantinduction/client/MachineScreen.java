@@ -30,7 +30,7 @@ public class MachineScreen extends AbstractContainerScreen<MachineMenu> {
     public MachineScreen(MachineMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
         this.imageWidth = 176;
-        this.imageHeight = menu.machine().layout().height();
+        this.imageHeight = menu.layout().height();
         this.inventoryLabelY = imageHeight - 94;
     }
 
@@ -57,7 +57,7 @@ public class MachineScreen extends AbstractContainerScreen<MachineMenu> {
         g.fill(x + 3, y + imageHeight - 3, x + imageWidth - 2, y + imageHeight - 1, 0xFF555555);
         g.fill(x + imageWidth - 3, y + 3, x + imageWidth - 1, y + imageHeight - 2, 0xFF555555);
 
-        MachineLayout layout = menu.machine().layout();
+        MachineLayout layout = menu.layout();
         for (MachineLayout.SlotAt s : layout.slots()) {
             bevel(g, x + s.x(), y + s.y(), 18, 18, DARK, LIGHT, SLOT);
             if (s.kind() == MachineLayout.Kind.BATTERY && !menu.getSlot(layout.slots().indexOf(s)).hasItem()) {
@@ -90,20 +90,29 @@ public class MachineScreen extends AbstractContainerScreen<MachineMenu> {
             }
         }
         // Work bar: an arrow-length bar filling left to right.
-        int bx = x + layout.barX();
-        int by = y + layout.barY();
-        bevel(g, bx, by, 24, 16, DARK, LIGHT, 0xFF8B8B8B);
-        if (menu.jobTime() > 0 && menu.timer() > 0) {
-            int w = (int) (22 * (1 - (double) menu.timer() / menu.jobTime()));
-            g.fill(bx + 1, by + 1, bx + 1 + w, by + 15, 0xFF4FB84F);
+        if (layout.barX() >= 0) {
+            drawBar(g, x, y, layout);
         }
         // Energy bar along the bottom of the machine area.
+        if (layout.energyX() < 0) {
+            return;
+        }
         int ex = x + layout.energyX();
         int ey = y + layout.energyY();
         bevel(g, ex, ey, 160, 8, DARK, LIGHT, 0xFF2A2A2A);
         if (menu.capacity() > 0) {
             int w = (int) (158 * Math.min(1, (double) menu.energy() / menu.capacity()));
             g.fill(ex + 1, ey + 1, ex + 1 + w, ey + 7, 0xFFD8B33A);
+        }
+    }
+
+    private void drawBar(GuiGraphics g, int x, int y, MachineLayout layout) {
+        int bx = x + layout.barX();
+        int by = y + layout.barY();
+        bevel(g, bx, by, 24, 16, DARK, LIGHT, 0xFF8B8B8B);
+        if (menu.jobTime() > 0 && menu.timer() > 0) {
+            int w = (int) (22 * (1 - (double) menu.timer() / menu.jobTime()));
+            g.fill(bx + 1, by + 1, bx + 1 + w, by + 15, 0xFF4FB84F);
         }
     }
 
@@ -124,7 +133,7 @@ public class MachineScreen extends AbstractContainerScreen<MachineMenu> {
     protected void renderLabels(GuiGraphics g, int mouseX, int mouseY) {
         g.drawString(font, title, (imageWidth - font.width(title)) / 2, 6, 0x404040, false);
         g.drawString(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, 0x404040, false);
-        MachineLayout layout = menu.machine().layout();
+        MachineLayout layout = menu.layout();
         for (MachineLayout.Line line : layout.lines()) {
             g.drawString(font, line.text(), line.x(), line.y(), 0x404040, false);
         }
@@ -133,7 +142,7 @@ public class MachineScreen extends AbstractContainerScreen<MachineMenu> {
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         super.render(g, mouseX, mouseY, partialTick);
-        MachineLayout layout = menu.machine().layout();
+        MachineLayout layout = menu.layout();
         List<FluidTank> tanks = menu.machine().tanks();
         for (MachineLayout.GaugeAt gauge : layout.gauges()) {
             if (isHovering(gauge.x(), gauge.y(), GAUGE_W, GAUGE_H, mouseX, mouseY)) {
@@ -144,9 +153,10 @@ public class MachineScreen extends AbstractContainerScreen<MachineMenu> {
                 g.renderComponentTooltip(font, tip, mouseX, mouseY);
             }
         }
-        if (isHovering(layout.energyX(), layout.energyY(), 160, 8, mouseX, mouseY)) {
+        if (layout.energyX() >= 0 && isHovering(layout.energyX(), layout.energyY(), 160, 8, mouseX, mouseY)
+                && menu.machine() instanceof resonantinduction.atomic.machine.AtomicMachineBlockEntity machine) {
             g.renderComponentTooltip(font, List.of(Component.translatable("tooltip.resonantinduction.energy", menu.energy(), menu.capacity()),
-                    Component.translatable("tooltip.resonantinduction.machine_use", menu.machine().usePerTick())), mouseX, mouseY);
+                    Component.translatable("tooltip.resonantinduction.machine_use", machine.usePerTick())), mouseX, mouseY);
         }
         renderTooltip(g, mouseX, mouseY);
     }

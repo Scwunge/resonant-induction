@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "resonantinduction:block/steam_funnel_top",
+    "bottom": "resonantinduction:block/steam_funnel_top",
+    "side": "resonantinduction:block/steam_funnel"
+  }
+}

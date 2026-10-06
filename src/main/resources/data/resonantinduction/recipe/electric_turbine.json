@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "atomic"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " B ",
+    "BMB",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "tag": "resonantinduction:parts/plate_secondary"
+    },
+    "M": {
+      "item": "resonantinduction:motor"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:electric_turbine",
+    "count": 1
+  }
+}

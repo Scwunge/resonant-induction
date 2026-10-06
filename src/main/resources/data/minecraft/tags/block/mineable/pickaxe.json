@@ -61,6 +61,12 @@
     "resonantinduction:uranium_ore",
     "resonantinduction:chemical_extractor",
     "resonantinduction:centrifuge",
-    "resonantinduction:nuclear_boiler"
+    "resonantinduction:nuclear_boiler",
+    "resonantinduction:reactor_cell",
+    "resonantinduction:control_rod",
+    "resonantinduction:thermometer",
+    "resonantinduction:siren",
+    "resonantinduction:electric_turbine",
+    "resonantinduction:steam_funnel"
   ]
 }

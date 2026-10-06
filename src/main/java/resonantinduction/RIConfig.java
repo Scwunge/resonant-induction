@@ -37,6 +37,8 @@ public final class RIConfig {
     public static final ModConfigSpec.DoubleValue GRATE_EFFECT;
     public static final ModConfigSpec.BooleanValue RADIOACTIVE_ORES;
     public static final ModConfigSpec.DoubleValue ATOMIC_ENERGY_SCALE;
+    public static final ModConfigSpec.BooleanValue REACTOR_MELTDOWNS;
+    public static final ModConfigSpec.DoubleValue STEAM_ENERGY;
     public static final ModConfigSpec.BooleanValue TOXIC_WASTE;
     public static final ModConfigSpec.BooleanValue ANTIMATTER_EXPLOSIONS;
     public static final ModConfigSpec.DoubleValue FULMINATION_MULTIPLIER;
@@ -134,6 +136,10 @@ public final class RIConfig {
                         "50000, the Centrifuge 500000). Lower it to make them cheaper to run.")
                 .defineInRange("energyScale", 1.0, 0.0001, 1000.0);
         TOXIC_WASTE = b.comment("Fission reactors make toxic waste.").define("toxicWaste", true);
+        REACTOR_MELTDOWNS = b.comment("A reactor cell kept at 2000 K or more for 50 seconds melts down (explodes, leaving radioactive waste).")
+                .define("reactorMeltdowns", true);
+        STEAM_ENERGY = b.comment("FE an Electric Turbine makes from each mB of steam (before turbineOutputMultiplier).")
+                .defineInRange("steamEnergy", 100.0, 0.0, 100000.0);
         ANTIMATTER_EXPLOSIONS = b.comment("Dropped antimatter explodes when it expires (the original's ban_antimatter_power flag, inverted).").define("antimatterExplosions", true);
         FULMINATION_MULTIPLIER = b.comment("Multiplier on the Fulmination Generator's output. Original: 1.").defineInRange("fulminationOutputMultiplier", 1.0, 0.0, 1000.0);
         TURBINE_MULTIPLIER = b.comment("Multiplier on the Electric Turbine's output. Original: 1.").defineInRange("turbineOutputMultiplier", 1.0, 0.0, 1000.0);

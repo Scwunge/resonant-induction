@@ -14,15 +14,15 @@ import resonantinduction.registry.RIRegistries;
 
 /** The atomic machines' container: the machine's slots as its layout places them, then the player's inventory. */
 public class MachineMenu extends AbstractContainerMenu {
-    private final AtomicMachineBlockEntity machine;
+    private final MachineHost machine;
     private final ContainerData data;
     private final int machineSlots;
 
-    public MachineMenu(int id, Inventory inventory, AtomicMachineBlockEntity machine, ContainerData data) {
+    public MachineMenu(int id, Inventory inventory, MachineHost machine, ContainerData data) {
         super(RIRegistries.ATOMIC_MACHINE_MENU.get(), id);
         this.machine = machine;
         this.data = data;
-        MachineLayout layout = machine.layout();
+        MachineLayout layout = machine.layout(data);
         for (MachineLayout.SlotAt s : layout.slots()) {
             addSlot(new SlotItemHandler(machine.inventory(), s.index(), s.x() + 1, s.y() + 1) {
                 @Override
@@ -46,12 +46,20 @@ public class MachineMenu extends AbstractContainerMenu {
 
     public static MachineMenu fromNetwork(int id, Inventory inventory, RegistryFriendlyByteBuf buf) {
         BlockPos pos = buf.readBlockPos();
-        AtomicMachineBlockEntity machine = (AtomicMachineBlockEntity) inventory.player.level().getBlockEntity(pos);
-        return new MachineMenu(id, inventory, machine, new SimpleContainerData(6));
+        MachineHost machine = (MachineHost) inventory.player.level().getBlockEntity(pos);
+        return new MachineMenu(id, inventory, machine, new SimpleContainerData(machine.data().getCount()));
     }
 
-    public AtomicMachineBlockEntity machine() {
+    public MachineHost machine() {
         return machine;
+    }
+
+    public ContainerData data() {
+        return data;
+    }
+
+    public MachineLayout layout() {
+        return machine.layout(data);
     }
 
     public long energy() {
@@ -104,6 +112,6 @@ public class MachineMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return !machine.isRemoved() && player.distanceToSqr(machine.getBlockPos().getCenter()) <= 64;
+        return !machine.self().isRemoved() && player.distanceToSqr(machine.self().getBlockPos().getCenter()) <= 64;
     }
 }

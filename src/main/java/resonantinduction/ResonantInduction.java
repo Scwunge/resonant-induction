@@ -27,6 +27,7 @@ public final class ResonantInduction {
         NeoForge.EVENT_BUS.addListener(TeslaGrid::onServerStopped);
         NeoForge.EVENT_BUS.addListener(QuantumTeleports::onServerTick);
         NeoForge.EVENT_BUS.addListener(QuantumTeleports::onServerStopped);
+        NeoForge.EVENT_BUS.addListener(resonantinduction.atomic.ThermalGrid::onLevelTick);
     }
 
     public static ResourceLocation id(String path) {
