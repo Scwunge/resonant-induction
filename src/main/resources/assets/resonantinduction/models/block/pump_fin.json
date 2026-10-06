@@ -1,7 +1,7 @@
 {
   "textures": {
-    "tex": "resonantinduction:model/pump",
-    "particle": "resonantinduction:model/pump"
+    "tex": "resonantinduction:block/model/pump",
+    "particle": "resonantinduction:block/model/pump"
   },
   "elements": [
     {

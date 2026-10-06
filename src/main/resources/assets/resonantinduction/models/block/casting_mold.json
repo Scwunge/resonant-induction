@@ -1,6 +1,6 @@
 {
  "textures": {
-  "tex": "resonantinduction:model/casting_mold",
+  "tex": "resonantinduction:block/model/casting_mold",
   "particle": "resonantinduction:block/material_metal_side"
  },
  "elements": [

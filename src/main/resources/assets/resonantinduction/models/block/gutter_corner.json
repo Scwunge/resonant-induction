@@ -1,6 +1,6 @@
 {
   "textures": {
-    "tex": "resonantinduction:model/gutter",
+    "tex": "resonantinduction:block/model/gutter",
     "particle": "resonantinduction:block/material_wood_surface"
   },
   "elements": [

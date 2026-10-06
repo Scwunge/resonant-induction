@@ -1,7 +1,7 @@
 {
   "textures": {
-    "tex": "resonantinduction:model/pipe",
-    "particle": "resonantinduction:model/pipe"
+    "tex": "resonantinduction:block/model/pipe",
+    "particle": "resonantinduction:block/model/pipe"
   },
   "elements": [
     {
