@@ -30,6 +30,11 @@ import resonantinduction.laser.MiningLaserItem;
 import resonantinduction.battery.BatteryBlock;
 import resonantinduction.battery.BatteryBlockEntity;
 import resonantinduction.battery.BatteryItem;
+import resonantinduction.multimeter.MultimeterBlock;
+import resonantinduction.multimeter.MultimeterBlockEntity;
+import resonantinduction.multimeter.MultimeterMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import resonantinduction.generator.GeneratorBlock;
 import resonantinduction.generator.GeneratorBlockEntity;
 import resonantinduction.generator.SolarPanelBlockEntity;
@@ -67,6 +72,7 @@ public final class RIRegistries {
     public static final DeferredRegister.DataComponents COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, ResonantInduction.MODID);
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, ResonantInduction.MODID);
     public static final DeferredRegister<MapCodec<? extends ICondition>> CONDITIONS = DeferredRegister.create(NeoForgeRegistries.Keys.CONDITION_CODECS, ResonantInduction.MODID);
+    public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, ResonantInduction.MODID);
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ResonantInduction.MODID);
 
     public static final ResourceKey<DamageType> ELECTROCUTION = ResourceKey.create(Registries.DAMAGE_TYPE, ResonantInduction.id("electrocution"));
@@ -150,6 +156,14 @@ public final class RIRegistries {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ThermopileBlockEntity>> THERMOPILE_BE = BLOCK_ENTITIES.register("thermopile",
             () -> BlockEntityType.Builder.of(ThermopileBlockEntity::new, THERMOPILE.get()).build(null));
 
+    public static final DeferredBlock<MultimeterBlock> MULTIMETER = BLOCKS.registerBlock("multimeter", MultimeterBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(1.5f, 6f).sound(SoundType.METAL).noOcclusion());
+    public static final DeferredItem<BlockItem> MULTIMETER_ITEM = ITEMS.registerSimpleBlockItem(MULTIMETER);
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MultimeterBlockEntity>> MULTIMETER_BE = BLOCK_ENTITIES.register("multimeter",
+            () -> BlockEntityType.Builder.of(MultimeterBlockEntity::new, MULTIMETER.get()).build(null));
+    public static final DeferredHolder<MenuType<?>, MenuType<MultimeterMenu>> MULTIMETER_MENU = MENUS.register("multimeter",
+            () -> IMenuTypeExtension.create(MultimeterMenu::fromNetwork));
+
     /** Stored FE of energy items. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ENERGY = COMPONENTS.registerComponentType("energy",
             b -> b.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT));
@@ -196,6 +210,7 @@ public final class RIRegistries {
         SOUNDS.register(modBus);
         TABS.register(modBus);
         CONDITIONS.register(modBus);
+        MENUS.register(modBus);
     }
 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {

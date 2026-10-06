@@ -6,6 +6,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraft.client.renderer.item.ItemProperties;
 import resonantinduction.ResonantInduction;
@@ -25,6 +26,12 @@ public final class RIClient {
         event.registerBlockEntityRenderer(RIRegistries.QUANTUM_GATE_BE.get(), QuantumGateRenderer::new);
         event.registerBlockEntityRenderer(RIRegistries.CHARGER_BE.get(), ChargerRenderer::new);
         event.registerBlockEntityRenderer(RIRegistries.BATTERY_BE.get(), BatteryRenderer::new);
+        event.registerBlockEntityRenderer(RIRegistries.MULTIMETER_BE.get(), MultimeterRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void menuScreens(RegisterMenuScreensEvent event) {
+        event.register(RIRegistries.MULTIMETER_MENU.get(), MultimeterScreen::new);
     }
 
     @SubscribeEvent

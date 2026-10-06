@@ -22,6 +22,8 @@ public final class RINetwork {
         // The handler body only runs on the client, so ClientPayloads never loads on a dedicated server.
         event.registrar("1").playToClient(ZapPayload.TYPE, ZapPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> ClientPayloads.zap(payload)));
+        event.registrar("1").playToServer(MultimeterSettingsPayload.TYPE, MultimeterSettingsPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> MultimeterSettingsPayload.handle(payload, context)));
     }
 
     public static void sendZap(ServerLevel level, Vec3 from, Vec3 to, DyeColor color) {
