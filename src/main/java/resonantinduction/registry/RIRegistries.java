@@ -31,6 +31,10 @@ import resonantinduction.battery.BatteryBlock;
 import resonantinduction.battery.BatteryBlockEntity;
 import resonantinduction.battery.BatteryItem;
 import resonantinduction.mechanical.gear.GearBlock;
+import resonantinduction.mechanical.motor.MotorBlock;
+import resonantinduction.mechanical.motor.MotorBlockEntity;
+import resonantinduction.mechanical.turbine.TurbineBlock;
+import resonantinduction.mechanical.turbine.TurbineBlockEntity;
 import resonantinduction.mechanical.gear.GearBlockEntity;
 import resonantinduction.mechanical.gear.HandCrankItem;
 import resonantinduction.mechanical.shaft.ShaftBlock;
@@ -203,6 +207,28 @@ public final class RIRegistries {
             () -> BlockEntityType.Builder.of(GearBlockEntity::new, GEARS.stream().map(DeferredBlock::get).toArray(net.minecraft.world.level.block.Block[]::new)).build(null));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ShaftBlockEntity>> SHAFT_BE = BLOCK_ENTITIES.register("shaft",
             () -> BlockEntityType.Builder.of(ShaftBlockEntity::new, SHAFTS.stream().map(DeferredBlock::get).toArray(net.minecraft.world.level.block.Block[]::new)).build(null));
+    public static final DeferredBlock<MotorBlock> MOTOR = BLOCKS.registerBlock("motor", MotorBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(3f, 6f).sound(SoundType.METAL).noOcclusion().requiresCorrectToolForDrops());
+    public static final DeferredItem<BlockItem> MOTOR_ITEM = ITEMS.registerSimpleBlockItem(MOTOR);
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MotorBlockEntity>> MOTOR_BE = BLOCK_ENTITIES.register("motor",
+            () -> BlockEntityType.Builder.of(MotorBlockEntity::new, MOTOR.get()).build(null));
+    public static final List<DeferredBlock<TurbineBlock>> TURBINES = new ArrayList<>();
+
+    static {
+        for (TurbineBlock.Kind kind : TurbineBlock.Kind.values()) {
+            for (int t = 0; t < 3; t++) {
+                int tier = t;
+                DeferredBlock<TurbineBlock> turbine = BLOCKS.registerBlock(kind.name().toLowerCase() + "_turbine_" + MECH_TIERS[t], p -> new TurbineBlock(kind, tier, p),
+                        BlockBehaviour.Properties.of().mapColor(tier == 0 ? MapColor.WOOD : tier == 1 ? MapColor.STONE : MapColor.METAL)
+                                .strength(2f, 4f).sound(tier == 0 ? SoundType.WOOD : tier == 1 ? SoundType.STONE : SoundType.METAL).noOcclusion());
+                TURBINES.add(turbine);
+                ITEMS.registerSimpleBlockItem(turbine);
+            }
+        }
+    }
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TurbineBlockEntity>> TURBINE_BE = BLOCK_ENTITIES.register("turbine",
+            () -> BlockEntityType.Builder.of(TurbineBlockEntity::new, TURBINES.stream().map(DeferredBlock::get).toArray(net.minecraft.world.level.block.Block[]::new)).build(null));
     public static final DeferredItem<HandCrankItem> HAND_CRANK = ITEMS.registerItem("hand_crank", HandCrankItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredHolder<SoundEvent, SoundEvent> GEAR_CRANK = SOUNDS.register("gear_crank",
             () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("gear_crank")));
@@ -263,6 +289,7 @@ public final class RIRegistries {
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, WIRE_BE.get(), WireBlockEntity::getEnergyCapability);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, BATTERY_BE.get(), BatteryBlockEntity::getEnergyCapability);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, TRANSFORMER_BE.get(), TransformerBlockEntity::getEnergyCapability);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, MOTOR_BE.get(), MotorBlockEntity::getEnergyCapability);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, SOLAR_PANEL_BE.get(), GeneratorBlockEntity::getEnergyCapability);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, THERMOPILE_BE.get(), GeneratorBlockEntity::getEnergyCapability);
         event.registerItem(Capabilities.EnergyStorage.ITEM, (stack, ctx) -> {

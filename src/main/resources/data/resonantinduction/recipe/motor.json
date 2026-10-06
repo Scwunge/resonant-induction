@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "motor"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "SRS",
+    "SMS",
+    "SWS"
+  ],
+  "key": {
+    "W": {
+      "tag": "resonantinduction:wires"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    },
+    "M": {
+      "tag": "c:storage_blocks/iron"
+    },
+    "S": [
+      {
+        "tag": "c:ingots/steel"
+      },
+      {
+        "tag": "c:ingots/iron"
+      }
+    ]
+  },
+  "result": {
+    "id": "resonantinduction:motor",
+    "count": 1
+  }
+}

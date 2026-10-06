@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "turbines"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "CWC",
+    "WGW",
+    "CWC"
+  ],
+  "key": {
+    "G": {
+      "item": "resonantinduction:wind_turbine_stone"
+    },
+    "C": {
+      "tag": "c:ingots/iron"
+    },
+    "W": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:wind_turbine_metal",
+    "count": 1
+  }
+}

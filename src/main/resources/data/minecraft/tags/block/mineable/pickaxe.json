@@ -13,6 +13,11 @@
     "resonantinduction:gear_metal",
     "resonantinduction:shaft_stone",
     "resonantinduction:shaft_metal",
-    "resonantinduction:gear_creative"
+    "resonantinduction:gear_creative",
+    "resonantinduction:motor",
+    "resonantinduction:wind_turbine_stone",
+    "resonantinduction:wind_turbine_metal",
+    "resonantinduction:water_turbine_stone",
+    "resonantinduction:water_turbine_metal"
   ]
 }

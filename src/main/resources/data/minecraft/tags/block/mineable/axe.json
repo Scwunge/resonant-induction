@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "resonantinduction:gear_wood",
-    "resonantinduction:shaft_wood"
+    "resonantinduction:shaft_wood",
+    "resonantinduction:wind_turbine_wood",
+    "resonantinduction:water_turbine_wood"
   ]
 }

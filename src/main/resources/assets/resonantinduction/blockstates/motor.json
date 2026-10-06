@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "resonantinduction:block/motor",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "resonantinduction:block/motor",
+      "x": 90
+    },
+    "facing=north": {
+      "model": "resonantinduction:block/motor"
+    },
+    "facing=south": {
+      "model": "resonantinduction:block/motor",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "resonantinduction:block/motor",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "resonantinduction:block/motor",
+      "y": 270
+    }
+  }
+}

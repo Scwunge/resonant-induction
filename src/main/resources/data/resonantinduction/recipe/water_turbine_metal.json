@@ -1,0 +1,35 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "turbines"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "SWS",
+    "WGW",
+    "SWS"
+  ],
+  "key": {
+    "G": {
+      "item": "resonantinduction:water_turbine_stone"
+    },
+    "W": [
+      {
+        "tag": "c:ingots/steel"
+      },
+      {
+        "tag": "c:ingots/iron"
+      }
+    ],
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:water_turbine_metal",
+    "count": 1
+  }
+}

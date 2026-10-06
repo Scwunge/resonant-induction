@@ -23,6 +23,9 @@ public final class RIConfig {
     public static final ModConfigSpec.IntValue LEVITATOR_MAX_PATH;
 
     public static final ModConfigSpec.IntValue SOLAR_OUTPUT;
+    public static final ModConfigSpec.DoubleValue WIND_POWER_RATIO;
+    public static final ModConfigSpec.DoubleValue WATER_POWER_RATIO;
+    public static final ModConfigSpec.DoubleValue MECHANICAL_FE_RATIO;
 
     public static final ModConfigSpec.IntValue BATTERY_TIER1;
     public static final ModConfigSpec.IntValue BATTERY_TIER2;
@@ -77,6 +80,10 @@ public final class RIConfig {
         b.push("generators");
         SOLAR_OUTPUT = b.comment("Solar Panel output in FE per tick in clear daylight. Original: 50.")
                 .defineInRange("solarOutput", 50, 0, 100000);
+        WIND_POWER_RATIO = b.comment("Multiplier on wind turbine power. Original: 1.").defineInRange("windPowerRatio", 1.0, 0.0, 100.0);
+        WATER_POWER_RATIO = b.comment("Multiplier on water turbine power. Original: 1.").defineInRange("waterPowerRatio", 1.0, 0.0, 100.0);
+        MECHANICAL_FE_RATIO = b.comment("FE per joule of rotational energy in the Electric Motor (both ways). The original used one to one.")
+                .defineInRange("feMechanicalRatio", 1.0, 0.001, 1000.0);
         b.pop();
 
         b.push("battery");

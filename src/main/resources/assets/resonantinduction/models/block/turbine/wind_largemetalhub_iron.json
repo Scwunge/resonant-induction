@@ -1,0 +1,18 @@
+{
+  "loader": "neoforge:obj",
+  "model": "resonantinduction:models/block/turbine/windTurbines.obj",
+  "flip_v": true,
+  "visibility": {
+    "LargeBlade": false,
+    "LargeBladeArm": false,
+    "LargeHub": false,
+    "LargeMetalBlade": false,
+    "LargeMetalHub": true,
+    "SmallBlade": false,
+    "SmallHub": false
+  },
+  "textures": {
+    "tex": "minecraft:block/iron_block",
+    "particle": "minecraft:block/iron_block"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "loader": "neoforge:obj",
+  "model": "resonantinduction:models/block/turbine/waterTurbines.obj",
+  "flip_v": true,
+  "visibility": {
+    "bigwheel_endknot": false,
+    "bigwheel_scoops": false,
+    "bigwheel_supportercircle": false,
+    "bigwheel_supporters": true,
+    "horizontal_centre_shaft": false,
+    "small_turbine_blades": false,
+    "small_waterwheel": false,
+    "small_waterwheel_endknot": false,
+    "small_waterwheel_supporters": false,
+    "turbine_blades": false,
+    "turbine_centre": false
+  },
+  "textures": {
+    "tex": "minecraft:block/spruce_planks",
+    "particle": "minecraft:block/spruce_planks"
+  }
+}

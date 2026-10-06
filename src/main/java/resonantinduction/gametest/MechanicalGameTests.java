@@ -53,6 +53,37 @@ public class MechanicalGameTests {
         helper.succeedWhen(() -> helper.assertTrue(Math.abs(speed(helper, top)) > 1, "gear at the top of the shaft turns at " + speed(helper, top)));
     }
 
+    @GameTest(template = TEMPLATE, timeoutTicks = 100)
+    public static void motorTurnsPowerIntoRotation(GameTestHelper helper) {
+        BlockPos pos = new BlockPos(3, 1, 3);
+        helper.setBlock(pos, RIRegistries.MOTOR.get().defaultBlockState().setValue(resonantinduction.mechanical.motor.MotorBlock.FACING, Direction.EAST));
+        gear(helper, pos.east(), 2, Direction.WEST);
+        var in = helper.getLevel().getCapability(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.BLOCK, helper.absolutePos(pos), Direction.NORTH);
+        helper.assertTrue(in != null && in.receiveEnergy(500_000, false) == 500_000, "motor did not take power from its side");
+        helper.assertTrue(helper.getLevel().getCapability(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.BLOCK, helper.absolutePos(pos), Direction.EAST) == null,
+                "motor should not take power through its shaft faces");
+        helper.succeedWhen(() -> helper.assertTrue(Math.abs(speed(helper, pos.east())) > 0.1, "gear on the motor turns at " + speed(helper, pos.east())));
+    }
+
+    @GameTest(template = TEMPLATE, timeoutTicks = 100)
+    public static void generatorTurnsRotationIntoPower(GameTestHelper helper) {
+        BlockPos pos = new BlockPos(3, 1, 3);
+        helper.setBlock(pos, RIRegistries.MOTOR.get().defaultBlockState().setValue(resonantinduction.mechanical.motor.MotorBlock.FACING, Direction.EAST));
+        ((resonantinduction.mechanical.motor.MotorBlockEntity) helper.getBlockEntity(pos)).toggleMode();
+        gear(helper, pos.east(), GearBlock.CREATIVE, Direction.WEST);
+        helper.setBlock(pos.north(), RIRegistries.TESLA.get());
+        resonantinduction.tesla.TeslaBlockEntity sink = helper.getBlockEntity(pos.north());
+        helper.succeedWhen(() -> helper.assertTrue(sink.getCharge() > 0, "generator made no power from a creative gear"));
+    }
+
+    @GameTest(template = TEMPLATE, timeoutTicks = 120)
+    public static void waterFallingThroughATurbineTurnsIt(GameTestHelper helper) {
+        BlockPos pos = new BlockPos(3, 3, 3);
+        helper.setBlock(pos, RIRegistries.TURBINES.get(3).get().defaultBlockState().setValue(resonantinduction.mechanical.turbine.TurbineBlock.FACING, Direction.UP));
+        helper.setBlock(pos.above(), net.minecraft.world.level.block.Blocks.WATER);
+        helper.succeedWhen(() -> helper.assertTrue(Math.abs(speed(helper, pos)) > 0.1, "water turbine turns at " + speed(helper, pos)));
+    }
+
     /** A cranked gear spins up while cranked, then coasts down (the original's slow exponential losses). */
     @GameTest(template = TEMPLATE, timeoutTicks = 200)
     public static void handCrankTurnsAGearThatCoastsDown(GameTestHelper helper) {
