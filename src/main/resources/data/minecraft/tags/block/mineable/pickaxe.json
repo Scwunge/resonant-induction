@@ -72,6 +72,7 @@
     "resonantinduction:electromagnet_glass",
     "resonantinduction:particle_accelerator",
     "resonantinduction:fulmination_generator",
-    "resonantinduction:quantum_assembler"
+    "resonantinduction:quantum_assembler",
+    "resonantinduction:plasma_heater"
   ]
 }

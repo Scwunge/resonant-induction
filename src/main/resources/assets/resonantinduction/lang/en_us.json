@@ -398,5 +398,9 @@
   "jei.resonantinduction.particle_accelerator": "Fires the item in its top slot as a particle out of its back, while it has a redstone signal and power. The particle needs a tunnel one block wide and high, with electromagnets above, below and on both sides; it turns where a side wall ends, but not within two seconds of its last turn. At full speed it becomes antimatter (harder blocks make more); 125 mg fill an empty cell. Two particles meeting at over half speed (fire one each way round a ring) may leave dark matter; a slow particle leaving the tunnel explodes.",
   "jei.resonantinduction.fulmination_generator": "Catches the energy of antimatter going off nearby, if it can see the blast, and sends it out of every side.",
   "jei.resonantinduction.quantum_assembler": "Copies the item in its middle slot, using a dark matter from each of the six slots round it every two minutes. It needs a full buffer of energy every tick: feed it from Fulmination Generators.",
-  "jei.resonantinduction.dark_matter": "Sometimes left when two fast particles meet in a Particle Accelerator. Used by the Quantum Assembler."
+  "jei.resonantinduction.dark_matter": "Sometimes left when two fast particles meet in a Particle Accelerator. Used by the Quantum Assembler.",
+  "block.resonantinduction.plasma_heater": "Plasma Heater",
+  "tooltip.resonantinduction.energy_short": "Energy: %s",
+  "tooltip.resonantinduction.fluid_short": "%s: %s mB",
+  "jei.resonantinduction.plasma_heater": "Heats deuterium and tritium into plasma for fusion power, using a great deal of energy. Fill it with cells, buckets or pipes; the plasma must be pumped out into a reactor cell, which lets it out into a chamber walled with electromagnets."
 }

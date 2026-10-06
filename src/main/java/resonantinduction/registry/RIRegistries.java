@@ -38,6 +38,8 @@ import resonantinduction.mechanical.process.MixerBlockEntity;
 import resonantinduction.archaic.CastingMoldBlock;
 import resonantinduction.atomic.fusion.ElectromagnetBlock;
 import resonantinduction.atomic.fusion.PlasmaBlock;
+import resonantinduction.atomic.fusion.PlasmaHeaterBlock;
+import resonantinduction.atomic.fusion.PlasmaHeaterBlockEntity;
 import resonantinduction.atomic.particle.AcceleratorBlock;
 import resonantinduction.atomic.particle.AcceleratorBlockEntity;
 import resonantinduction.atomic.particle.FulminationBlock;
@@ -698,7 +700,7 @@ public final class RIRegistries {
         ITEMS.registerSimpleBlockItem(FUNNEL);
     }
 
-    // ---- atomic: electromagnets, particle accelerator, fulmination generator, quantum assembler ----
+    // ---- atomic: electromagnets, particle accelerator, fulmination generator, quantum assembler, plasma heater ----
     public static final DeferredHolder<SoundEvent, SoundEvent> ACCELERATOR_SOUND = SOUNDS.register("accelerator",
             () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("accelerator")));
     public static final DeferredHolder<SoundEvent, SoundEvent> ASSEMBLER_SOUND = SOUNDS.register("assembler",
@@ -726,7 +728,12 @@ public final class RIRegistries {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<QuantumAssemblerBlockEntity>> QUANTUM_ASSEMBLER_BE = BLOCK_ENTITIES.register("quantum_assembler",
             () -> BlockEntityType.Builder.of(QuantumAssemblerBlockEntity::new, QUANTUM_ASSEMBLER.get()).build(null));
 
+    public static final DeferredBlock<PlasmaHeaterBlock> PLASMA_HEATER = BLOCKS.registerBlock("plasma_heater", PlasmaHeaterBlock::new, atomicMachine());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PlasmaHeaterBlockEntity>> PLASMA_HEATER_BE = BLOCK_ENTITIES.register("plasma_heater",
+            () -> BlockEntityType.Builder.of(PlasmaHeaterBlockEntity::new, PLASMA_HEATER.get()).build(null));
+
     static {
+        ITEMS.registerSimpleBlockItem(PLASMA_HEATER);
         ITEMS.registerSimpleBlockItem(ELECTROMAGNET);
         ITEMS.registerSimpleBlockItem(ELECTROMAGNET_GLASS);
         ITEMS.registerSimpleBlockItem(ACCELERATOR);
@@ -845,6 +852,8 @@ public final class RIRegistries {
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, FULMINATION_BE.get(), FulminationBlock.Tile::getEnergyCapability);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, QUANTUM_ASSEMBLER_BE.get(), AtomicMachineBlockEntity::getEnergyCapability);
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, QUANTUM_ASSEMBLER_BE.get(), QuantumAssemblerBlockEntity::getItemCapability);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, PLASMA_HEATER_BE.get(), PlasmaHeaterBlockEntity::getEnergyCapability);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, PLASMA_HEATER_BE.get(), PlasmaHeaterBlockEntity::getFluidCapability);
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, CENTRIFUGE_BE.get(), CentrifugeBlockEntity::getFluidCapability);
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CENTRIFUGE_BE.get(), CentrifugeBlockEntity::getItemCapability);
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, REACTOR_CELL_BE.get(), ReactorCellBlockEntity::getFluidCapability);

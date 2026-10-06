@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "atomic"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CPC",
+    "PFP",
+    "CPC"
+  ],
+  "key": {
+    "P": {
+      "tag": "resonantinduction:parts/plate_primary"
+    },
+    "F": {
+      "item": "resonantinduction:reactor_cell"
+    },
+    "C": {
+      "tag": "resonantinduction:parts/circuit_elite"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:plasma_heater",
+    "count": 1
+  }
+}

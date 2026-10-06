@@ -51,6 +51,7 @@ public final class RIConfig {
     public static final ModConfigSpec.IntValue DEUTERIUM_PER_TRITIUM;
     public static final ModConfigSpec.DoubleValue DARK_MATTER_CHANCE;
     public static final ModConfigSpec.IntValue QUANTUM_ASSEMBLER_MODE;
+    public static final ModConfigSpec.IntValue PLASMA_HEAT_AMOUNT;
     public static final ModConfigSpec.ConfigValue<java.util.List<? extends String>> QUANTUM_ASSEMBLER_RECIPES;
     public static final ModConfigSpec.DoubleValue GRATE_DRAIN_SPEED;
 
@@ -156,6 +157,8 @@ public final class RIConfig {
         DEUTERIUM_PER_TRITIUM = b.comment("mB of deuterium per mB of tritium extracted. Original: 4.").defineInRange("deuteriumPerTritium", 4, 1, 1000);
         DARK_MATTER_CHANCE = b.comment("Chance a particle collision makes dark matter. Original: 0.2.").defineInRange("darkMatterSpawnChance", 0.2, 0.0, 1.0);
         QUANTUM_ASSEMBLER_MODE = b.comment("What the Quantum Assembler can copy: 0 nothing, 1 items, 2 items and blocks. Original: 1.").defineInRange("quantumAssemblerGenerateMode", 1, 0, 2);
+        PLASMA_HEAT_AMOUNT = b.comment("mB each of deuterium and tritium the Plasma Heater turns into plasma a tick. Original: 100.")
+                .defineInRange("plasmaHeatAmount", 100, 1, 10000);
         QUANTUM_ASSEMBLER_RECIPES = b.comment("More items the Quantum Assembler can copy whatever the mode, by id (e.g. \"minecraft:diamond_block\").")
                 .defineListAllowEmpty("quantumAssemblerRecipes", java.util.List.of(), () -> "", o -> o instanceof String);
         b.pop();

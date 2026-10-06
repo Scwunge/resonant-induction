@@ -7,12 +7,14 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import resonantinduction.ResonantInduction;
 import resonantinduction.atomic.ThermalGrid;
+import resonantinduction.atomic.fusion.PlasmaHeaterBlockEntity;
 import resonantinduction.atomic.reactor.ElectricTurbineBlockEntity;
 import resonantinduction.atomic.reactor.ReactorCellBlockEntity;
 import resonantinduction.atomic.reactor.ThermometerBlock;
@@ -146,6 +148,41 @@ public class ReactorGameTests {
             helper.assertTrue(spread, "plasma did not spread");
             iron.forEach(p -> helper.assertBlockPresent(Blocks.IRON_BLOCK, p));
             helper.assertTrue(temperature(helper, pos) > 10000, "plasma is cold: " + temperature(helper, pos));
+        });
+    }
+
+    @GameTest(template = TEMPLATE, timeoutTicks = 40)
+    public static void plasmaHeaterMakesPlasma(GameTestHelper helper) {
+        BlockPos pos = new BlockPos(3, 2, 3);
+        helper.setBlock(pos, RIRegistries.PLASMA_HEATER.get());
+        PlasmaHeaterBlockEntity heater = helper.getBlockEntity(pos);
+        IFluidHandler fluids = helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(pos), Direction.UP);
+        IEnergyStorage energy = helper.getLevel().getCapability(Capabilities.EnergyStorage.BLOCK, helper.absolutePos(pos), Direction.UP);
+        helper.assertTrue(fluids.fill(new FluidStack(RIRegistries.DEUTERIUM.get(), 1000), IFluidHandler.FluidAction.EXECUTE) == 1000, "took no deuterium");
+        helper.assertTrue(energy.receiveEnergy(Integer.MAX_VALUE, true) == 0, "takes power with one gas");
+        helper.assertTrue(fluids.fill(new FluidStack(RIRegistries.TRITIUM.get(), 1000), IFluidHandler.FluidAction.EXECUTE) == 1000, "took no tritium");
+        helper.onEachTick(() -> energy.receiveEnergy(Integer.MAX_VALUE, false));
+        helper.succeedWhen(() -> {
+            helper.assertTrue(heater.plasma().getFluidAmount() >= 300, "only " + heater.plasma().getFluidAmount() + " mB of plasma");
+            helper.assertTrue(heater.deuterium().getFluidAmount() == 1000 - heater.plasma().getFluidAmount(), "deuterium not used");
+            FluidStack out = fluids.drain(100, IFluidHandler.FluidAction.SIMULATE);
+            helper.assertTrue(out.getFluid().isSame(RIRegistries.PLASMA.get()) && out.getAmount() == 100, "can't draw plasma out");
+        });
+    }
+
+    /** Plasma pumped into a reactor cell escapes, a bucket at a time, two blocks out. */
+    @GameTest(template = TEMPLATE, timeoutTicks = 60)
+    public static void reactorCellLetsPlasmaOut(GameTestHelper helper) {
+        BlockPos pos = new BlockPos(5, 2, 3);
+        cell(helper, pos, false);
+        IFluidHandler in = helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(pos), Direction.UP);
+        helper.assertTrue(in.fill(new FluidStack(RIRegistries.PLASMA.get(), 1000), IFluidHandler.FluidAction.EXECUTE) == 1000, "cell took no plasma");
+        helper.succeedWhen(() -> {
+            boolean out = false;
+            for (Direction d : Direction.Plane.HORIZONTAL) {
+                out |= helper.getBlockState(pos.relative(d, 2)).is(RIRegistries.PLASMA_BLOCK.get());
+            }
+            helper.assertTrue(out, "no plasma came out");
         });
     }
 }

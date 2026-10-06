@@ -16,6 +16,9 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import java.util.function.BiFunction;
 import net.neoforged.neoforge.fluids.FluidStack;
 import resonantinduction.resource.MaterialFluid;
 import resonantinduction.battery.BatteryItem;
@@ -58,6 +61,7 @@ public final class RIClient {
         event.registerBlockEntityRenderer(RIRegistries.THERMOMETER_BE.get(), ReactorRenderers.Thermometer::new);
         event.registerBlockEntityRenderer(RIRegistries.ELECTRIC_TURBINE_BE.get(), ReactorRenderers.Turbine::new);
         event.registerBlockEntityRenderer(RIRegistries.QUANTUM_ASSEMBLER_BE.get(), QuantumAssemblerRenderer::new);
+        event.registerBlockEntityRenderer(RIRegistries.PLASMA_HEATER_BE.get(), PlasmaHeaterRenderer::new);
         event.registerEntityRenderer(RIRegistries.PARTICLE.get(), ParticleRenderer::new);
     }
 
@@ -72,18 +76,24 @@ public final class RIClient {
         event.registerFluidType(plainFluid("tritium", 0xFFFFFFFF), RIRegistries.TRITIUM_TYPE.get());
         event.registerFluidType(plainFluid("plasma", 0xFFFFFFFF), RIRegistries.PLASMA_TYPE.get());
         event.registerFluidType(plainFluid("toxic_waste", 0xFFFFFFFF), RIRegistries.TOXIC_WASTE_TYPE.get());
-        event.registerItem(new IClientItemExtensions() {
-            private QuantumAssemblerRenderer.Item renderer;
+        event.registerItem(itemRenderer(QuantumAssemblerRenderer.Item::new), RIRegistries.QUANTUM_ASSEMBLER.get().asItem());
+        event.registerItem(itemRenderer(PlasmaHeaterRenderer.Item::new), RIRegistries.PLASMA_HEATER.get().asItem());
+    }
+
+    /** An item drawn by a renderer of its own, made when first needed. */
+    private static IClientItemExtensions itemRenderer(BiFunction<BlockEntityRenderDispatcher, EntityModelSet, BlockEntityWithoutLevelRenderer> factory) {
+        return new IClientItemExtensions() {
+            private BlockEntityWithoutLevelRenderer renderer;
 
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 if (renderer == null) {
                     Minecraft mc = Minecraft.getInstance();
-                    renderer = new QuantumAssemblerRenderer.Item(mc.getBlockEntityRenderDispatcher(), mc.getEntityModels());
+                    renderer = factory.apply(mc.getBlockEntityRenderDispatcher(), mc.getEntityModels());
                 }
                 return renderer;
             }
-        }, RIRegistries.QUANTUM_ASSEMBLER.get().asItem());
+        };
     }
 
     private static IClientFluidTypeExtensions plainFluid(String texture, int tint) {
