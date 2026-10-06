@@ -1,0 +1,10 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "processing"
+    }
+  ],
+  "type": "resonantinduction:dust_smelting",
+  "cookingtime": 200
+}

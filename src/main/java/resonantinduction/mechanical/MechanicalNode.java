@@ -23,6 +23,8 @@ public class MechanicalNode {
     public double angle;
     public double prevAngle;
     protected double load = 2;
+    /** Server-side angle, only to count whole turns. */
+    private double serverAngle;
 
     private final Map<MechanicalNode, Direction> connections = new LinkedHashMap<>();
     private final Owner owner;
@@ -50,6 +52,10 @@ public class MechanicalNode {
 
         /** Called every server tick after the physics, for machines to use the power. */
         default void onNodeUpdate(MechanicalNode node) {
+        }
+
+        /** Called on the server each time the node completes a full turn (either way). */
+        default void onRevolve(MechanicalNode node) {
         }
     }
 
@@ -126,6 +132,13 @@ public class MechanicalNode {
             }
         }
         owner.onNodeUpdate(this);
+
+        // The original capped rotation at half a turn per tick and fired revolve() each full turn.
+        serverAngle += Math.max(-Math.PI, Math.min(Math.PI, angularVelocity)) * DELTA;
+        if (Math.abs(serverAngle) >= Math.PI * 2) {
+            serverAngle %= Math.PI * 2;
+            owner.onRevolve(this);
+        }
     }
 
     /** Client-side: advance the visual angle (the original capped it at half a turn per tick). */

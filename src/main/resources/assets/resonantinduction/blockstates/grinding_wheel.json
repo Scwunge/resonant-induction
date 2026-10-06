@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "resonantinduction:block/process/grinder_particle"
+    },
+    "facing=south": {
+      "model": "resonantinduction:block/process/grinder_particle"
+    },
+    "facing=east": {
+      "model": "resonantinduction:block/process/grinder_particle"
+    },
+    "facing=west": {
+      "model": "resonantinduction:block/process/grinder_particle"
+    },
+    "facing=up": {
+      "model": "resonantinduction:block/process/grinder_particle"
+    },
+    "facing=down": {
+      "model": "resonantinduction:block/process/grinder_particle"
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+ "textures": {
+  "tex": "resonantinduction:block/process/mechanical_piston",
+  "particle": "resonantinduction:block/process/mechanical_piston"
+ },
+ "elements": [
+  {
+   "name": "topPlate",
+   "from": [
+    1.0,
+    1.0,
+    0.0
+   ],
+   "to": [
+    15.0,
+    15.0,
+    5.0
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      0.0,
+      6.75,
+      0.625,
+      10.25
+     ],
+     "texture": "#tex"
+    },
+    "west": {
+     "uv": [
+      2.375,
+      6.75,
+      3.0,
+      10.25
+     ],
+     "texture": "#tex"
+    },
+    "up": {
+     "uv": [
+      2.375,
+      5.5,
+      0.625,
+      6.75
+     ],
+     "texture": "#tex"
+    },
+    "down": {
+     "uv": [
+      4.125,
+      5.5,
+      2.375,
+      6.75
+     ],
+     "texture": "#tex"
+    },
+    "north": {
+     "uv": [
+      2.375,
+      6.75,
+      0.625,
+      10.25
+     ],
+     "texture": "#tex"
+    },
+    "south": {
+     "uv": [
+      4.75,
+      6.75,
+      3.0,
+      10.25
+     ],
+     "texture": "#tex"
+    }
+   }
+  },
+  {
+   "name": "outerPiston",
+   "from": [
+    5.0,
+    5.0,
+    1.5
+   ],
+   "to": [
+    11.0,
+    11.0,
+    15.5
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      3.0,
+      13.75,
+      4.75,
+      15.25
+     ],
+     "texture": "#tex"
+    },
+    "west": {
+     "uv": [
+      5.5,
+      13.75,
+      7.25,
+      15.25
+     ],
+     "texture": "#tex"
+    },
+    "up": {
+     "uv": [
+      5.5,
+      10.25,
+      4.75,
+      13.75
+     ],
+     "texture": "#tex"
+    },
+    "down": {
+     "uv": [
+      6.25,
+      10.25,
+      5.5,
+      13.75
+     ],
+     "texture": "#tex"
+    },
+    "north": {
+     "uv": [
+      5.5,
+      13.75,
+      4.75,
+      15.25
+     ],
+     "texture": "#tex"
+    },
+    "south": {
+     "uv": [
+      8.0,
+      13.75,
+      7.25,
+      15.25
+     ],
+     "texture": "#tex"
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "resonantinduction:block/process/piston_static"
+    },
+    "facing=south": {
+      "model": "resonantinduction:block/process/piston_static",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "resonantinduction:block/process/piston_static",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "resonantinduction:block/process/piston_static",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "resonantinduction:block/process/piston_static",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "resonantinduction:block/process/piston_static",
+      "x": 90
+    }
+  }
+}

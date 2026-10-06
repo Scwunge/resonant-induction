@@ -1,0 +1,7 @@
+newmtl wheel
+Kd 1 1 1
+map_Kd #wheel
+
+newmtl teeth
+Kd 1 1 1
+map_Kd #teeth

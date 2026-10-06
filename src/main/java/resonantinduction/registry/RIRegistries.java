@@ -31,6 +31,22 @@ import resonantinduction.battery.BatteryBlock;
 import resonantinduction.battery.BatteryBlockEntity;
 import resonantinduction.battery.BatteryItem;
 import resonantinduction.mechanical.gear.GearBlock;
+import resonantinduction.mechanical.process.GrindingWheelBlockEntity;
+import resonantinduction.mechanical.process.MachineBlock;
+import resonantinduction.mechanical.process.MechanicalPistonBlockEntity;
+import resonantinduction.mechanical.process.MixerBlockEntity;
+import resonantinduction.archaic.FilterBlock;
+import resonantinduction.archaic.ImprintItem;
+import resonantinduction.archaic.ImprintableBlockEntity;
+import resonantinduction.archaic.MillstoneBlock;
+import resonantinduction.resource.DustPileBlock;
+import resonantinduction.resource.DustSmeltingRecipe;
+import resonantinduction.resource.MaterialBlockEntity;
+import resonantinduction.resource.OreResourceItem;
+import resonantinduction.resource.PoolBlock;
+import resonantinduction.resource.PoolBucketItem;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.block.RenderShape;
 import resonantinduction.mechanical.motor.MotorBlock;
 import resonantinduction.mechanical.motor.MotorBlockEntity;
 import resonantinduction.mechanical.turbine.TurbineBlock;
@@ -83,6 +99,7 @@ public final class RIRegistries {
     public static final DeferredRegister.DataComponents COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, ResonantInduction.MODID);
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, ResonantInduction.MODID);
     public static final DeferredRegister<MapCodec<? extends ICondition>> CONDITIONS = DeferredRegister.create(NeoForgeRegistries.Keys.CONDITION_CODECS, ResonantInduction.MODID);
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, ResonantInduction.MODID);
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, ResonantInduction.MODID);
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ResonantInduction.MODID);
 
@@ -229,6 +246,67 @@ public final class RIRegistries {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TurbineBlockEntity>> TURBINE_BE = BLOCK_ENTITIES.register("turbine",
             () -> BlockEntityType.Builder.of(TurbineBlockEntity::new, TURBINES.stream().map(DeferredBlock::get).toArray(net.minecraft.world.level.block.Block[]::new)).build(null));
+    // ---- ore processing ----
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> MATERIAL = COMPONENTS.registerComponentType("material",
+            b -> b.persistent(Codec.STRING).networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.STRING_UTF8));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<ItemStack>>> IMPRINT_ITEMS = COMPONENTS.registerComponentType("imprint_items",
+            b -> b.persistent(ItemStack.CODEC.listOf()).networkSynchronized(ItemStack.LIST_STREAM_CODEC));
+    public static final DeferredItem<OreResourceItem> RUBBLE = ITEMS.registerItem("rubble", p -> new OreResourceItem(OreResourceItem.Form.RUBBLE, p));
+    public static final DeferredItem<OreResourceItem> DUST = ITEMS.registerItem("dust", p -> new OreResourceItem(OreResourceItem.Form.DUST, p));
+    public static final DeferredItem<OreResourceItem> REFINED_DUST = ITEMS.registerItem("refined_dust", p -> new OreResourceItem(OreResourceItem.Form.REFINED_DUST, p));
+    public static final DeferredItem<PoolBucketItem> MOLTEN_BUCKET = ITEMS.registerItem("molten_bucket", p -> new PoolBucketItem(PoolBlock.Kind.MOLTEN, p), new Item.Properties().stacksTo(1));
+    public static final DeferredItem<PoolBucketItem> MIXTURE_BUCKET = ITEMS.registerItem("mixture_bucket", p -> new PoolBucketItem(PoolBlock.Kind.MIXTURE, p), new Item.Properties().stacksTo(1));
+    public static final DeferredBlock<DustPileBlock> DUST_PILE = BLOCKS.registerBlock("dust_pile", p -> new DustPileBlock(false, p),
+            BlockBehaviour.Properties.of().mapColor(MapColor.SAND).strength(0.5f).sound(SoundType.SAND).noOcclusion());
+    public static final DeferredBlock<DustPileBlock> REFINED_DUST_PILE = BLOCKS.registerBlock("refined_dust_pile", p -> new DustPileBlock(true, p),
+            BlockBehaviour.Properties.of().mapColor(MapColor.SAND).strength(0.5f).sound(SoundType.SAND).noOcclusion());
+    public static final DeferredBlock<PoolBlock> MOLTEN_POOL = BLOCKS.registerBlock("molten_pool", p -> new PoolBlock(PoolBlock.Kind.MOLTEN, p),
+            BlockBehaviour.Properties.of().mapColor(MapColor.FIRE).strength(100f).noOcclusion().noLootTable().lightLevel(s -> 12).replaceable().liquid());
+    public static final DeferredBlock<PoolBlock> MIXTURE_POOL = BLOCKS.registerBlock("mixture_pool", p -> new PoolBlock(PoolBlock.Kind.MIXTURE, p),
+            BlockBehaviour.Properties.of().mapColor(MapColor.WATER).strength(100f).noOcclusion().noLootTable().replaceable().liquid());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MaterialBlockEntity>> MATERIAL_BE = BLOCK_ENTITIES.register("material",
+            () -> BlockEntityType.Builder.of(MaterialBlockEntity::new, DUST_PILE.get(), REFINED_DUST_PILE.get(), MOLTEN_POOL.get(), MIXTURE_POOL.get()).build(null));
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<DustSmeltingRecipe.Smelting>> DUST_SMELTING = RECIPE_SERIALIZERS.register("dust_smelting",
+            () -> DustSmeltingRecipe.serializer(DustSmeltingRecipe.Smelting::new, DustSmeltingRecipe.Smelting::getCookingTime, 200));
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<DustSmeltingRecipe.Blasting>> DUST_BLASTING = RECIPE_SERIALIZERS.register("dust_blasting",
+            () -> DustSmeltingRecipe.serializer(DustSmeltingRecipe.Blasting::new, DustSmeltingRecipe.Blasting::getCookingTime, 100));
+
+    public static final DeferredBlock<MachineBlock> MECHANICAL_PISTON = BLOCKS.registerBlock("mechanical_piston",
+            p -> new MachineBlock(p, () -> RIRegistries.MECHANICAL_PISTON_BE.get(), MechanicalPistonBlockEntity::new, net.minecraft.world.phys.shapes.Shapes.block(), RenderShape.MODEL),
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3f, 6f).sound(SoundType.METAL).noOcclusion().requiresCorrectToolForDrops());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MechanicalPistonBlockEntity>> MECHANICAL_PISTON_BE = BLOCK_ENTITIES.register("mechanical_piston",
+            () -> BlockEntityType.Builder.of(MechanicalPistonBlockEntity::new, MECHANICAL_PISTON.get()).build(null));
+    public static final DeferredBlock<MachineBlock> GRINDING_WHEEL = BLOCKS.registerBlock("grinding_wheel",
+            p -> new MachineBlock(p, () -> RIRegistries.GRINDING_WHEEL_BE.get(), GrindingWheelBlockEntity::new,
+                    net.minecraft.world.level.block.Block.box(0.8, 0.8, 0.8, 15.2, 15.2, 15.2), RenderShape.ENTITYBLOCK_ANIMATED),
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(3f, 6f).sound(SoundType.STONE).noOcclusion().requiresCorrectToolForDrops());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GrindingWheelBlockEntity>> GRINDING_WHEEL_BE = BLOCK_ENTITIES.register("grinding_wheel",
+            () -> BlockEntityType.Builder.of(GrindingWheelBlockEntity::new, GRINDING_WHEEL.get()).build(null));
+    public static final DeferredBlock<MachineBlock> MIXER = BLOCKS.registerBlock("mixer",
+            p -> new MachineBlock(p, () -> RIRegistries.MIXER_BE.get(), MixerBlockEntity::new, net.minecraft.world.level.block.Block.box(3, 0, 3, 13, 16, 13), RenderShape.MODEL),
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3f, 6f).sound(SoundType.METAL).noOcclusion().requiresCorrectToolForDrops());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MixerBlockEntity>> MIXER_BE = BLOCK_ENTITIES.register("mixer",
+            () -> BlockEntityType.Builder.of(MixerBlockEntity::new, MIXER.get()).build(null));
+    public static final DeferredBlock<FilterBlock> FILTER = BLOCKS.registerBlock("filter", FilterBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(2f, 6f).sound(SoundType.METAL).noOcclusion());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ImprintableBlockEntity>> IMPRINTABLE_BE = BLOCK_ENTITIES.register("imprintable",
+            () -> BlockEntityType.Builder.of(ImprintableBlockEntity::new, FILTER.get()).build(null));
+    public static final DeferredBlock<MillstoneBlock> MILLSTONE = BLOCKS.registerBlock("millstone", MillstoneBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(3f, 6f).sound(SoundType.STONE).requiresCorrectToolForDrops());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MillstoneBlock.Tile>> MILLSTONE_BE = BLOCK_ENTITIES.register("millstone",
+            () -> BlockEntityType.Builder.of(MillstoneBlock.Tile::new, MILLSTONE.get()).build(null));
+    public static final DeferredItem<ImprintItem> IMPRINT = ITEMS.registerItem("imprint", ImprintItem::new, new Item.Properties().stacksTo(1));
+    public static final DeferredHolder<SoundEvent, SoundEvent> GRINDER_SOUND = SOUNDS.register("grinder",
+            () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("grinder")));
+
+    static {
+        ITEMS.registerSimpleBlockItem(MECHANICAL_PISTON);
+        ITEMS.registerSimpleBlockItem(GRINDING_WHEEL);
+        ITEMS.registerSimpleBlockItem(MIXER);
+        ITEMS.registerSimpleBlockItem(FILTER);
+        ITEMS.registerSimpleBlockItem(MILLSTONE);
+    }
+
     public static final DeferredItem<HandCrankItem> HAND_CRANK = ITEMS.registerItem("hand_crank", HandCrankItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredHolder<SoundEvent, SoundEvent> GEAR_CRANK = SOUNDS.register("gear_crank",
             () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("gear_crank")));
@@ -263,6 +341,11 @@ public final class RIRegistries {
             .displayItems((params, out) -> ITEMS.getEntries().forEach(e -> {
                 if (e.get() instanceof BatteryItem battery) {
                     battery.variants().forEach(out::accept);
+                } else if (e.get() instanceof OreResourceItem || e.get() instanceof PoolBucketItem) {
+                    // One of each per metal, once tags are known.
+                    for (String m : resonantinduction.resource.Materials.all()) {
+                        out.accept(resonantinduction.resource.Materials.of(e.get(), m, 1));
+                    }
                 } else {
                     out.accept(e.get());
                 }
@@ -280,6 +363,7 @@ public final class RIRegistries {
         TABS.register(modBus);
         CONDITIONS.register(modBus);
         MENUS.register(modBus);
+        RECIPE_SERIALIZERS.register(modBus);
     }
 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {

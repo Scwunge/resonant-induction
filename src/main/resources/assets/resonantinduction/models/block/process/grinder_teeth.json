@@ -1,0 +1,14 @@
+{
+  "loader": "neoforge:obj",
+  "model": "resonantinduction:models/block/process/grinder.obj",
+  "flip_v": true,
+  "visibility": {
+    "grinder": false,
+    "teeth": true
+  },
+  "textures": {
+    "wheel": "minecraft:block/oak_planks",
+    "teeth": "minecraft:block/cobblestone",
+    "particle": "minecraft:block/cobblestone"
+  }
+}

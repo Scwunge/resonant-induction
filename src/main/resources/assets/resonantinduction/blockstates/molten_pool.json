@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "level=1": {
+      "model": "resonantinduction:block/process/molten_pool_1"
+    },
+    "level=2": {
+      "model": "resonantinduction:block/process/molten_pool_2"
+    },
+    "level=3": {
+      "model": "resonantinduction:block/process/molten_pool_3"
+    },
+    "level=4": {
+      "model": "resonantinduction:block/process/molten_pool_4"
+    },
+    "level=5": {
+      "model": "resonantinduction:block/process/molten_pool_5"
+    },
+    "level=6": {
+      "model": "resonantinduction:block/process/molten_pool_6"
+    },
+    "level=7": {
+      "model": "resonantinduction:block/process/molten_pool_7"
+    },
+    "level=8": {
+      "model": "resonantinduction:block/process/molten_pool_8"
+    }
+  }
+}

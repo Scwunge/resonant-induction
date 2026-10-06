@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "processing"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "SGS",
+    "SPS",
+    "SRS"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "S": {
+      "tag": "c:ingots/iron"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    },
+    "G": {
+      "item": "resonantinduction:gear_metal"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:mechanical_piston",
+    "count": 1
+  }
+}

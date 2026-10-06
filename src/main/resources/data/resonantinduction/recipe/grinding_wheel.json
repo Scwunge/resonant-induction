@@ -1,0 +1,35 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "processing"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "III",
+    "LGL",
+    "III"
+  ],
+  "key": {
+    "I": [
+      {
+        "tag": "c:ingots/steel"
+      },
+      {
+        "tag": "c:ingots/iron"
+      }
+    ],
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "G": {
+      "tag": "resonantinduction:gears"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:grinding_wheel",
+    "count": 1
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "processing"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "SPS",
+    "SAS",
+    "SSS"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "A": {
+      "item": "minecraft:stone_pickaxe"
+    },
+    "S": {
+      "item": "minecraft:stone"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:millstone",
+    "count": 1
+  }
+}

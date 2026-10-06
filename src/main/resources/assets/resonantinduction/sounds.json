@@ -16,5 +16,14 @@
     "sounds": [
       "resonantinduction:gear_crank"
     ]
+  },
+  "grinder": {
+    "subtitle": "subtitles.resonantinduction.grinder",
+    "sounds": [
+      "resonantinduction:grinder1",
+      "resonantinduction:grinder2",
+      "resonantinduction:grinder3",
+      "resonantinduction:grinder4"
+    ]
   }
 }

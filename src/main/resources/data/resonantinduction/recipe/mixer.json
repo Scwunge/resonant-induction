@@ -1,0 +1,32 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "processing"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "IGI",
+    "IGI",
+    "IGI"
+  ],
+  "key": {
+    "I": [
+      {
+        "tag": "c:ingots/steel"
+      },
+      {
+        "tag": "c:ingots/iron"
+      }
+    ],
+    "G": {
+      "tag": "resonantinduction:gears"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:mixer",
+    "count": 1
+  }
+}

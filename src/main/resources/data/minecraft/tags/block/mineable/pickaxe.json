@@ -18,6 +18,11 @@
     "resonantinduction:wind_turbine_stone",
     "resonantinduction:wind_turbine_metal",
     "resonantinduction:water_turbine_stone",
-    "resonantinduction:water_turbine_metal"
+    "resonantinduction:water_turbine_metal",
+    "resonantinduction:mechanical_piston",
+    "resonantinduction:grinding_wheel",
+    "resonantinduction:mixer",
+    "resonantinduction:filter",
+    "resonantinduction:millstone"
   ]
 }

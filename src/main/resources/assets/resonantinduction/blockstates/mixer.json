@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "resonantinduction:block/process/mixer_static"
+    },
+    "facing=south": {
+      "model": "resonantinduction:block/process/mixer_static"
+    },
+    "facing=east": {
+      "model": "resonantinduction:block/process/mixer_static"
+    },
+    "facing=west": {
+      "model": "resonantinduction:block/process/mixer_static"
+    },
+    "facing=up": {
+      "model": "resonantinduction:block/process/mixer_static"
+    },
+    "facing=down": {
+      "model": "resonantinduction:block/process/mixer_static"
+    }
+  }
+}

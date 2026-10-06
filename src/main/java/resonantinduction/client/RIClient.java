@@ -30,6 +30,9 @@ public final class RIClient {
         event.registerBlockEntityRenderer(RIRegistries.GEAR_BE.get(), MechanicalRenderer::new);
         event.registerBlockEntityRenderer(RIRegistries.SHAFT_BE.get(), MechanicalRenderer::new);
         event.registerBlockEntityRenderer(RIRegistries.TURBINE_BE.get(), TurbineRenderer::new);
+        event.registerBlockEntityRenderer(RIRegistries.MECHANICAL_PISTON_BE.get(), ProcessRenderer::new);
+        event.registerBlockEntityRenderer(RIRegistries.GRINDING_WHEEL_BE.get(), ProcessRenderer::new);
+        event.registerBlockEntityRenderer(RIRegistries.MIXER_BE.get(), ProcessRenderer::new);
     }
 
     @SubscribeEvent
@@ -42,6 +45,11 @@ public final class RIClient {
         event.register(BatteryRenderer.CONNECTOR_IN);
         event.register(BatteryRenderer.CONNECTOR_OUT);
         TurbineRenderer.allParts().forEach(event::register);
+        event.register(ProcessRenderer.PISTON_ROTOR);
+        event.register(ProcessRenderer.PISTON_SHAFT);
+        event.register(ProcessRenderer.GRINDER_WHEEL);
+        event.register(ProcessRenderer.GRINDER_TEETH);
+        event.register(ProcessRenderer.MIXER_ROTOR);
         for (String tier : MechanicalRenderer.TIERS) {
             event.register(MechanicalRenderer.model("gear_small_" + tier));
             event.register(MechanicalRenderer.model("gear_large_" + tier));
@@ -72,7 +80,23 @@ public final class RIClient {
     }
 
     @SubscribeEvent
+    public static void materialBlockColors(RegisterColorHandlersEvent.Block event) {
+        event.register((state, level, pos, tint) -> level != null && pos != null
+                        && level.getBlockEntity(pos) instanceof resonantinduction.resource.MaterialBlockEntity be ? FastColor.ARGB32.opaque(MaterialColors.get(be.material())) : -1,
+                RIRegistries.DUST_PILE.get(), RIRegistries.REFINED_DUST_PILE.get(), RIRegistries.MOLTEN_POOL.get(), RIRegistries.MIXTURE_POOL.get());
+    }
+
+    @SubscribeEvent
+    public static void reload(net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent event) {
+        event.registerReloadListener((net.minecraft.server.packs.resources.ResourceManagerReloadListener) manager -> MaterialColors.clear());
+    }
+
+    @SubscribeEvent
     public static void itemColors(RegisterColorHandlersEvent.Item event) {
+        event.register((stack, tint) -> tint == 0 ? FastColor.ARGB32.opaque(MaterialColors.get(resonantinduction.resource.Materials.material(stack))) : -1,
+                RIRegistries.RUBBLE.get(), RIRegistries.DUST.get(), RIRegistries.REFINED_DUST.get());
+        event.register((stack, tint) -> tint == 1 ? FastColor.ARGB32.opaque(MaterialColors.get(resonantinduction.resource.Materials.material(stack))) : -1,
+                RIRegistries.MOLTEN_BUCKET.get(), RIRegistries.MIXTURE_BUCKET.get());
         for (WireMaterial m : WireMaterial.values()) {
             event.register((stack, tint) -> tint == 0 ? FastColor.ARGB32.opaque(((WireItem) stack.getItem()).material().color) : -1,
                     RIRegistries.WIRE_ITEMS.get(m).get());

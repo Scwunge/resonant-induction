@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "resonantinduction:block/millstone_top",
+    "side": "resonantinduction:block/millstone_side"
+  }
+}
