@@ -276,5 +276,16 @@
   "jei.resonantinduction.detector": "Gives a redstone signal while items are in front of it. With an Imprint, only those items count; a wrench inverts that.",
   "jei.resonantinduction.sorter": "Put an Imprint on any of its faces. Items dropped on it (or put in by hoppers) leave through a face whose imprint lists them, into an inventory there or onto the ground. A wrench inverts every face.",
   "jei.resonantinduction.breaker": "On a redstone signal it breaks the block in front of it, putting the drops in an inventory behind it or dropping them there.",
-  "jei.resonantinduction.placer": "Holds a stack; on a redstone signal it places a block of it in front. Sneak + wrench: it refills from the inventory behind it."
+  "jei.resonantinduction.placer": "Holds a stack; on a redstone signal it places a block of it in front. Sneak + wrench: it refills from the inventory behind it.",
+  "block.resonantinduction.material_stone_brick": "Machine Stone Bricks",
+  "block.resonantinduction.material_stone_brick2": "Machine Stone Tiles",
+  "block.resonantinduction.material_stone_chiseled": "Chiseled Machine Stone",
+  "block.resonantinduction.material_stone_cobble": "Machine Cobblestone",
+  "block.resonantinduction.material_stone_cracked": "Cracked Machine Stone",
+  "block.resonantinduction.material_stone": "Machine Stone",
+  "block.resonantinduction.material_stone_slab": "Machine Stone Slab Block",
+  "block.resonantinduction.material_stone_mossy": "Mossy Machine Stone",
+  "block.resonantinduction.material_steel_dark": "Dark Machine Steel",
+  "block.resonantinduction.material_steel_tint": "Tinted Machine Steel",
+  "block.resonantinduction.material_steel": "Machine Steel"
 }

@@ -501,6 +501,20 @@ public final class RIRegistries {
         ITEMS.registerSimpleBlockItem(PLACER);
     }
 
+    /** The original's machine material blocks: decoration, creative only as in the original (it had no recipes for them). */
+    public static final List<DeferredBlock<net.minecraft.world.level.block.Block>> MACHINE_MATERIALS = new ArrayList<>();
+
+    static {
+        for (String name : new String[] {"material_stone_brick", "material_stone_brick2", "material_stone_chiseled", "material_stone_cobble", "material_stone_cracked", "material_stone", "material_stone_slab", "material_stone_mossy", "material_steel_dark", "material_steel_tint", "material_steel"}) {
+            boolean steel = name.contains("steel");
+            DeferredBlock<net.minecraft.world.level.block.Block> b = BLOCKS.registerSimpleBlock(name, BlockBehaviour.Properties.of()
+                    .mapColor(steel ? MapColor.METAL : MapColor.STONE).strength(steel ? 5f : 1.5f, 6f).sound(steel ? SoundType.METAL : SoundType.STONE)
+                    .requiresCorrectToolForDrops());
+            MACHINE_MATERIALS.add(b);
+            ITEMS.registerSimpleBlockItem(b);
+        }
+    }
+
     public static final DeferredItem<HandCrankItem> HAND_CRANK = ITEMS.registerItem("hand_crank", HandCrankItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredHolder<SoundEvent, SoundEvent> GEAR_CRANK = SOUNDS.register("gear_crank",
             () -> SoundEvent.createVariableRangeEvent(ResonantInduction.id("gear_crank")));

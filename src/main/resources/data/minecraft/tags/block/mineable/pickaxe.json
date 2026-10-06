@@ -46,6 +46,17 @@
     "resonantinduction:detector",
     "resonantinduction:sorter",
     "resonantinduction:breaker",
-    "resonantinduction:placer"
+    "resonantinduction:placer",
+    "resonantinduction:material_stone_brick",
+    "resonantinduction:material_stone_brick2",
+    "resonantinduction:material_stone_chiseled",
+    "resonantinduction:material_stone_cobble",
+    "resonantinduction:material_stone_cracked",
+    "resonantinduction:material_stone",
+    "resonantinduction:material_stone_slab",
+    "resonantinduction:material_stone_mossy",
+    "resonantinduction:material_steel_dark",
+    "resonantinduction:material_steel_tint",
+    "resonantinduction:material_steel"
   ]
 }
