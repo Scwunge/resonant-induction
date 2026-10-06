@@ -2,7 +2,7 @@
   "neoforge:conditions": [
     {
       "type": "resonantinduction:feature",
-      "feature": "tesla"
+      "feature": "laser"
     },
     {
       "type": "neoforge:not",
@@ -13,31 +13,31 @@
     }
   ],
   "type": "minecraft:crafting_shaped",
-  "category": "redstone",
+  "category": "tools",
   "pattern": [
-    "WEW",
-    " C ",
-    "DID"
+    "RDR",
+    "RDR",
+    "ICB"
   ],
   "key": {
-    "W": {
-      "tag": "c:ingots/copper"
-    },
-    "E": {
-      "item": "minecraft:ender_eye"
-    },
-    "C": {
-      "tag": "c:storage_blocks/redstone"
+    "R": {
+      "tag": "c:dusts/redstone"
     },
     "D": {
       "tag": "c:gems/diamond"
     },
     "I": {
-      "tag": "c:ingots/iron"
+      "tag": "c:ingots/gold"
+    },
+    "C": {
+      "item": "minecraft:comparator"
+    },
+    "B": {
+      "tag": "c:storage_blocks/redstone"
     }
   },
   "result": {
-    "id": "resonantinduction:tesla",
+    "id": "resonantinduction:mining_laser",
     "count": 1
   }
 }

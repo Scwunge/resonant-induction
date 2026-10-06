@@ -3,6 +3,7 @@
   "values": [
     "resonantinduction:tesla",
     "resonantinduction:levitator",
-    "resonantinduction:quantum_gate"
+    "resonantinduction:quantum_gate",
+    "resonantinduction:charger"
   ]
 }

@@ -35,7 +35,15 @@ public final class ElectricBolts {
         if (BOLTS.size() >= MAX_BOLTS) {
             BOLTS.remove(0);
         }
-        BOLTS.add(new Bolt(from, to, argb, RANDOM));
+        BOLTS.add(new Bolt(from, to, argb, RANDOM, false));
+    }
+
+    /** A straight beam that lasts a tick or two (lasers). */
+    public static void addBeam(Vec3 from, Vec3 to, int argb) {
+        if (BOLTS.size() >= MAX_BOLTS) {
+            BOLTS.remove(0);
+        }
+        BOLTS.add(new Bolt(from, to, argb, RANDOM, true));
     }
 
     @SubscribeEvent
@@ -77,10 +85,15 @@ public final class ElectricBolts {
         private final float b;
         private int life;
 
-        Bolt(Vec3 from, Vec3 to, int argb, RandomSource random) {
+        Bolt(Vec3 from, Vec3 to, int argb, RandomSource random, boolean straight) {
             r = ((argb >> 16) & 0xFF) / 255f;
             g = ((argb >> 8) & 0xFF) / 255f;
             b = (argb & 0xFF) / 255f;
+            if (straight) {
+                life = 2;
+                segments.add(new Segment(from, to, 1f));
+                return;
+            }
             life = 2 + random.nextInt(3);
             double length = from.distanceTo(to);
             build(from, to, length * 0.2, 1f, 0, random);

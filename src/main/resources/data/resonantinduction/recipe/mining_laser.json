@@ -2,7 +2,7 @@
   "neoforge:conditions": [
     {
       "type": "resonantinduction:feature",
-      "feature": "tesla"
+      "feature": "laser"
     },
     {
       "type": "neoforge:mod_loaded",
@@ -10,31 +10,31 @@
     }
   ],
   "type": "minecraft:crafting_shaped",
-  "category": "redstone",
+  "category": "tools",
   "pattern": [
-    "WEW",
-    " C ",
-    "DID"
+    "RDR",
+    "RDR",
+    "ICB"
   ],
   "key": {
-    "W": {
-      "item": "electrodynamics:wirecopper"
-    },
-    "E": {
-      "item": "minecraft:ender_eye"
-    },
-    "C": {
-      "item": "electrodynamics:battery"
+    "R": {
+      "tag": "c:dusts/redstone"
     },
     "D": {
       "tag": "c:gems/diamond"
     },
     "I": {
-      "tag": "c:plates/steel"
+      "tag": "c:ingots/gold"
+    },
+    "C": {
+      "tag": "c:circuits/advanced"
+    },
+    "B": {
+      "item": "electrodynamics:battery"
     }
   },
   "result": {
-    "id": "resonantinduction:tesla",
+    "id": "resonantinduction:mining_laser",
     "count": 1
   }
 }

@@ -22,7 +22,17 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import resonantinduction.RIFeatures;
 import resonantinduction.ResonantInduction;
+import resonantinduction.charger.ChargerBlock;
+import resonantinduction.charger.ChargerBlockEntity;
+import resonantinduction.laser.MiningLaserItem;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.neoforged.neoforge.common.conditions.ICondition;
+import net.neoforged.neoforge.energy.ComponentEnergyStorage;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import resonantinduction.item.QuantumEntanglerItem;
 import resonantinduction.levitator.LevitatorBlock;
 import resonantinduction.levitator.LevitatorBlockEntity;
@@ -40,6 +50,7 @@ public final class RIRegistries {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, ResonantInduction.MODID);
     public static final DeferredRegister.DataComponents COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, ResonantInduction.MODID);
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, ResonantInduction.MODID);
+    public static final DeferredRegister<MapCodec<? extends ICondition>> CONDITIONS = DeferredRegister.create(NeoForgeRegistries.Keys.CONDITION_CODECS, ResonantInduction.MODID);
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ResonantInduction.MODID);
 
     public static final ResourceKey<DamageType> ELECTROCUTION = ResourceKey.create(Registries.DAMAGE_TYPE, ResonantInduction.id("electrocution"));
@@ -70,6 +81,24 @@ public final class RIRegistries {
             ITEMS.registerItem("glyph_digon", p -> new QuantumGlyphItem(2, p)),
             ITEMS.registerItem("glyph_trigon", p -> new QuantumGlyphItem(3, p)));
 
+    public static final DeferredBlock<ChargerBlock> CHARGER = BLOCKS.registerBlock("charger", ChargerBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(2f, 6f).sound(SoundType.METAL).noOcclusion());
+    public static final DeferredItem<BlockItem> CHARGER_ITEM = ITEMS.registerSimpleBlockItem(CHARGER);
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ChargerBlockEntity>> CHARGER_BE = BLOCK_ENTITIES.register("charger",
+            () -> BlockEntityType.Builder.of(ChargerBlockEntity::new, CHARGER.get()).build(null));
+
+    /** Stored FE of energy items. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ENERGY = COMPONENTS.registerComponentType("energy",
+            b -> b.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> LASER_MODE = COMPONENTS.registerComponentType("laser_mode",
+            b -> b.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT));
+
+    public static final DeferredItem<MiningLaserItem> MINING_LASER = ITEMS.registerItem("mining_laser", MiningLaserItem::new,
+            new Item.Properties().stacksTo(1));
+
+    public static final DeferredHolder<MapCodec<? extends ICondition>, MapCodec<RIFeatures.FeatureCondition>> FEATURE_CONDITION =
+            CONDITIONS.register("feature", () -> RIFeatures.FeatureCondition.CODEC);
+
     /** The device a Quantum Entangler has marked, waiting to be linked with a second one. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<GlobalPos>> LINK_TARGET = COMPONENTS.registerComponentType("link_target",
             b -> b.persistent(GlobalPos.CODEC).networkSynchronized(GlobalPos.STREAM_CODEC));
@@ -95,11 +124,19 @@ public final class RIRegistries {
         COMPONENTS.register(modBus);
         SOUNDS.register(modBus);
         TABS.register(modBus);
+        CONDITIONS.register(modBus);
     }
 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, TESLA_BE.get(), TeslaBlockEntity::getEnergyCapability);
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, QUANTUM_GATE_BE.get(), QuantumGateBlockEntity::getItemCapability);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, CHARGER_BE.get(), ChargerBlockEntity::getEnergyCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CHARGER_BE.get(), ChargerBlockEntity::getItemCapability);
+        // Original transfer rate: a hundredth of the battery per tick.
+        event.registerItem(Capabilities.EnergyStorage.ITEM, (stack, ctx) -> {
+            int capacity = MiningLaserItem.capacity();
+            return new ComponentEnergyStorage(stack, ENERGY.get(), capacity, Math.max(1, capacity / 100), capacity);
+        }, MINING_LASER.get());
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, QUANTUM_GATE_BE.get(), QuantumGateBlockEntity::getFluidCapability);
     }
 }

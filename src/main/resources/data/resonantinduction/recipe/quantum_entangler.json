@@ -1,4 +1,10 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "tesla"
+    }
+  ],
   "type": "minecraft:crafting_shaped",
   "category": "tools",
   "pattern": [

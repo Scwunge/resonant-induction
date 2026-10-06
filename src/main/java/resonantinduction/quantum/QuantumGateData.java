@@ -55,6 +55,14 @@ public class QuantumGateData extends SavedData {
         }
     }
 
+    /** Forgets every gate and the shared storage of a frequency (used by tests; gates re-register while loaded). */
+    public void clearFrequency(int frequency) {
+        gates.remove(frequency);
+        items.remove(frequency);
+        tanks.remove(frequency);
+        setDirty();
+    }
+
     public IItemHandlerModifiable inventory(int frequency) {
         return new IItemHandlerModifiable() {
             @Override

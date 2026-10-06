@@ -1,4 +1,10 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "levitator"
+    }
+  ],
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "pattern": [

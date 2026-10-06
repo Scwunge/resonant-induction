@@ -7,6 +7,10 @@ public final class ClientPayloads {
     private ClientPayloads() {}
 
     public static void zap(RINetwork.ZapPayload payload) {
-        ElectricBolts.add(payload.from(), payload.to(), payload.color());
+        if (payload.straight()) {
+            ElectricBolts.addBeam(payload.from(), payload.to(), payload.color());
+        } else {
+            ElectricBolts.add(payload.from(), payload.to(), payload.color());
+        }
     }
 }

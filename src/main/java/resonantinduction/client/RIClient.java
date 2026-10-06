@@ -14,5 +14,6 @@ public final class RIClient {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(RIRegistries.QUANTUM_GATE_BE.get(), QuantumGateRenderer::new);
+        event.registerBlockEntityRenderer(RIRegistries.CHARGER_BE.get(), ChargerRenderer::new);
     }
 }

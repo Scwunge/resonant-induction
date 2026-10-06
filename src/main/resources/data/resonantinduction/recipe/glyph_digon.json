@@ -1,4 +1,10 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "quantum"
+    }
+  ],
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
@@ -14,7 +20,7 @@
       "item": "resonantinduction:levitator"
     },
     "C": {
-      "tag": "c:storage_blocks/redstone"
+      "item": "resonantinduction:charger"
     },
     "T": {
       "item": "resonantinduction:tesla"

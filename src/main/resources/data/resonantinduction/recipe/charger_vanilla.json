@@ -2,7 +2,7 @@
   "neoforge:conditions": [
     {
       "type": "resonantinduction:feature",
-      "feature": "tesla"
+      "feature": "charger"
     },
     {
       "type": "neoforge:not",
@@ -15,29 +15,22 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "pattern": [
-    "WEW",
-    " C ",
-    "DID"
+    "WWW",
+    "ICI"
   ],
   "key": {
     "W": {
       "tag": "c:ingots/copper"
     },
-    "E": {
-      "item": "minecraft:ender_eye"
-    },
-    "C": {
-      "tag": "c:storage_blocks/redstone"
-    },
-    "D": {
-      "tag": "c:gems/diamond"
-    },
     "I": {
       "tag": "c:ingots/iron"
+    },
+    "C": {
+      "item": "minecraft:repeater"
     }
   },
   "result": {
-    "id": "resonantinduction:tesla",
+    "id": "resonantinduction:charger",
     "count": 1
   }
 }

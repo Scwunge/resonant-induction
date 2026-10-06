@@ -18,6 +18,7 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import net.neoforged.neoforge.items.IItemHandler;
 import resonantinduction.ResonantInduction;
 import resonantinduction.quantum.QuantumGateBlockEntity;
+import resonantinduction.quantum.QuantumGateData;
 import resonantinduction.registry.RIRegistries;
 
 /** Each test uses its own frequency (glyph pattern) so tests running side by side don't share gates. */
@@ -25,6 +26,17 @@ import resonantinduction.registry.RIRegistries;
 @PrefixGameTestTemplate(false)
 public class QuantumGateGameTests {
     static final String TEMPLATE = TeslaGameTests.TEMPLATE;
+
+    /** Gates and storage persist with the world, and earlier test runs leave gates behind, so start each frequency clean. */
+    static void clear(GameTestHelper helper, int[] glyphs) {
+        int frequency = 0;
+        int weight = 1;
+        for (int g : glyphs) {
+            frequency += weight * g;
+            weight *= QuantumGateBlockEntity.GLYPHS;
+        }
+        QuantumGateData.get(helper.getLevel().getServer()).clearFrequency(frequency);
+    }
 
     static QuantumGateBlockEntity gate(GameTestHelper helper, BlockPos pos, int[] glyphs) {
         helper.setBlock(pos, RIRegistries.QUANTUM_GATE.get());
@@ -49,6 +61,7 @@ public class QuantumGateGameTests {
     @GameTest(template = TEMPLATE, timeoutTicks = 200)
     public static void teleportsItemsBetweenGates(GameTestHelper helper) {
         int[] glyphs = {3, 3, 3, 3, 3, 3, 3, 2};
+        clear(helper, glyphs);
         gate(helper, new BlockPos(2, 1, 3), glyphs);
         BlockPos far = new BlockPos(15, 1, 3);
         gate(helper, far, glyphs);
@@ -75,6 +88,7 @@ public class QuantumGateGameTests {
     @GameTest(template = TEMPLATE)
     public static void gatesShareInventoryAndTank(GameTestHelper helper) {
         int[] glyphs = {0, 1, 0, 1, 0, 1, 0, 1};
+        clear(helper, glyphs);
         BlockPos a = new BlockPos(2, 1, 3);
         BlockPos b = new BlockPos(12, 1, 3);
         gate(helper, a, glyphs);

@@ -20,6 +20,7 @@ public final class ResonantInduction {
         modBus.addListener(RIRegistries::registerCapabilities);
         modBus.addListener(RINetwork::register);
         container.registerConfig(ModConfig.Type.SERVER, RIConfig.SPEC);
+        container.registerConfig(ModConfig.Type.COMMON, RIFeatures.SPEC);
         NeoForge.EVENT_BUS.addListener(TeslaGrid::onServerStopped);
         NeoForge.EVENT_BUS.addListener(QuantumTeleports::onServerTick);
         NeoForge.EVENT_BUS.addListener(QuantumTeleports::onServerStopped);

@@ -2,7 +2,7 @@
   "neoforge:conditions": [
     {
       "type": "resonantinduction:feature",
-      "feature": "tesla"
+      "feature": "charger"
     },
     {
       "type": "neoforge:mod_loaded",
@@ -12,29 +12,22 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "pattern": [
-    "WEW",
-    " C ",
-    "DID"
+    "WWW",
+    "ICI"
   ],
   "key": {
     "W": {
       "item": "electrodynamics:wirecopper"
     },
-    "E": {
-      "item": "minecraft:ender_eye"
+    "I": {
+      "tag": "c:ingots/steel"
     },
     "C": {
-      "item": "electrodynamics:battery"
-    },
-    "D": {
-      "tag": "c:gems/diamond"
-    },
-    "I": {
-      "tag": "c:plates/steel"
+      "tag": "c:circuits/basic"
     }
   },
   "result": {
-    "id": "resonantinduction:tesla",
+    "id": "resonantinduction:charger",
     "count": 1
   }
 }

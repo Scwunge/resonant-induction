@@ -22,6 +22,12 @@ public final class RIConfig {
     public static final ModConfigSpec.DoubleValue LEVITATOR_ACCELERATION;
     public static final ModConfigSpec.IntValue LEVITATOR_MAX_PATH;
 
+    public static final ModConfigSpec.IntValue LASER_CAPACITY;
+    public static final ModConfigSpec.IntValue LASER_COST_REMOVE;
+    public static final ModConfigSpec.IntValue LASER_RANGE;
+    public static final ModConfigSpec.DoubleValue LASER_DAMAGE;
+    public static final ModConfigSpec.IntValue LASER_BREAK_TICKS;
+
     static {
         ModConfigSpec.Builder b = new ModConfigSpec.Builder();
         b.push("tesla");
@@ -56,6 +62,19 @@ public final class RIConfig {
                 .defineInRange("acceleration", 0.02, 0.001, 1.0);
         LEVITATOR_MAX_PATH = b.comment("Longest distance between two linked levitators. Original: 200.")
                 .defineInRange("maxPathDistance", 200, 2, 1024);
+        b.pop();
+
+        b.push("mining_laser");
+        LASER_CAPACITY = b.comment("Mining Laser battery (FE). Original: 500000.")
+                .defineInRange("capacity", 500000, 1000, Integer.MAX_VALUE);
+        LASER_COST_REMOVE = b.comment("FE per tick while firing in remove mode; smelt mode uses half, damage mode a third. Original: 100.")
+                .defineInRange("costPerTick", 100, 0, 100000);
+        LASER_RANGE = b.comment("Beam range in blocks. Original: 50.")
+                .defineInRange("range", 50, 1, 128);
+        LASER_DAMAGE = b.comment("Damage per tick to whatever the beam hits (it also sets it on fire). Original: 3.3.")
+                .defineInRange("damage", 3.3, 0.0, 100.0);
+        LASER_BREAK_TICKS = b.comment("Ticks the beam must stay on a block to cut it out. Original: 15.")
+                .defineInRange("breakTicks", 15, 1, 200);
         b.pop();
         SPEC = b.build();
     }
