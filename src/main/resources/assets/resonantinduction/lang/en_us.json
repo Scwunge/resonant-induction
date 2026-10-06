@@ -74,5 +74,19 @@
   "tooltip.resonantinduction.wire.capacity": "Capacity: %s FE/t",
   "tooltip.resonantinduction.wire.resistance": "Resistance: %s ohm",
   "tooltip.resonantinduction.wire.damage": "Shock damage: %s",
-  "tooltip.resonantinduction.wire.help": "Sneak to place through a block; wool insulates, a lever makes a switch"
+  "tooltip.resonantinduction.wire.help": "Sneak to place through a block; wool insulates, a lever makes a switch",
+  "block.resonantinduction.battery": "Battery",
+  "tooltip.resonantinduction.tier": "Tier: %s",
+  "message.resonantinduction.battery.status": "Battery bank: %s / %s FE in %s cells",
+  "message.resonantinduction.battery.io": "%s face: %s",
+  "message.resonantinduction.battery.io.input": "input",
+  "message.resonantinduction.battery.io.output": "output",
+  "message.resonantinduction.battery.io.none": "off",
+  "direction.resonantinduction.down": "Bottom",
+  "direction.resonantinduction.up": "Top",
+  "direction.resonantinduction.north": "North",
+  "direction.resonantinduction.south": "South",
+  "direction.resonantinduction.west": "West",
+  "direction.resonantinduction.east": "East",
+  "jei.resonantinduction.battery": "Stores FE. Batteries placed against each other merge into one bank and share their energy. Every face starts as an input; use a wrench (or sneak-use with an empty hand) on a face to switch it between input, output and off. Output faces push energy into whatever is next to them. Keeps its charge when broken, and can be charged in a Charger. Tier 2 is made from eight tier 1 batteries, tier 3 from eight tier 2."
 }

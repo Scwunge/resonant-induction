@@ -5,11 +5,15 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraft.client.renderer.item.ItemProperties;
+import resonantinduction.ResonantInduction;
+import resonantinduction.battery.BatteryItem;
 import net.minecraft.util.FastColor;
 import resonantinduction.wire.WireBlockEntity;
 import resonantinduction.wire.WireItem;
 import resonantinduction.wire.WireMaterial;
-import resonantinduction.ResonantInduction;
 import resonantinduction.registry.RIRegistries;
 
 @EventBusSubscriber(modid = ResonantInduction.MODID, value = Dist.CLIENT)
@@ -20,6 +24,20 @@ public final class RIClient {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(RIRegistries.QUANTUM_GATE_BE.get(), QuantumGateRenderer::new);
         event.registerBlockEntityRenderer(RIRegistries.CHARGER_BE.get(), ChargerRenderer::new);
+        event.registerBlockEntityRenderer(RIRegistries.BATTERY_BE.get(), BatteryRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void additionalModels(ModelEvent.RegisterAdditional event) {
+        event.register(BatteryRenderer.CONNECTOR_IN);
+        event.register(BatteryRenderer.CONNECTOR_OUT);
+    }
+
+    @SubscribeEvent
+    public static void clientSetup(FMLClientSetupEvent event) {
+        // Battery items light up coils by charge (0-8), like the original item renderer.
+        event.enqueueWork(() -> ItemProperties.register(RIRegistries.BATTERY_ITEM.get(), ResonantInduction.id("level"),
+                (stack, level, entity, seed) -> Math.round(8f * stack.getOrDefault(RIRegistries.ENERGY.get(), 0) / Math.max(1, BatteryItem.capacity(stack))) / 8f));
     }
 
     /** Tint 0: the wire metal. Tint 1: the insulation's dye colour. */

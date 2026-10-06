@@ -27,6 +27,9 @@ import resonantinduction.ResonantInduction;
 import resonantinduction.charger.ChargerBlock;
 import resonantinduction.charger.ChargerBlockEntity;
 import resonantinduction.laser.MiningLaserItem;
+import resonantinduction.battery.BatteryBlock;
+import resonantinduction.battery.BatteryBlockEntity;
+import resonantinduction.battery.BatteryItem;
 import resonantinduction.wire.FlatWireBlock;
 import resonantinduction.wire.FramedWireBlock;
 import resonantinduction.wire.WireBlock;
@@ -124,8 +127,16 @@ public final class RIRegistries {
                 return BlockEntityType.Builder.of(WireBlockEntity::new, blocks.toArray(new net.minecraft.world.level.block.Block[0])).build(null);
             });
 
+    public static final DeferredBlock<BatteryBlock> BATTERY = BLOCKS.registerBlock("battery", BatteryBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3f, 6f).sound(SoundType.METAL).noOcclusion().requiresCorrectToolForDrops());
+    public static final DeferredItem<BatteryItem> BATTERY_ITEM = ITEMS.register("battery", () -> new BatteryItem(BATTERY.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BatteryBlockEntity>> BATTERY_BE = BLOCK_ENTITIES.register("battery",
+            () -> BlockEntityType.Builder.of(BatteryBlockEntity::new, BATTERY.get()).build(null));
+
     /** Stored FE of energy items. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ENERGY = COMPONENTS.registerComponentType("energy",
+            b -> b.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> BATTERY_TIER = COMPONENTS.registerComponentType("battery_tier",
             b -> b.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT));
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> LASER_MODE = COMPONENTS.registerComponentType("laser_mode",
             b -> b.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT));
@@ -149,7 +160,13 @@ public final class RIRegistries {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB = TABS.register("main", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.resonantinduction"))
             .icon(() -> new ItemStack(TESLA_ITEM.get()))
-            .displayItems((params, out) -> ITEMS.getEntries().forEach(e -> out.accept(e.get())))
+            .displayItems((params, out) -> ITEMS.getEntries().forEach(e -> {
+                if (e.get() instanceof BatteryItem battery) {
+                    battery.variants().forEach(out::accept);
+                } else {
+                    out.accept(e.get());
+                }
+            }))
             .build());
 
     private RIRegistries() {}
@@ -169,6 +186,11 @@ public final class RIRegistries {
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, QUANTUM_GATE_BE.get(), QuantumGateBlockEntity::getItemCapability);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, CHARGER_BE.get(), ChargerBlockEntity::getEnergyCapability);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, WIRE_BE.get(), WireBlockEntity::getEnergyCapability);
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, BATTERY_BE.get(), BatteryBlockEntity::getEnergyCapability);
+        event.registerItem(Capabilities.EnergyStorage.ITEM, (stack, ctx) -> {
+            int capacity = BatteryItem.capacity(stack);
+            return new ComponentEnergyStorage(stack, ENERGY.get(), capacity, Math.max(1, capacity / 100), Math.max(1, capacity / 100));
+        }, BATTERY_ITEM.get());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CHARGER_BE.get(), ChargerBlockEntity::getItemCapability);
         // Original transfer rate: a hundredth of the battery per tick.
         event.registerItem(Capabilities.EnergyStorage.ITEM, (stack, ctx) -> {

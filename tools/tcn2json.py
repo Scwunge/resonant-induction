@@ -3,7 +3,8 @@
 Techne block models use ModelBase space: y points down, the block spans y 8..24 and x/z -8..8, and the renderer
 flips x. Rotations: multiples of 90 on Y are baked into the box; X/Z rotations snap to the nearest 22.5 degrees.
 
-usage: python tcn2json.py model.tcn texture_id out.json
+usage: python tcn2json.py model.tcn texture_id out.json [shape names...]
+With shape names, only those shapes are exported (to split a model into parts).
 """
 import json
 import re
@@ -15,12 +16,14 @@ def num(s):
     return [float(v) for v in s.split(",")]
 
 
-def convert(tcn_path, texture, out_path):
+def convert(tcn_path, texture, out_path, only=None):
     xml = zipfile.ZipFile(tcn_path).read("model.xml").decode("utf-8")
     tw, th = num(re.search(r"<TextureSize>(.*?)</TextureSize>", xml).group(1))
     su, sv = 16.0 / tw, 16.0 / th
     elements = []
     for name, body in re.findall(r'<Shape[^>]*name="([^"]*)"[^>]*>(.*?)</Shape>', xml, re.S):
+        if only and name not in only:
+            continue
         def g(tag):
             m = re.search("<%s>(.*?)</%s>" % (tag, tag), body)
             return m.group(1) if m else None
@@ -75,4 +78,4 @@ def convert(tcn_path, texture, out_path):
 
 
 if __name__ == "__main__":
-    convert(sys.argv[1], sys.argv[2], sys.argv[3])
+    convert(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4:] or None)

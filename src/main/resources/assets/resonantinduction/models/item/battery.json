@@ -1,0 +1,53 @@
+{
+ "parent": "resonantinduction:item/battery_0",
+ "overrides": [
+  {
+   "predicate": {
+    "resonantinduction:level": 0.115
+   },
+   "model": "resonantinduction:item/battery_1"
+  },
+  {
+   "predicate": {
+    "resonantinduction:level": 0.24
+   },
+   "model": "resonantinduction:item/battery_2"
+  },
+  {
+   "predicate": {
+    "resonantinduction:level": 0.365
+   },
+   "model": "resonantinduction:item/battery_3"
+  },
+  {
+   "predicate": {
+    "resonantinduction:level": 0.49
+   },
+   "model": "resonantinduction:item/battery_4"
+  },
+  {
+   "predicate": {
+    "resonantinduction:level": 0.615
+   },
+   "model": "resonantinduction:item/battery_5"
+  },
+  {
+   "predicate": {
+    "resonantinduction:level": 0.74
+   },
+   "model": "resonantinduction:item/battery_6"
+  },
+  {
+   "predicate": {
+    "resonantinduction:level": 0.865
+   },
+   "model": "resonantinduction:item/battery_7"
+  },
+  {
+   "predicate": {
+    "resonantinduction:level": 0.99
+   },
+   "model": "resonantinduction:item/battery_8"
+  }
+ ]
+}

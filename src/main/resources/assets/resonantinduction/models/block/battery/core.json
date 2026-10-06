@@ -1,0 +1,77 @@
+{
+ "textures": {
+  "tex": "resonantinduction:block/battery/battery",
+  "particle": "resonantinduction:block/battery/battery"
+ },
+ "elements": [
+  {
+   "name": "energyCore",
+   "from": [
+    1.5,
+    0.5,
+    1.5
+   ],
+   "to": [
+    14.5,
+    15.5,
+    14.5
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      8.0,
+      3.25,
+      9.625,
+      7.0
+     ],
+     "texture": "#tex"
+    },
+    "west": {
+     "uv": [
+      11.25,
+      3.25,
+      12.875,
+      7.0
+     ],
+     "texture": "#tex"
+    },
+    "up": {
+     "uv": [
+      11.25,
+      0.0,
+      9.625,
+      3.25
+     ],
+     "texture": "#tex"
+    },
+    "down": {
+     "uv": [
+      12.875,
+      0.0,
+      11.25,
+      3.25
+     ],
+     "texture": "#tex"
+    },
+    "north": {
+     "uv": [
+      11.25,
+      3.25,
+      9.625,
+      7.0
+     ],
+     "texture": "#tex"
+    },
+    "south": {
+     "uv": [
+      14.5,
+      3.25,
+      12.875,
+      7.0
+     ],
+     "texture": "#tex"
+    }
+   }
+  }
+ ]
+}

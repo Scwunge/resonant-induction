@@ -1,0 +1,37 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "battery"
+    },
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ingots/steel"
+      }
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "III",
+    "IRI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "tag": "c:ingots/steel"
+    },
+    "R": {
+      "tag": "c:storage_blocks/redstone"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:battery",
+    "count": 1,
+    "components": {
+      "resonantinduction:battery_tier": 0
+    }
+  }
+}

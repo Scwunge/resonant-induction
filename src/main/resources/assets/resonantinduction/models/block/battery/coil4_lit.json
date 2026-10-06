@@ -1,0 +1,77 @@
+{
+ "textures": {
+  "tex": "resonantinduction:block/battery/battery",
+  "particle": "resonantinduction:block/battery/battery"
+ },
+ "elements": [
+  {
+   "name": "coil4lit",
+   "from": [
+    0.5,
+    9.5,
+    0.5
+   ],
+   "to": [
+    15.5,
+    10.5,
+    15.5
+   ],
+   "faces": {
+    "east": {
+     "uv": [
+      7.5,
+      13.25,
+      9.375,
+      13.5
+     ],
+     "texture": "#tex"
+    },
+    "west": {
+     "uv": [
+      11.25,
+      13.25,
+      13.125,
+      13.5
+     ],
+     "texture": "#tex"
+    },
+    "up": {
+     "uv": [
+      11.25,
+      9.5,
+      9.375,
+      13.25
+     ],
+     "texture": "#tex"
+    },
+    "down": {
+     "uv": [
+      13.125,
+      9.5,
+      11.25,
+      13.25
+     ],
+     "texture": "#tex"
+    },
+    "north": {
+     "uv": [
+      11.25,
+      13.25,
+      9.375,
+      13.5
+     ],
+     "texture": "#tex"
+    },
+    "south": {
+     "uv": [
+      15.0,
+      13.25,
+      13.125,
+      13.5
+     ],
+     "texture": "#tex"
+    }
+   }
+  }
+ ]
+}

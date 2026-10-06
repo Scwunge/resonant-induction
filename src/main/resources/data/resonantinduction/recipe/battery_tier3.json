@@ -1,0 +1,34 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "resonantinduction:feature",
+      "feature": "battery"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "RRR",
+    "RIR",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "type": "neoforge:components",
+      "items": "resonantinduction:battery",
+      "components": {
+        "resonantinduction:battery_tier": 1
+      }
+    },
+    "I": {
+      "tag": "c:storage_blocks/diamond"
+    }
+  },
+  "result": {
+    "id": "resonantinduction:battery",
+    "count": 1,
+    "components": {
+      "resonantinduction:battery_tier": 2
+    }
+  }
+}

@@ -22,6 +22,11 @@ public final class RIConfig {
     public static final ModConfigSpec.DoubleValue LEVITATOR_ACCELERATION;
     public static final ModConfigSpec.IntValue LEVITATOR_MAX_PATH;
 
+    public static final ModConfigSpec.IntValue BATTERY_TIER1;
+    public static final ModConfigSpec.IntValue BATTERY_TIER2;
+    public static final ModConfigSpec.IntValue BATTERY_TIER3;
+    public static final ModConfigSpec.IntValue BATTERY_MAX_OUTPUT;
+
     public static final ModConfigSpec.IntValue WIRE_FE_PER_AMP;
     public static final ModConfigSpec.BooleanValue WIRE_SHOCK;
 
@@ -65,6 +70,16 @@ public final class RIConfig {
                 .defineInRange("acceleration", 0.02, 0.001, 1.0);
         LEVITATOR_MAX_PATH = b.comment("Longest distance between two linked levitators. Original: 200.")
                 .defineInRange("maxPathDistance", 200, 2, 1024);
+        b.pop();
+
+        b.push("battery");
+        b.comment("The original tiers held 5e8, 8e11 and 1.4e15 joules (exponential), which does not fit Forge Energy; these keep the",
+                "same order (each tier is crafted from eight of the one below).");
+        BATTERY_TIER1 = b.defineInRange("tier1Capacity", 1_000_000, 1, Integer.MAX_VALUE);
+        BATTERY_TIER2 = b.defineInRange("tier2Capacity", 50_000_000, 1, Integer.MAX_VALUE);
+        BATTERY_TIER3 = b.defineInRange("tier3Capacity", 2_000_000_000, 1, Integer.MAX_VALUE);
+        BATTERY_MAX_OUTPUT = b.comment("Most FE an output face pushes per tick (the original had no limit).")
+                .defineInRange("maxOutputPerFace", 1_000_000, 1, Integer.MAX_VALUE);
         b.pop();
 
         b.push("wires");

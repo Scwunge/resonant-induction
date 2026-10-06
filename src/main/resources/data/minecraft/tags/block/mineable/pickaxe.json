@@ -4,6 +4,7 @@
     "resonantinduction:tesla",
     "resonantinduction:levitator",
     "resonantinduction:quantum_gate",
-    "resonantinduction:charger"
+    "resonantinduction:charger",
+    "resonantinduction:battery"
   ]
 }

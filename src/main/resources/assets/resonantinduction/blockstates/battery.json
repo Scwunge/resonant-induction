@@ -1,0 +1,231 @@
+{
+ "multipart": [
+  {
+   "apply": {
+    "model": "resonantinduction:block/battery/core"
+   }
+  },
+  {
+   "when": {
+    "up": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/top"
+   }
+  },
+  {
+   "when": {
+    "down": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/bottom"
+   }
+  },
+  {
+   "when": {
+    "north": "false",
+    "west": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/frame1"
+   }
+  },
+  {
+   "when": {
+    "down": "true",
+    "north": "false",
+    "west": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/frame1con"
+   }
+  },
+  {
+   "when": {
+    "north": "false",
+    "east": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/frame2"
+   }
+  },
+  {
+   "when": {
+    "down": "true",
+    "north": "false",
+    "east": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/frame2con"
+   }
+  },
+  {
+   "when": {
+    "south": "false",
+    "east": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/frame3"
+   }
+  },
+  {
+   "when": {
+    "down": "true",
+    "south": "false",
+    "east": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/frame3con"
+   }
+  },
+  {
+   "when": {
+    "south": "false",
+    "west": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/frame4"
+   }
+  },
+  {
+   "when": {
+    "down": "true",
+    "south": "false",
+    "west": "false"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/frame4con"
+   }
+  },
+  {
+   "when": {
+    "level": "7|8"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/coil2_lit"
+   }
+  },
+  {
+   "when": {
+    "level": "0|1|2|3|4|5|6"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/coil2"
+   }
+  },
+  {
+   "when": {
+    "level": "6|7|8"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/coil3_lit"
+   }
+  },
+  {
+   "when": {
+    "level": "0|1|2|3|4|5"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/coil3"
+   }
+  },
+  {
+   "when": {
+    "level": "5|6|7|8"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/coil4_lit"
+   }
+  },
+  {
+   "when": {
+    "level": "0|1|2|3|4"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/coil4"
+   }
+  },
+  {
+   "when": {
+    "level": "4|5|6|7|8"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/coil5_lit"
+   }
+  },
+  {
+   "when": {
+    "level": "0|1|2|3"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/coil5"
+   }
+  },
+  {
+   "when": {
+    "level": "3|4|5|6|7|8"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/coil6_lit"
+   }
+  },
+  {
+   "when": {
+    "level": "0|1|2"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/coil6"
+   }
+  },
+  {
+   "when": {
+    "level": "2|3|4|5|6|7|8"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/coil7_lit"
+   }
+  },
+  {
+   "when": {
+    "level": "0|1"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/coil7"
+   }
+  },
+  {
+   "when": {
+    "level": "1|2|3|4|5|6|7|8"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/coil8_lit"
+   }
+  },
+  {
+   "when": {
+    "level": "0"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/coil8"
+   }
+  },
+  {
+   "when": {
+    "up": "true",
+    "level": "8"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/coil1_lit"
+   }
+  },
+  {
+   "when": {
+    "up": "true",
+    "level": "0|1|2|3|4|5|6|7"
+   },
+   "apply": {
+    "model": "resonantinduction:block/battery/coil1"
+   }
+  }
+ ]
+}
